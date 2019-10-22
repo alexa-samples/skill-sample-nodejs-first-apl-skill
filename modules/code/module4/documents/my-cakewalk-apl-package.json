@@ -1,0 +1,71 @@
+{
+    "type": "APL",
+    "version": "1.1",
+    "settings": {},
+    "theme": "dark",
+    "import": [
+        {
+            "name": "alexa-layouts",
+            "version": "1.1.0"
+        }
+    ],
+    "resources": [],
+    "styles": {
+        "bigText": {
+            "values": [
+                {
+                    "fontSize": "72dp",
+                    "color": "black",
+                    "textAlign": "center"
+                }
+            ]
+        }
+    },
+    "onMount": [],
+    "graphics": {},
+    "commands": {},
+    "layouts": {
+        "cakeWalkText": {
+            "description": "A basic text layout with start, middle and end.",
+            "parameters":[
+                {
+                    "name": "startText",
+                    "type": "string"
+                },
+                {
+                    "name": "middleText",
+                    "type": "string"
+                },
+                {
+                    "name": "endText",
+                    "type": "string"
+                }
+            ],
+            "items": [
+                {
+                    "type": "Container",
+                    "items": [
+                        {
+                            "type": "Text",
+                            "style": "bigText",
+                            "text": "${startText}",
+                            "id":"textTop"
+                        },
+                        {
+                            "type": "Text",
+                            "style": "bigText",
+                            "text": "${middleText}",
+                            "id": "textMiddle"
+                        },
+                        {
+                            "type": "Text",
+                            "style": "bigText",
+                            "text": "${endText}",
+                            "id": "textBottom"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,308 @@
+
+:imagesdir: ../modules/images
+:sectnums:
+:toc:
+
+= Adding APL Commands
+
+In this section, you will learn about APL Commands and how to add them to your skill. We will animate the text components and images across all of our APL screens and add in a video component.
+
+== What and Why
+
+https://developer.amazon.com/docs/alexa-presentation-language/apl-commands.html[APL Commands] are messages which change the visual or audio presentation of the content delivered to your customer. There are a few different ways you can use commands. The first is by using the directive, `Alexa.Presentation.APL.ExecuteCommands`. There are also different bindings in some components and even in the APL document. For an example, the https://developer.amazon.com/docs/alexa-presentation-language/apl-touchwrapper.html#onpress[TouchWrapper responsive component] has an onPress property which takes in a list of commands. Today, we will be using a similar mechanism within the APL document, the `onMount` property of our APL document which executes commands immediately upon inflating the document. This is useful for the animation commands we are using in our introduction.
+
+Now, let's animate some text objects. This is what we want to create:
+
+image:FinalLaunchScreen.gif[]
+
+== Updating our APL Documents
+
+First, we will need to update out APL Documents to be able to use commands by adding an https://developer.amazon.com/docs/alexa-presentation-language/apl-component.html#id[id] property to our components. Since we want the commands to execute immediately on the APL screen loading, we will be putting them inside the onMount property of our launch document. Add some logical ids for our text components... But, wait... these are in the APL package. If you checked the hosted version, you will see there are already component ids added! These are `textTop, textMiddle, textBottom` corresponding to the top, middle, and bottom text components, so there is no need to add any more ids there. 
+
+A. In your launch document (launchDocument.json file), add `"id": "image"` to the AlexaImage component. The last id to add is in the video component in our birthday screen document. 
+B. Add `"id": "birthdayVideo"` to your video component in the birthdayDocument.json file. 
+
+== Adding Commands to Our Document
+
+The command we will be using is the https://developer.amazon.com/docs/alexa-presentation-language/apl-standard-commands.html#animate_item_command[AnimateItem command]. This command was added in APL 1.1, so make sure that your APL document and your code level directives are declaring version 1.1. In both the APL document and your code, this will look like `version: '1.1'`. The animate item command will run a fixed-duration animation sequence on one or more properties of a single component. We are going to modify the `transform` property. 
+
+The basic structure of our animate item commands will be :
+
+ {
+  "type": "AnimateItem",
+  "easing": "ease-in-out",
+  "duration": 2000,
+  "componentId": "textTop",
+  "value": [
+    {
+      "property": "transform",
+      "from": [
+        {
+          "translateX": 1200
+        }
+      ],
+      "to": [
+        {
+          "translateX": 0
+        }
+      ]
+    }
+  ]
+ }
+
+The transform property requires you to specify where the component is moving to and from. All transformations in the "to" and "from" arrays must match types. In this case, the type is of translationX. For more information on valid values, see https://developer.amazon.com/docs/alexa-presentation-language/apl-standard-commands.html#animate_item_command_value_property[the animate command values tech doc]. We are going to use the https://developer.amazon.com/docs/alexa-presentation-language/apl-standard-commands.html#parallel-command[ParallelCommand] in order to run all of our text animations in parallel. This command has a list of commands to execute called child commands. All child commands execute simultaneously.
+
+ {
+   "type": "Parallel",
+   "delay": 500,
+   "commands": [
+     <List_of_commands>
+   ]
+ }
+
+Now that we understand the structure of our commands, we will need to create the JSON representing the commands inside the onMount property of our launchDocument.json file. Let's add some commands. To start, we will animate the text components to all slide in from different directions like in the gif and we want the commands to execute all at the same time, so the 3 text AnimateItem commands will be contained within the parallel command. To arrive at the values for each of these translations, we'll have to understand the viewport coordinate system. 
+
+image:viewportCoordinates.png[] 
+
+As you see above, the way the viewport is drawn is with coordinate (0,0) contained at the upper left corner. In addition, all of the 'to' properties will be relative to the object's position in the APL document we built, not relative to the viewport coordinates. For the first object, we will translate from 1600, to 0 on the X axis. The middle text will come from the left, so we will translate from -400 (so we can ensure the Text cannot be seen before animation) to 0 on the X axis, and the last item will come from below, which will use 'translateY' from 1200 to 0, since Y is positive going down. 
+
+A. Add the set of commands to your `onMount` property in your launchDocument.json document. Putting the above inside of the parallel command will leave us with: 
++
+ [
+    {
+        "type": "Parallel",
+        "commands": [
+            {
+                "type": "AnimateItem",
+                "easing": "ease-in-out",
+                "duration": 2000,
+                "componentId": "textTop",
+                "value": [
+                    {
+                        "property": "transform",
+                        "from": [
+                            {
+                                "translateX": 1200
+                            }
+                        ],
+                        "to": [
+                                {
+                                    "translateX": 0
+                                }
+                            ]
+                        }
+                ]
+            },
+            {
+                "type": "AnimateItem",
+                "easing": "ease-in-out",
+                "duration": 2000,
+                "componentId": "textMiddle",
+                "value": [
+                    {
+                        "property": "transform",
+                        "from": [
+                            {
+                                "translateX": -400
+                            }
+                        ],
+                        "to": [
+                            {
+                                "translateX": 0
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "AnimateItem",
+                "easing": "ease-in-out",
+                "duration": 2000,
+                "componentId": "textBottom",
+                "value": [
+                    {
+                        "property": "transform",
+                        "from": [
+                            {
+                                "translateY": 1200
+                            }
+                        ],
+                        "to": [
+                            {
+                                "translateX": 0
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+ ]
++
+Once that is working, let's make the more complex animation for the image component. Looking at how this animation runs, we will need to scale our image from a really small scale to 1 (full size). We are also rotating it from 0 to 360 degrees over this duration which will be 2 seconds. You will notice the path it takes is not quite linear and different from the other animations. This is because it is custom defined. You do not have to stick to the https://developer.amazon.com/docs/alexa-presentation-language/apl-standard-commands.html#animate_item_command_easing_property[defined properties] in the chart below, but can define your own curve with https://en.wikipedia.org/wiki/B%C3%A9zier_curve#Cubic_B%C3%A9zier_curves[cubic-bezier curves] or a linear path. In fact, the named curves all have mathematical definitions listed in the chart below. The coordinates start at (0,0) and go to (1,1). Think of the X coordinate as time and Y as magnitude of the change. Here is the curve I defined `"easing": "path(0.25, 0.2, 0.5, 0.5, 0.75, 0.8)",` But if you want to write your own, feel free!
++
+image:definedEasingCurves.png[]
++
+B. Put this all together for the image command gives us: 
++
+ {
+    "type": "AnimateItem",
+    "easing": "path(0.25, 0.2, 0.5, 0.5, 0.75, 0.8)",
+    "duration": 3000,
+    "componentId": "image",
+    "value": [
+        {
+            "property": "transform",
+            "from": [
+                {
+                    "scale": 0.01
+                },
+                {
+                    "rotate": 0
+                }
+            ],
+            "to": [
+                {
+                    "scale": 1
+                },
+                {
+                    "rotate": 360
+                }
+            ]
+        }
+    ]
+ }
++
+Add this to your commands.json inside the parallel command's list. Now test it out! Once that is working, enter your birthday and test the launchHandler with context when it is not your birthday. You should see the commands applied to this as well. But, we are not quite done. What about animations when it is their birthday? This is using the birthdayDocument.json file which has no commands in it. Let's fix this.
+
+== Adding Birthday Interactions
+
+WARNING: Skip this section. Onmount inside of an APL package is not working at the moment :)
+
+For the birthday screen, we want to show a screen like this:
+
+image:birthdayVideo.gif[]
+
+Notice that the animations are the same for the text items which are also shared. We have a few options on how to apply these commands. But, to avoid copy and pasting, let's move the shared commands into the APL package. 
+
+A. Since you cannot do this with Alexa Hosted, instead, start to point your APL imports (for both birthdayDocument.json and launchDocument.json) at this new package: 
++
+ {
+    "name": "my-cakewalk-apl-package-v2",
+    "version": "1.0",
+    "source": "https://public-pics-muoio.s3.amazonaws.com/my-cakewalk-apl-package-v2.json"
+ }
++
+In here, you will see just the commands targeting the shared text components. So, you can now remove these from your launchDocument.json doc, keeping only the image command. 
+B. Deploy your new documents and test out the birthday scenario in the developer simulator to ensure your animations are now applied. If the animations are working, move onto the next section.
+
+== Adding Video Control
+
+Did you notice the other change in the above gif? There is a new component added to the birthdayDocument.json document, the https://developer.amazon.com/docs/alexa-presentation-language/apl-transport-controls-layout.html[AlexaTransportsControls responsive component]. You should always have an on screen control for your video or it may not pass certification. Let's add this. This component is also a part of the alexa-layouts package.
+
+A. Add the AlexaTransportControls component to the container with the video component, since we want this aligned to the center, also.
++
+ {
+    "type": "Container",
+    "alignItems": "center",
+    "items": [
+        ...<Video_Component>...
+        {
+            "primaryControlSize": 50,
+            "secondaryControlSize": 0,
+            "mediaComponentId": "birthdayVideo",
+            "type": "AlexaTransportControls"
+        }
+    ]
+ }
++
+Our component has a secondary control of 0 because we do not want to show the secondary control buttons. These are the skip and rewind buttons if you were playing a series of videos. The primary control size is the size of the play button. The mediaComponentId must reference the VideoComponent earlier in the document. 
+B. Save and deploy these changes and test for your birthday scenario. Make sure the button is functioning and stops and replays the video when toggled. 
+
+Did you notice the clipping on the audio response from Alexa? You may not notice this if your birthday is close enough, but Alexa's voice response is getting cut off when the video starts to play. To fix this we will need to use the ExecuteCommands Directive.
+
+== ExecuteCommands Directive
+
+Alexa is cut off from speaking when the video starts to play. We need to turn off autoplay in order to fix this, since we do want Alexa to speak and then have the video autoplay. It does not make sense for our customers to have to tell the video to start. 
+
+To fix the audio, we are going to have to add the https://developer.amazon.com/docs/alexa-presentation-language/apl-execute-command-directive.html[ExecuteCommands directive] to our backend as well as a payload for it. The execute commands directive will execute the list of provided commands after Alexa is done speaking. It looks like this:
+
+ {
+    "type" : "Alexa.Presentation.APL.ExecuteCommands",
+    "token": "[SkillProvidedToken]",
+    "commands": [
+        <List_of_commands>
+    ]
+ }
+
+For our usage, we will need the skill provided token for the ExecuteCommand directive to target, so this can be `"birthdayToken"`. Without this, our command will not know which document to target to execute on.
+
+A. Add a new token field to the APL RenderDocument directive with the value of `birthdayToken`. Your addDirective(...) will now look like:
++
+ // Create Render Directive
+ handlerInput.responseBuilder.addDirective({
+    type: 'Alexa.Presentation.APL.RenderDocument',
+    version: '1.1',
+    token: 'birthdayToken',
+    document: birthdayDocument,
+    datasources: {
+        ... Omitted for brevity...
+    }
+ });
++
+B. In the else block in our `HasBirthdayLaunchRequestHandler`, we will need to add another directive. This can be chained onto our current render directive. Add the below code to the `handlerInput.responseBuilder`.
++
+ .addDirective({
+    type: "Alexa.Presentation.APL.ExecuteCommands",
+    token: "birthdayToken",
+    commands: [
+        <List_of_commands>
+    ]
+ });
++
+C. Replace the `<List_of_commands>` with our commands list. This is simply going to be a single command to start the video. Since this happens once Alexa is done speaking, we get the behavior we want! The command looks like this:
++
+ {
+    type: "ControlMedia",
+    componentId: "birthdayVideo",
+    command: "play"
+ }
++
+You will end up with APL directive code that looks like this:
++
+ // Create Render Directive
+ handlerInput.responseBuilder.addDirective({
+    type: 'Alexa.Presentation.APL.RenderDocument',
+    version: '1.1',
+    token: 'birthdayToken',
+    document: birthdayDocument,
+    datasources: {
+        text: {
+            type: 'object',
+            start: "Happy Birthday!",
+            middle: "From,",
+            end: "Alexa <3"
+        },
+        assets: {
+            video: "https://public-pics-muoio.s3.amazonaws.com/video/Amazon_Cake.mp4",
+            backgroundURL: getBackgroundURL(handlerInput, "confetti")
+        }
+    }
+ }).addDirective({
+    type: "Alexa.Presentation.APL.ExecuteCommands",
+    token: "birthdayToken",
+    commands: [{
+        type: "ControlMedia",
+        componentId: "birthdayVideo",
+        command: "play"
+    }]
+ });
++
+D. Save and deploy and test this out now.
+
+That is a cool animation isn't it? Great work on making it this far and expanding your Cake Walk with images, text, video, and animations! 
+
+https://github.com/JoeMoCode/CakeWalkAPL/tree/master/modules/code/module5[Complete code in Github]
+
+link:module4.html[Previous Module (4)] 
+link:module6.html[Wrap Up & Extra Credit]

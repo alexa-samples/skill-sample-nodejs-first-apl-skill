@@ -1,0 +1,11 @@
+{
+    "text": {
+        "start": "Welcome",
+        "middle": "to",
+        "end": "Cake Walk!"
+    },
+    "images": {
+        "cake":"https://public-pics-muoio.s3.amazonaws.com/alexaCake_960x960.png",
+        "backgroundURL": "https://github.com/JoeMoCode/CakeWalkAPL/blob/master/modules/code/final/documents/images/lights_1280x800.png?raw=true"
+    }
+}

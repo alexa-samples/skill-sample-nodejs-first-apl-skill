@@ -1,0 +1,150 @@
+{
+    "type": "APL",
+    "version": "1.1",
+    "settings": {},
+    "theme": "dark",
+    "import": [
+        {
+            "name": "alexa-layouts",
+            "version": "1.1.0"
+        }
+    ],
+    "resources": [],
+    "styles": {
+        "bigText": {
+            "values": [
+                {
+                    "fontSize": "72dp",
+                    "color": "black",
+                    "textAlign": "center"
+                }
+            ]
+        }
+    },
+    "onMount": [{
+        "type": "Parallel",
+        "commands": [
+            {
+                "type": "AnimateItem",
+                "easing": "ease-in-out",
+                "duration": 2000,
+                "componentId": "textTop",
+                "value": [
+                    {
+                        "property": "opacity",
+                        "to": 1
+                    },
+                    {
+                        "property": "transform",
+                        "from": [
+                            {
+                                "translateX": 800
+                            }
+                        ],
+                        "to": [
+                            {
+                                "translateX": 0
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "AnimateItem",
+                "easing": "ease-in-out",
+                "duration": 2000,
+                "componentId": "textMiddle",
+                "value": [
+                    {
+                        "property": "opacity",
+                        "to": 1
+                    },
+                    {
+                        "property": "transform",
+                        "from": [
+                            {
+                                "translateX": -400
+                            }
+                        ],
+                        "to": [
+                            {
+                                "translateX": 0
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "AnimateItem",
+                "easing": "ease-in-out",
+                "duration": 2000,
+                "componentId": "textBottom",
+                "value": [
+                    {
+                        "property": "opacity",
+                        "to": 1
+                    },
+                    {
+                        "property": "transform",
+                        "from": [
+                            {
+                                "translateY": 1200
+                            }
+                        ],
+                        "to": [
+                            {
+                                "translateX": 0
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }],
+    "graphics": {},
+    "commands": {},
+    "layouts": {
+        "cakeWalkText": {
+            "description": "A basic text layout with start, middle and end.",
+            "parameters":[
+                {
+                    "name": "startText",
+                    "type": "string"
+                },
+                {
+                    "name": "middleText",
+                    "type": "string"
+                },
+                {
+                    "name": "endText",
+                    "type": "string"
+                }
+            ],
+            "items": [
+                {
+                    "type": "Container",
+                    "items": [
+                        {
+                            "type": "Text",
+                            "style": "bigText",
+                            "text": "${startText}",
+                            "id":"textTop"
+                        },
+                        {
+                            "type": "Text",
+                            "style": "bigText",
+                            "text": "${middleText}",
+                            "id": "textMiddle"
+                        },
+                        {
+                            "type": "Text",
+                            "style": "bigText",
+                            "text": "${endText}",
+                            "id": "textBottom"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

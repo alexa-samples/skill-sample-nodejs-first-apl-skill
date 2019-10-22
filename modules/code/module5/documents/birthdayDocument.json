@@ -1,0 +1,183 @@
+{
+    "type": "APL",
+    "version": "1.1",
+    "settings": {},
+    "theme": "dark",
+    "import": [
+        {
+            "name": "my-cakewalk-apl-package-v2",
+            "version": "1.0",
+            "source": "https://public-pics-muoio.s3.amazonaws.com/my-cakewalk-apl-package-v2.json"
+        },
+        {
+            "name": "alexa-layouts",
+            "version": "1.1.0"
+        }
+    ],
+    "resources": [],
+    "styles": {
+        "bigText": {
+            "values": [
+                {
+                    "fontSize": "72dp",
+                    "color": "black",
+                    "textAlign": "center"
+                }
+            ]
+        }
+    },
+    "onMount": [{
+        "commands": [
+            {
+            "componentId": "textTop",
+            "duration": 2000,
+            "easing": "ease-in-out",
+            "type": "AnimateItem",
+            "value": [
+                {
+                "property": "opacity",
+                "to": 1
+                },
+                {
+                "from": [
+                    {
+                    "translateX": 800
+                    }
+                ],
+                "property": "transform",
+                "to": [
+                    {
+                    "translateX": 0
+                    }
+                ]
+                }
+            ]
+            },
+            {
+            "componentId": "textMiddle",
+            "duration": 2000,
+            "easing": "ease-in-out",
+            "type": "AnimateItem",
+            "value": [
+                {
+                "property": "opacity",
+                "to": 1
+                },
+                {
+                "from": [
+                    {
+                    "translateX": -400
+                    }
+                ],
+                "property": "transform",
+                "to": [
+                    {
+                    "translateX": 0
+                    }
+                ]
+                }
+            ]
+            },
+            {
+            "componentId": "textBottom",
+            "duration": 2000,
+            "easing": "ease-in-out",
+            "type": "AnimateItem",
+            "value": [
+                {
+                "property": "opacity",
+                "to": 1
+                },
+                {
+                "from": [
+                    {
+                    "translateY": 1200
+                    }
+                ],
+                "property": "transform",
+                "to": [
+                    {
+                    "translateX": 0
+                    }
+                ]
+                }
+            ]
+            }
+        ],
+        "type": "Parallel"
+    }],
+    "graphics": {},
+    "commands": {},
+    "layouts": {},
+    "mainTemplate": {
+        "parameters": [
+            "payload"
+        ],
+        "items": [
+            {
+                "type": "Container",
+                "items": [
+                    {
+                        "type": "AlexaBackground",
+                        "backgroundImageSource": "${payload.assets.backgroundURL}"
+                    },
+                    {
+                        "type": "Container",
+                        "paddingTop":"3vh",
+                        "alignItems": "center",
+                        "items": [{
+                                "type": "Video",
+                                "height": "85vh",
+                                "width":"90vw",
+                                "id":"birthdayVideo",
+                                "source": "${payload.assets.video}",
+                                "autoplay": false,
+                                "onPause": [{
+                                    "type": "SetState",
+                                    "componentId": "playPauseToggleButtonId",
+                                    "state": "checked",
+                                    "value": true
+                                }],
+                                "onPlay": [{
+                                    "type": "SetState",
+                                    "componentId": "playPauseToggleButtonId",
+                                    "state": "checked",
+                                    "value": false
+                                }]
+                            },
+                            {
+                                "primaryControlSize": 50,
+                                "secondaryControlSize": 0,
+                                "autoplay": false,
+                                "mediaComponentId": "birthdayVideo",
+                                "type": "AlexaTransportControls"
+                            }
+                        ]
+                    }
+                ],
+                "height": "100%",
+                "width": "100%",
+                "when": "${@viewportProfile != @hubRoundSmall}"
+            },
+            {
+                "type": "Container",
+                "paddingTop": "75dp",
+                "items": [
+                    {
+                        "type": "AlexaBackground",
+                        "backgroundImageSource": "${payload.assets.backgroundURL}"
+                    },
+                    {
+                        "type": "cakeWalkText",
+                        "startText":"${payload.text.start}",
+                        "middleText":"${payload.text.middle}",
+                        "endText":"${payload.text.end}"
+                    }
+                ],
+                "height": "100%",
+                "width": "100%",
+                "when": "${@viewportProfile == @hubRoundSmall}"
+            }
+        ]
+    }
+}

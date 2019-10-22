@@ -1,0 +1,520 @@
+:imagesdir: ../modules/images
+:sectnums:
+:toc:
+
+= Making More Documents
+
+{blank}
+
+Since we now have a functioning document for our no context launch request, let's make our other screens. In this section you will complete the visuals for both the countdown and birthday screens while learning how to create a reusable layout and APL package. In addition, we will use the video component to deliver a special video on your birthday.
+
+== Layouts
+
+So far we have made this screen:
+
+image::finalNoContextScreen.png[]
+
+And we want to make these screens:
+
+image::finalCountdownScreen.png[] 
+image::finalBirthdayScreen.png[]
+
+See the similarities? We can already make the countdown screen with our current document! And we can almost make the Birthday screen. There are only two differences with the birthday screen and our current launch screen. There is a video instead of an image, and the background asset is different. Let's start by optimizing our current document using https://developer.amazon.com/docs/alexa-presentation-language/apl-layout.html[layouts]. 
+
+Layouts are composite components; they are components made out of other components and layouts. We have already been using layouts (responsive components are layouts defined by Amazon in the APL Package, "Alexa-Layouts"), but now it is time to define our own based on the patterns we see in our screens for our experience.
+
+Layouts are also defined in JSON. They have a description, parameters accepted, and an items section which is composed of other components. The https://developer.amazon.com/docs/alexa-presentation-language/apl-layout.html#parameters[parameters] can have default values in case there is no parameter value provided, as well as a specific type (or "any"). We can extract the text parts of our document and create a layout out of it. 
+
+A. Add the layout of the repeated patterns to the `layouts` section of the document. The reusable text layout looks like:
++
+ "cakeWalkText": {
+     "description": "A basic text layout with start, middle and end.",
+    "parameters":[
+        "startText",
+        "middleText",
+        "endText"
+    ],
+    "item": [
+        {
+            "type": "Text",
+            "style": "bigText",
+            "paddingTop":"${@viewportProfile == @hubRoundSmall ? 75dp : 0dp}",
+            "text": "${startText}"
+        },
+        {
+            "type": "Text",
+            "style": "bigText",
+            "text": "${middleText}"
+        },
+        {
+            "type": "Text",
+            "style": "bigText",
+            "text": "${endText}"
+        }
+    ]
+ }
++
+We would use this layout like so:
+
+ {
+    "type": "cakeWalkText",
+    "startText":"${payload.text.start}",
+    "middleText":"${payload.text.middle}",
+    "endText":"${payload.text.end}"
+ }
++
+This can simplify our already existing document and will allow us to get rid of duplicate JSON. Note, there is one difference here between the text components for Echo spot and the rest of the devices. We will resolve this with a conditional statement inside of the paddingTop property instead of on the container. This greatly simplifies our whole JSON document! 
++
+B. Remove the redundant code and replace it with the new "cakeWalkText" layout.
++
+When we remove the redundant code and replace it with references to our layout, we get:
++
+ {
+    "type": "APL",
+    "version": "1.1",
+    "settings": {},
+    "theme": "dark",
+    "import": [
+        {
+            "name": "alexa-layouts",
+            "version": "1.1.0"
+        }
+    ],
+    "resources": [],
+    "styles": {
+        "bigText": {
+            "values": [
+                {
+                    "fontSize": "72dp",
+                    "color": "black",
+                    "textAlign": "center"
+                }
+            ]
+        }
+    },
+    "onMount": [],
+    "graphics": {},
+    "commands": {},
+    "layouts": {
+        "cakeWalkText": {
+            "description": "A basic text layout with start, middle and end.",
+            "parameters":[
+                {
+                    "name": "startText",
+                    "type": "string"
+                },
+                {
+                    "name": "middleText",
+                    "type": "string"
+                },
+                {
+                    "name": "endText",
+                    "type": "string"
+                }
+            ],
+            "items": [
+                {
+                    "type": "Container",
+                    "items": [
+                        {
+                            "type": "Text",
+                            "style": "bigText",
+                            "text": "${startText}"
+                        },
+                        {
+                            "type": "Text",
+                            "style": "bigText",
+                            "text": "${middleText}"
+                        },
+                        {
+                            "type": "Text",
+                            "style": "bigText",
+                            "text": "${endText}"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "mainTemplate": {
+        "parameters": [
+            "payload"
+        ],
+        "items": [
+            {
+                "type": "Container",
+                "items": [
+                    {
+                        "type": "AlexaBackground",
+                        "backgroundImageSource": "${payload.assets.backgroundURL}"
+                    },
+                    {
+                        "type": "cakeWalkText",
+                        "startText":"${payload.text.start}",
+                        "middleText":"${payload.text.middle}",
+                        "endText":"${payload.text.end}"
+                    },
+                    {
+                        "type": "Container",
+                        "alignItems": "center",
+                        "items": [
+                            {
+                                "type": "AlexaImage",
+                                "imageSource": "${payload.assets.cake}",
+                                "imageRoundedCorner": false,
+                                "imageScale": "best-fit",
+                                "imageHeight": "50vh",
+                                "imageAspectRatio": "standard_landscape",
+                                "imageBlurredBackground": false
+                            }
+                        ]
+                    }
+                ],
+                "height": "100%",
+                "width": "100%",
+                "when": "${@viewportProfile != @hubRoundSmall}"
+            },
+            {
+                "type": "Container",
+                "paddingTop": "75dp",
+                "items": [
+                    {
+                        "type": "AlexaBackground",
+                        "backgroundImageSource": "${payload.assets.backgroundURL}"
+                    }, 
+                    {
+                        "type": "cakeWalkText",
+                        "startText":"${payload.text.start}",
+                        "middleText":"${payload.text.middle}",
+                        "endText":"${payload.text.end}"
+                    }
+                ],
+                "height": "100%",
+                "width": "100%",
+                "when": "${@viewportProfile == @hubRoundSmall}"
+            }
+        ]
+    }
+ }
++
+But wait... this isn't that much simpler to look at! It looks longer... Let's simplify our document further by breaking out the layout and styles into it's own APL package.
+
+== Hosting Your Own APL Package
+
+Once you have your components rendering and the launch screen looks the same, it is time to host our layout so it can be used in more than one document. Layouts, styles, and resources can all be hosted in an https://developer.amazon.com/docs/alexa-presentation-language/apl-package.html[APL package]. In fact, an APL package has the same format of an APL document except, there is no mainTemplate. This is a great way to share resources, styles, or your own custom responsive components or UI patterns across multiple APL documents. You can even create your own documents to share with the rest of the Alexa developer community!
+
+We want to host both our style and our layout. To do so we will use our S3 bucket on our backend. Unfortunately, since we are using the Alexa hosted environment, we cannot modify permissions on the S3 provision we are given. Alexa devices and simulators need the header, `Access-Control-Allow-Origin` to be set and allow *.amazon.com. To learn more, https://developer.amazon.com/docs/alexa-presentation-language/apl-support-for-your-skill.html#support-cors[check out the tech docs]. Also, the link must be public which we cannot do with Alexa hosted. But for this exercise, we will use https://public-pics-muoio.s3.amazonaws.com/my-cakewalk-apl-package.json[this S3 link] to host our JSON APL package.
+
+Our package will be just the reusable set of properties from our APL document. This includes the layouts and the styles. We also will need the import section because we rely on alexa-layouts in order to render our layout. Imports are transitive in APL. This is basically everything except for the `mainTemplate`. Our package will be:
+
+ {
+    "type": "APL",
+    "version": "1.1",
+    "settings": {},
+    "theme": "dark",
+    "import": [
+        {
+            "name": "alexa-layouts",
+            "version": "1.1.0"
+        }
+    ],
+    "resources": [],
+    "styles": {
+        "bigText": {
+            "values": [
+                {
+                    "fontSize": "72dp",
+                    "color": "black",
+                    "textAlign": "center"
+                }
+            ]
+        }
+    },
+    "onMount": [],
+    "graphics": {},
+    "commands": {},
+    "layouts": {
+        "cakeWalkText": {
+            "description": "A basic text layout with start, middle and end.",
+            "parameters":[
+                {
+                    "name": "startText",
+                    "type": "string"
+                },
+                {
+                    "name": "middleText",
+                    "type": "string"
+                },
+                {
+                    "name": "endText",
+                    "type": "string"
+                }
+            ],
+            "items": [
+                {
+                    "type": "Container",
+                    "items": [
+                        {
+                            "type": "Text",
+                            "style": "bigText",
+                            "text": "${startText}"
+                        },
+                        {
+                            "type": "Text",
+                            "style": "bigText",
+                            "text": "${middleText}"
+                        },
+                        {
+                            "type": "Text",
+                            "style": "bigText",
+                            "text": "${endText}"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+ }
+
+Now in our main document, we can remove everything except for the mainTemplate blob, and add in a new import for our package. In the authoring tool, we can use https://public-pics-muoio.s3.amazonaws.com/my-cakewalk-apl-package.json[this public link] to test. 
+
+A. Add this import to your document:
++
+ {
+    "name": "my-cakewalk-apl-package",
+    "version": "1.0",
+    "source": "https://public-pics-muoio.s3.amazonaws.com/my-cakewalk-apl-package.json"
+ }
++
+With this import, we can now reference the values from our custom style (bigText) and layout (cakeWalkText). Our document is now significantly smaller and easier to read:
++
+ {
+    "type": "APL",
+    "version": "1.1",
+    "settings": {},
+    "theme": "dark",
+    "import": [
+        {
+            "name": "my-cakewalk-apl-package",
+            "version": "1.0",
+            "source": "https://public-pics-muoio.s3.amazonaws.com/my-cakewalk-apl-package.json"
+        },
+        {
+            "name": "alexa-layouts",
+            "version": "1.1.0"
+        }
+    ],
+    "resources": [],
+    "styles": {},
+    "onMount": [],
+    "graphics": {},
+    "commands": {},
+    "layouts": {},
+    "mainTemplate": {
+        "parameters": [
+            "payload"
+        ],
+        "items": [
+            {
+                "type": "Container",
+                "items": [
+                    {
+                        "type": "AlexaBackground",
+                        "backgroundImageSource": "${payload.assets.backgroundURL}"
+                    },
+                    {
+                        "type": "cakeWalkText",
+                        "startText":"${payload.text.start}",
+                        "middleText":"${payload.text.middle}",
+                        "endText":"${payload.text.end}"
+                    },
+                    {
+                        "type": "Container",
+                        "alignItems": "center",
+                        "items": [
+                            {
+                                "type": "AlexaImage",
+                                "imageSource": "${payload.assets.cake}",
+                                "imageRoundedCorner": false,
+                                "imageScale": "best-fit",
+                                "imageHeight": "50vh",
+                                "imageAspectRatio": "standard_landscape",
+                                "imageBlurredBackground": false
+                            }
+                        ]
+                    }
+                ],
+                "height": "100%",
+                "width": "100%",
+                "when": "${@viewportProfile != @hubRoundSmall}"
+            },
+            {
+                "type": "Container",
+                "paddingTop": "75dp",
+                "items": [
+                    {
+                        "type": "AlexaBackground",
+                        "backgroundImageSource": "${payload.assets.backgroundURL}"
+                    }, 
+                    {
+                        "type": "cakeWalkText",
+                        "startText":"${payload.text.start}",
+                        "middleText":"${payload.text.middle}",
+                        "endText":"${payload.text.end}"
+                    }
+                ],
+                "height": "100%",
+                "width": "100%",
+                "when": "${@viewportProfile == @hubRoundSmall}"
+            }
+        ]
+    }
+ }
++
+B. Save over your current launchDocument.json with this new document. 
+Now, let's make our final document. This will use a video instead of the image component, but otherwise it is the same. The https://developer.amazon.com/docs/alexa-presentation-language/apl-video.html[video component] has a simple structure for our use case.
+C. Create a new document called birthdayDocument.json and make it a copy of our old document.
+D. Replace the image component in your birthdayDocument.json with the following video component inside a container.
++
+ {
+    "type": "Container",
+    "paddingTop":"3vh",
+    "alignItems": "center",
+    "items": [{
+        "type": "Video",
+        "height": "85vh",
+        "width":"90vw",
+        "source": "${payload.assets.video}",
+        "autoplay": true
+    }]
+ }
++
+We want to add this container so that we can center the component in our APL Document. The padding is so we see some of the background at the top of the viewport.
+The video we will be using is of an animated birthday cake with Alexa Singing in the background. It looks like this:
++
+video::https://public-pics-muoio.s3.amazonaws.com/video/Amazon_Cake.mp4[width=640]
++
+This video really wants to be played fullscreen which is why we made our height 85% of the viewport height and width 90% of the viewport. However, now our text is no longer wanted when we display the video.
+E. Remove the CakeWalkText component in the first container (when `${@viewportProfile != @hubRoundSmall}`).
+F. Save this in your skill code as a new file, birthdayDocument.json.
+
+== Wiring up the Backend
+
+Let's swap back over to the index.js file and wire our other APL screens up.
+
+The only difference in our current launch document and our known birthday document is the content. Let's start to modify our `HasBirthdayLaunchRequestHandler` to conditionally use our launchDocument.json file or our birthdayDocument.json file depending on the situation. We want it to look like this:
+
+image::finalCountdownScreen.png[]
+
+A. Since we will be using the same launch doc, we already have the import to the JSON representing our document. Add a block in HasBirthdayLaunchRequestHandler similar to our LaunchRequestHandler
++
+ // Add APL directive to response
+ if (Alexa.getSupportedInterfaces(handlerInput.requestEnvelope)['Alexa.Presentation.APL']) {
+     //TODO Add Directive
+ }
++
+B. We want to avoid duplicating code, so let's make a helper function to get the background image based upon our key. This will also be used to fetch a new background image for the alternate document. In addition, we will use it to contain our device screen size to asset size logic. Add this helper function to your index.js above the comment that starts with `// This handler acts`:
++
+ function getBackgroundURL(handlerInput, fileNamePrefix) {
+    const viewportProfile = Alexa.getViewportProfile(handlerInput.requestEnvelope);
+    const backgroundKey = viewportProfile === 'TV-LANDSCAPE-XLARGE' ? "Media/"+fileNamePrefix+"_1920x1080.png" : "Media/"+fileNamePrefix+"_1280x800.png";
+    return util.getS3PreSignedUrl(backgroundKey);
+ }
++
+This is beneficial since it provides a single place where our assumptions of filenames live. If we want to add more viewport profile detection we have a single place to do so, we would just need more assets. If we decide not to host from the `Media` directory in our S3 bucket, or even change our hosting entirely off of S3, we have a single place to do it.
+C. We now need to refactor our LaunchRequestHandler.handle() code to use the new function. Our new data payload will now have a new value for the backgroundURL key in the payload:
++
+ backgroundURL: getBackgroundURL(handlerInput, "lights")
++
+And you can delete the lines:
++
+ const viewportProfile = Alexa.getViewportProfile(handlerInput.requestEnvelope);
+ const backgroundKey = viewportProfile === 'TV-LANDSCAPE-XLARGE' ? "Media/lights_1920x1080.png" : "Media/lights_1280x800.png";
++
+D. Going back to the `HasBirthdayLaunchRequestHandler`, we can now use our function to build our data payload. This will look like this:
++
+ text: {
+    type: 'object',
+    start: "Your Birthday",
+    middle: "is in",
+    end: numberDaysString
+ },
+ assets: {
+    cake: util.getS3PreSignedUrl('Media/alexaCake_960x960.png'),
+    backgroundURL: backgroundURL: getBackgroundURL(handlerInput, "lights")
+ }
++
+You will see that there is an undefined variable in this payload, `numberDaysString`. This is a variable string which will be something like "1 day" or "234 days". You can represent this by the expression:
++
+ const numberDaysString = diffDays === 1 ? "1 day": diffDays + " days";
++
+Now, replace your conditional statement from part A with:
++
+ const numberDaysString = diffDays === 1 ? "1 day": diffDays + " days";
+ // Add APL directive to response
+ if (Alexa.getSupportedInterfaces(handlerInput.requestEnvelope)['Alexa.Presentation.APL']) {
+    // Create Render Directive
+    handlerInput.responseBuilder.addDirective({
+        type: 'Alexa.Presentation.APL.RenderDocument',
+        version: '1.1',
+        document: launchDocument,
+        datasources: {
+            text: {
+                type: 'object',
+                start: "Your Birthday",
+                middle: "is in",
+                end: numberDaysString
+            },
+            assets: {
+                cake: util.getS3PreSignedUrl('Media/alexaCake_960x960.png'),
+                backgroundURL: getBackgroundURL(handlerInput, "lights")
+            }
+        }
+    });
+ }
++
+Now test it out! You will have to go through the whole flow to enter your month, day, and year of birth before you can see this screen.
++
+E. Once you have verified this is working, let's build the other path for when it is your birthday. This will make use of our new document, `birthdayDocument.json`, so let's start by importing that as birthdayDocument at the top. 
++
+ const birthdayDocument = require('./documents/birthdayDocument.json');
++
+F. Now, we will need to add some conditional logic to our new code to switch between APL documents depending on if it is our birthday or not. Underneath the comment, `// Create Render Directive`, add  
++
+ if (currentDate.getTime() !== nextBirthday) {
+     //TODO Move the old directive here.
+ } else {
+     //TODO Write a birthday specific directive here.
+ }
++
+G. Cut the `handlerInput.responseBuilder.addDirectiveReplace({...})` and replace the comment, `//TODO Move the old directive here.` with this. 
+H. Inside the else block we can add our new directive using the `birthdayDocument` you imported above. We will be using the `"confetti"` picture. Add this full directive in the else block: 
++
+ // Create Render Directive
+ handlerInput.responseBuilder.addDirective({
+    type: 'Alexa.Presentation.APL.RenderDocument',
+    version: '1.1',
+    document: birthdayDocument,
+    datasources: {
+        text: {
+            type: 'object',
+            start: "Happy Birthday!",
+            middle: "From,",
+            end: "Alexa <3"
+        },
+        assets: {
+            video: "https://public-pics-muoio.s3.amazonaws.com/video/Amazon_Cake.mp4",
+            backgroundURL: getBackgroundURL(handlerInput, "confetti")
+        }
+    }
+ });
++
+This new directive differs in the data provided for the text object, the image is replaced with a video, and the background uses the confetti asset. We still need to input start, middle, and end text because our variant for the Hub Round Small device uses this.
+I. Now, Test your skill. Clear your user data in S3 and lie so today is your birthday! If you aren't lying, well... Happy Birthday! :)
+
+When this is working, you can go to the final hands on module to learn about commands.
+
+https://github.com/JoeMoCode/CakeWalkAPL/tree/master/modules/code/module4[Complete code in Github]
+
+link:module3.html[Previous Module (3)]
+link:module5.html[Next Module (5)]

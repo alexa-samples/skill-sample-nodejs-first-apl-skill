@@ -1,0 +1,10 @@
+{
+    "text": {
+        "start": "Welcome",
+        "middle": "to",
+        "end": "Cake Walk!"
+    },
+    "assets": {
+        "cake":"https://public-pics-muoio.s3.amazonaws.com/alexaCake_960x960.png"
+    }
+}

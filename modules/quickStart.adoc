@@ -1,0 +1,31 @@
+
+
+:imagesdir: ../modules/images
+
+= Quick Start Instructions
+
+These are the instructions for skill builders who have never worked with the Cake Walk skill.
+
+== Understand Cake Walk
+
+Cake Walk is a simple skill which changes between usages. The initial experience is Alexa welcoming you and requesting for your birthday. It uses auto-delegation to get each of these slots. These are stored in persistent memory (S3) and the skill session ends.
+
+On opening Cake Walk after you entered your birthday, you are either greeted with a countdown to your birthday, or if it is your birthday, you get a birthday message.
+
+To build your own cake walk skill, go to the https://github.com/alexa/skill-sample-nodejs-first-skill[Cake Walk code repo on github]. Once you are here, you can will need the https://github.com/alexa/skill-sample-nodejs-first-skill/tree/master/final[final module code uploaded to developer console]. Clone the repository if you are familiar with git, but it is not necessary, because you want to set the files up in your Alexa Developer account. 
+
+A. Open the https://developer.amazon.com/alexa/console/ask[developer console to the ASK page]. Sign in if needed.
+B. Click Create skill.
+C. Enter the skill name as "Cake Walk".
++
+image:MakeCakeWalk.gif[]
++
+D. Upload the interaction model https://raw.githubusercontent.com/alexa/skill-sample-nodejs-first-skill/master/final/en-US.json[from here] to your skill. This is easy to do from the build tab. Copy paste the raw github link JSON into the "JSON Editor" which you can find on the left side.
+E. Build your interaction model with the "Build Model" button.
+F. For the code, switch to the code tab in the developer console.
+G. Replace the contents of index.js with the https://raw.githubusercontent.com/alexa/skill-sample-nodejs-first-skill/master/final/index.js[contents in Github from here]. 
+H. Replace the contents of the package.json file with the https://raw.githubusercontent.com/alexa/skill-sample-nodejs-first-skill/master/final/package.json[contents in Github from here].
+I. Save and deploy the code.
+J. Go to the test tab and enable the skill in "Development" stage.
+K. Test the skill by typing `open cake walk` into the Alexa Simulator text box.
+L. When this is all working (you will see json in the request and response), go back to link:module3.html[module 3].

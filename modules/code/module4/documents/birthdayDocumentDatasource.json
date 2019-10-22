@@ -1,0 +1,12 @@
+{
+    "text": {
+        "start": "Happy Birthday!",
+        "middle": "From,",
+        "end": "Alexa <3"
+    },
+    "assets": {
+        "video": "https://public-pics-muoio.s3.amazonaws.com/video/Amazon_Cake.mp4",
+        "cake":"https://public-pics-muoio.s3.amazonaws.com/alexaCake_960x960.png",
+        "backgroundURL": "https://github.com/JoeMoCode/CakeWalkAPL/blob/master/modules/code/final/documents/images/lights_1280x800.png?raw=true"
+    }
+}

@@ -1,0 +1,105 @@
+{
+    "type": "APL",
+    "version": "1.1",
+    "settings": {},
+    "theme": "dark",
+    "import": [
+        {
+            "name": "alexa-layouts",
+            "version": "1.1.0"
+        }
+    ],
+    "resources": [],
+    "styles": {
+        "bigText": {
+            "values": [
+                {
+                    "fontSize": "72dp",
+                    "color": "black",
+                    "textAlign": "center"
+                }
+            ]
+        }
+    },
+    "onMount": [],
+    "graphics": {},
+    "commands": {},
+    "layouts": {},
+    "mainTemplate": {
+        "parameters": [
+            "payload"
+        ],
+        "items": [
+            {
+                "type": "Container",
+                "items": [
+                    {
+                        "type": "AlexaBackground",
+                        "backgroundImageSource": "${payload.assets.backgroundURL}"
+                    },
+                    {
+                        "type": "Text",
+                        "style": "bigText",
+                        "text": "${payload.text.start}"
+                    },
+                    {
+                        "type": "Text",
+                        "style": "bigText",
+                        "text": "${payload.text.middle}"
+                    },
+                    {
+                        "type": "Text",
+                        "style": "bigText",
+                        "text": "${payload.text.end}"
+                    },
+                    {
+                        "type": "Container",
+                        "alignItems": "center",
+                        "items": [
+                            {
+                                "type": "AlexaImage",
+                                "imageSource": "${payload.assets.cake}",
+                                "imageRoundedCorner": false,
+                                "imageScale": "best-fit",
+                                "imageHeight": "50vh",
+                                "imageAspectRatio": "standard_landscape",
+                                "imageBlurredBackground": false
+                            }
+                        ]
+                    }
+                ],
+                "height": "100%",
+                "width": "100%",
+                "when": "${@viewportProfile != @hubRoundSmall}"
+            },
+            {
+                "type": "Container",
+                "items": [
+                    {
+                        "type": "AlexaBackground",
+                        "backgroundImageSource": "${payload.assets.backgroundURL}"
+                    },
+                    {
+                        "type": "Text",
+                        "style": "bigText",
+                        "paddingTop": "75dp",
+                        "text": "${payload.text.start}"
+                    },
+                    {
+                        "type": "Text",
+                        "style": "bigText",
+                        "text": "${payload.text.middle}"
+                    },
+                    {
+                        "type": "Text",
+                        "style": "bigText",
+                        "text": "${payload.text.end}"
+                    }
+                ],
+                "height": "100%",
+                "width": "100%",
+                "when": "${@viewportProfile == @hubRoundSmall}"
+            }
+        ]
+    }
+}
