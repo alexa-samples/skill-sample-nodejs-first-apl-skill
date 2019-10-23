@@ -1,7 +1,7 @@
 # --------------------------------------------------------------------------
 # Make file for building this package. Needs Asciidoctor installed.
 # https://asciidoctor.org/docs/user-manual/
-# also
+# 
 # asciidoctor-pdf
 # https://asciidoctor.org/docs/asciidoctor-pdf/
 # Server and open commands assume MacOS

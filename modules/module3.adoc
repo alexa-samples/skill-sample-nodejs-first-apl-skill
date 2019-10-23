@@ -1,7 +1,7 @@
 
 :link-cakewalk: https://developer.amazon.com/en-US/alexa/alexa-skills-kit/courses/cake-walk[Cake Walk Course]
 :link-quick-setup: link:quickStart.html[quick setup instructions] 
-:link-S3-assets: https://github.com/JoeMoCode/CakeWalkAPL/tree/master/modules/assets[from this page.]
+:link-S3-assets: https://github.com/alexa/skill-sample-nodejs-first-apl-skill/tree/master/modules/assets[from this page.]
 :authoringToolLink: https://developer.amazon.com/alexa/console/ask/displays
 :sectnums:
 :toc:
@@ -134,8 +134,8 @@ B. Then in the data section, use:
         "end": "Cake Walk!"
     },
     "assets": {
-        "cake":"https://public-pics-muoio.s3.amazonaws.com/alexaCake_960x960.png",
-        "backgroundURL": "https://github.com/JoeMoCode/CakeWalkAPL/blob/master/modules/assets/lights_1920x1080.png?raw=true"
+        "cake":"https://github.com/alexa/skill-sample-nodejs-first-apl-skill/blob/master/modules/assets/alexaCake_960x960.png?raw=true",
+        "backgroundURL": "https://github.com/alexa/skill-sample-nodejs-first-apl-skill/blob/master/modules/assets/lights_1920x1080.png?raw=true"
     }
  }
 +
@@ -195,7 +195,7 @@ H. Test this out making sure to use the TV and the hub devices in the test conso
 
 Since our frontend is scaling properly by using the responsive components, we are done! Let's head to the next module and learn some more advanced APL document concepts.
 
-https://github.com/JoeMoCode/CakeWalkAPL/tree/master/modules/code/module3[Complete code in Github]
+https://github.com/alexa/skill-sample-nodejs-first-apl-skill/tree/master/modules/code/module3[Complete code in Github]
 
 link:module2.html[Previous Module (2)]
 link:module4.html[Next Module (4)]

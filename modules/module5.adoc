@@ -190,7 +190,7 @@ A. Since you cannot do this with Alexa Hosted, instead, start to point your APL 
  {
     "name": "my-cakewalk-apl-package-v2",
     "version": "1.0",
-    "source": "https://public-pics-muoio.s3.amazonaws.com/my-cakewalk-apl-package-v2.json"
+    "source": "https://raw.githubusercontent.com/alexa/skill-sample-nodejs-first-apl-skill/master/modules/code/module5/documents/my-cakewalk-apl-package-v2.json"
  }
 +
 In here, you will see just the commands targeting the shared text components. So, you can now remove these from your launchDocument.json doc, keeping only the image command. 
@@ -302,7 +302,7 @@ D. Save and deploy and test this out now.
 
 That is a cool animation isn't it? Great work on making it this far and expanding your Cake Walk with images, text, video, and animations! 
 
-https://github.com/JoeMoCode/CakeWalkAPL/tree/master/modules/code/module5[Complete code in Github]
+https://github.com/alexa/skill-sample-nodejs-first-apl-skill/tree/master/modules/code/module5[Complete code in Github]
 
 link:module4.html[Previous Module (4)] 
 link:module6.html[Wrap Up & Extra Credit]

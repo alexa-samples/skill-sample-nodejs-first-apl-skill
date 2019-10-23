@@ -203,7 +203,7 @@ But wait... this isn't that much simpler to look at! It looks longer... Let's si
 
 Once you have your components rendering and the launch screen looks the same, it is time to host our layout so it can be used in more than one document. Layouts, styles, and resources can all be hosted in an https://developer.amazon.com/docs/alexa-presentation-language/apl-package.html[APL package]. In fact, an APL package has the same format of an APL document except, there is no mainTemplate. This is a great way to share resources, styles, or your own custom responsive components or UI patterns across multiple APL documents. You can even create your own documents to share with the rest of the Alexa developer community!
 
-We want to host both our style and our layout. To do so we will use our S3 bucket on our backend. Unfortunately, since we are using the Alexa hosted environment, we cannot modify permissions on the S3 provision we are given. Alexa devices and simulators need the header, `Access-Control-Allow-Origin` to be set and allow *.amazon.com. To learn more, https://developer.amazon.com/docs/alexa-presentation-language/apl-support-for-your-skill.html#support-cors[check out the tech docs]. Also, the link must be public which we cannot do with Alexa hosted. But for this exercise, we will use https://public-pics-muoio.s3.amazonaws.com/my-cakewalk-apl-package.json[this S3 link] to host our JSON APL package.
+We want to host both our style and our layout. To do so we will use our S3 bucket on our backend. Unfortunately, since we are using the Alexa hosted environment, we cannot modify permissions on the S3 provision we are given. Alexa devices and simulators need the header, `Access-Control-Allow-Origin` to be set and allow *.amazon.com. To learn more about Cross-Origin Resource Sharing, https://developer.amazon.com/docs/alexa-presentation-language/apl-support-for-your-skill.html#support-cors[check out the tech docs]. Also, the link must be public which we cannot do with Alexa hosted. But for this exercise, we will use https://raw.githubusercontent.com/alexa/skill-sample-nodejs-first-apl-skill/master/modules/code/module4/documents/my-cakewalk-apl-package.json[this GitHub link] to host our JSON APL package. Note: Github supports CORS on all domains.
 
 Our package will be just the reusable set of properties from our APL document. This includes the layouts and the styles. We also will need the import section because we rely on alexa-layouts in order to render our layout. Imports are transitive in APL. This is basically everything except for the `mainTemplate`. Our package will be:
 
@@ -276,14 +276,14 @@ Our package will be just the reusable set of properties from our APL document. T
     }
  }
 
-Now in our main document, we can remove everything except for the mainTemplate blob, and add in a new import for our package. In the authoring tool, we can use https://public-pics-muoio.s3.amazonaws.com/my-cakewalk-apl-package.json[this public link] to test. 
+Now in our main document, we can remove everything except for the mainTemplate blob, and add in a new import for our package. In the authoring tool, we can use https://raw.githubusercontent.com/alexa/skill-sample-nodejs-first-apl-skill/master/modules/code/module4/documents/my-cakewalk-apl-package.json[this public link] to test. 
 
 A. Add this import to your document:
 +
  {
     "name": "my-cakewalk-apl-package",
     "version": "1.0",
-    "source": "https://public-pics-muoio.s3.amazonaws.com/my-cakewalk-apl-package.json"
+    "source": "https://raw.githubusercontent.com/alexa/skill-sample-nodejs-first-apl-skill/master/modules/code/module4/documents/my-cakewalk-apl-package.json"
  }
 +
 With this import, we can now reference the values from our custom style (bigText) and layout (cakeWalkText). Our document is now significantly smaller and easier to read:
@@ -297,7 +297,7 @@ With this import, we can now reference the values from our custom style (bigText
         {
             "name": "my-cakewalk-apl-package",
             "version": "1.0",
-            "source": "https://public-pics-muoio.s3.amazonaws.com/my-cakewalk-apl-package.json"
+            "source": "https://raw.githubusercontent.com/alexa/skill-sample-nodejs-first-apl-skill/master/modules/code/module4/documents/my-cakewalk-apl-package.json"
         },
         {
             "name": "alexa-layouts",
@@ -514,7 +514,7 @@ I. Now, Test your skill. Clear your user data in S3 and lie so today is your bir
 
 When this is working, you can go to the final hands on module to learn about commands.
 
-https://github.com/JoeMoCode/CakeWalkAPL/tree/master/modules/code/module4[Complete code in Github]
+https://github.com/alexa/skill-sample-nodejs-first-apl-skill/tree/master/modules/code/module4[Complete code in Github]
 
 link:module3.html[Previous Module (3)]
 link:module5.html[Next Module (5)]

@@ -218,7 +218,7 @@ This relies on a new "assets.cake" object to be added to the data section. The n
         "end": "Cake Walk!"
     },
     "assets": {
-        "cake":"https://public-pics-muoio.s3.amazonaws.com/alexaCake_960x960.png"
+        "cake":"https://github.com/alexa/skill-sample-nodejs-first-apl-skill/blob/master/modules/assets/alexaCake_960x960.png?raw=true"
     }
  }
 +
@@ -386,7 +386,7 @@ Final APL Document JSON for reference:
 
 Let's put this document to use in the next section. 
 
-https://github.com/JoeMoCode/CakeWalkAPL/tree/master/modules/code/module2[Complete code in Github]
+https://github.com/alexa/skill-sample-nodejs-first-apl-skill/tree/master/modules/code/module2[Complete code in Github]
 
 link:module1.html[Previous Module (1)]
 link:module3.html[Next Module (3)]

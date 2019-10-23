@@ -7,7 +7,7 @@
         {
             "name": "my-cakewalk-apl-package",
             "version": "1.0",
-            "source": "https://public-pics-muoio.s3.amazonaws.com/my-cakewalk-apl-package.json"
+            "source": "https://raw.githubusercontent.com/alexa/skill-sample-nodejs-first-apl-skill/master/modules/code/module4/documents/my-cakewalk-apl-package.json"
         },
         {
             "name": "alexa-layouts",

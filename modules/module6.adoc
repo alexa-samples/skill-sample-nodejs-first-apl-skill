@@ -22,7 +22,7 @@ There are a few ways you can improve this skill and add a better visual experien
 ** https://developer.amazon.com/docs/alexa-design/apl.html[APL Alexa Design Guide]
 ** https://forums.developer.amazon.com/topics/apl.html[APL developer forums topic]
 ** https://forums.developer.amazon.com/articles/193931/apl-known-issues-and-bugs-2.html[Known issues in APL]
-** https://github.com/JoeMoCode/CakeWalkAPL[APL Cake Walk Repo]
+** https://github.com/alexa/skill-sample-nodejs-first-apl-skill[APL Cake Walk Repo]
 ** https://github.com/alexa/skill-sample-nodejs-first-skill[Cake Walk]
 ** https://github.com/alexa/skill-sample-nodejs-premium-hello-world[Premium Hello World]
 ** https://github.com/alexa/skill-sample-nodejs-fact-in-skill-purchases[Fact In-skill Purchases]
@@ -48,5 +48,5 @@ We're committed to developing online and in-person learning material to aid desi
 We'd love to hear from you in regard to:
 
 * This course. Let us know what you liked, didn't like, and what we can do to improve!
-** We take https://github.com/JoeMoCode/CakeWalkAPL/pulls[pull requests], too :)
+** We take https://github.com/alexa/skill-sample-nodejs-first-apl-skill/pulls[pull requests], too :)
 * Have a feature request for APL or general Alexa Skill Development? You have a voice: http://alexa.uservoice.com[uservoice].

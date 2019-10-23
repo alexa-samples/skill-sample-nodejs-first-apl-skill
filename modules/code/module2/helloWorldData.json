@@ -5,6 +5,6 @@
         "end": "Cake Walk!"
     },
     "assets": {
-        "cake":"https://public-pics-muoio.s3.amazonaws.com/alexaCake_960x960.png"
+        "cake":"https://github.com/alexa/skill-sample-nodejs-first-apl-skill/blob/master/modules/assets/alexaCake_960x960.png?raw=true"
     }
 }
