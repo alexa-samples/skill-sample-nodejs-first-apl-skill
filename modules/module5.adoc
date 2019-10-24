@@ -173,7 +173,10 @@ B. Put this all together for the image command gives us:
     ]
  }
 +
-Add this to your commands.json inside the parallel command's list. Now test it out! Once that is working, enter your birthday and test the launchHandler with context when it is not your birthday. You should see the commands applied to this as well. But, we are not quite done. What about animations when it is their birthday? This is using the birthdayDocument.json file which has no commands in it. Let's fix this.
+Add this in your `launchDocument.json` file inside the onMount command list. 
+C. Now test it out! 
+D. Once that is working, enter your birthday and test the launchHandler with context when it is not your birthday. You should see the commands applied to this as well. 
+We are not quite done. What about animations when it is their birthday? Since, that experience is defined in the birthdayDocument.json file which we have not added commands to. Let's fix this.
 
 == Adding Birthday Interactions
 
