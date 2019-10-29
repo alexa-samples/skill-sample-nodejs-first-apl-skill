@@ -3,11 +3,17 @@
 :sectnums:
 :toc:
 
-= Build Your First Visuals
+= Build Your First Visuals with the APL Authoring Tool
 
 {blank}
 
-In this section, we are going to learn about the authoring tool and use this to create an APL LaunchRequest response document for our Cake Walk skill. By the end of this section, you'll simply have a screen that says, "Welcome to Cake Walk!," with a small image of a cake. To make this screen, you'll learn about the APL image and text components, styles, how to use data binding, and how to start making responsive documents. Let's get started.
+In this section, we are going to learn about the authoring tool and use this to create an APL LaunchRequest response document for our Cake Walk skill. By the end of this section, you'll simply have a screen that says, "Welcome to Cake Walk!," with a small image of a cake. To make this screen, you'll learn about the following:
+* APL image and text components
+* Styles
+* Data binding basics
+* Responsive documents
+
+Let's get started.
 
 Note: We suggest using Firefox or Chrome for this course. Safari is not supported in the authoring tool.
 
@@ -24,7 +30,7 @@ image::firstHelloWorld.gif[]
 +
 D. Let's add some text, "Hello Cake Walk!". Click on the text component under the layouts section.
 E. Scroll down the middle section until you find the "text" property of the text component. Change this message to `Hello Cake Walk!`.
-F. Above this, find the fontSize property and change this to 72dp. We want to increase the text size to account for our customers which are looking at the device from far away. Now you should no longer see the text...Uh oh! The reason it is cut off now is because we are bounding the text rendering to a box which is much too small. Let's fix this.
+F. Above this, find the fontSize property and change this to 72dp. We want to increase the text size to account for our customers which are looking at the device from far away. Now you should no longer see the text...Uh oh! Because the text is bound to such a small rendering box, it no longer can display text with 72dp font size. Let's fix this.
 G. Scroll down to the "Width" section and find the "width" property of our Text component. Delete the value in the width text box, so it will default to auto. 
 H. Do the same with "height" under the "Height" section. Auto is a better setting to use since it will automatically scale the size of the bounding box for the text to match the content. This will help us later if we choose to modify the font size in the future as we did above.
 
@@ -71,11 +77,11 @@ For reference here is the JSON that you should have.
      }
  }
 
-We created a text component and then modified some properties on it. To know the full set of text component properties, https://developer.amazon.com/docs/alexa-presentation-language/apl-text.html[check out the tech docs]. If you looked at that page, you will see that paddingTop and paddingBottom are missing. That is because all components also inherit properties from their parents. The top level component tech doc can be https://developer.amazon.com/docs/alexa-presentation-language/apl-component.html[found here].
+We created a text component and then modified some properties on it. To see the full set of text component properties, https://developer.amazon.com/docs/alexa-presentation-language/apl-text.html[check out the tech docs]. If you looked at that page, you will see that paddingTop and paddingBottom are missing. That is because all components also inherit properties from their parents. The top level component tech doc can be https://developer.amazon.com/docs/alexa-presentation-language/apl-component.html[found here].
 
 The authoring tool also created a container for us. https://developer.amazon.com/docs/alexa-presentation-language/apl-container.html[Containers] contain APL components in an alignment of "column" or "row" and are themselves, components, meaning, they have the basic component properties, too. Containers are essential for building responsive APL documents and complex documents will use a mix of row and column containers to properly lay out components in a way which scales nicely across devices. 
 
-== Hello World With Style
+== Hello Cake Walk with style
 
 Some of the component properties can be defined using https://developer.amazon.com/docs/alexa-presentation-language/apl-style-definition-and-evaluation.html[styles]. Styles are a way of naming a chunk of properties that can be reused across components in the "style" property which all components have. 
 
@@ -123,7 +129,7 @@ This will leave you with a style blob looking like:
 +
 Even though you have not changed the actual text component, since it is using the bigText style, this is now applied to the Text component. 
 
-== Data Binding
+== Data binding
 
 Did you notice the "Data" button? This is to simulate the data that can be a part of the `Alexa.Presentation.APL.RenderDocument` directive which is what you send from your skill backend to render the document. But, we'll come back to that later. First, let's look at how to build our document with data sources. 
 
@@ -161,7 +167,7 @@ image::WelcomeToCakeWalk.png[]
 
 Now, we have a set of reusable styles across this APL document, and we learned about making a screen using data binding. Let's add an image of a birthday cake.
 
-== Adding a Birthday Cake
+== Adding a birthday cake
 
 For this, we will also use databinding. To add an image, we need to add an image component to our document. Image components take in a url to the image. However, image is a rudimentary component and to make it look good across the many multimodal devices would take a lot of effort and multiple image resolutions since it does not auto scale. We can avoid this hurdle by using the https://developer.amazon.com/docs/alexa-presentation-language/apl-alexa-image-layout.html[AlexaImage] responsive component where we will need just a single image which will scale across device resolutions. 
 

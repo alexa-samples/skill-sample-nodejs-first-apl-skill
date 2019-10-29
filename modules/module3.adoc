@@ -8,7 +8,7 @@
 
 :imagesdir: ../modules/images
 
-= Adding Visuals to your backend
+= Modify Your Backend to Add LaunchRequest Visuals
 
 {blank}
 
@@ -16,7 +16,7 @@ In this section, you will learn how to modify your backend to safely add APL vis
 
 Cake Walk code will be used in this section. If you have not done the {link-cakewalk}, and you are a new Alexa developer, check out the intro course, now, then come back to this module. If you are already a skill builder and experienced with the basics of a nodeJS skill, then feel free to skip the course and see the {link-quick-setup} to get the code and overview of the Cake Walk Skill. 
 
-== Adding Visuals to Your Skill
+== Adding visuals to your skill
 
 For an Alexa device to safely render your APL document, you have to respond with a render directive only when the device supports APL. This directive takes the form of `Alexa.Presentation.APL.RenderDocument`. You can add a directive using the nodeJS SDK easily by calling `handlerInput.responseBuilder.addDirective({...});`
 
@@ -79,7 +79,7 @@ E. Then, import this at the top of your `index.js` like so:
 The launchDocument variable in your javascript code represents the contents of your json file. 
 F. Now, deploy the code. But wait, we cannot test it, yet.
 
-== Using the Developer Console's Simulator to Test
+== Using the developer console simulator to test
 
 Before we can test our document changes, we have to enable APL in the Build tab. 
 
@@ -106,7 +106,7 @@ TIP: Remember to delete your user data if you have any! Cake walk has two differ
 F. Repeat this test on all the other screen types. 
 
 
-== Uploading Assets to S3
+== Uploading assets to S3
 Before we can make use of image assets, we will need to host these images. Ideally, you will use a https://en.wikipedia.org/wiki/Content_delivery_network[CDN] (such as https://aws.amazon.com/blogs/networking-and-content-delivery/amazon-s3-amazon-cloudfront-a-match-made-in-the-cloud/[Amazon Cloudfront in conjunction with S3]) to serve your assets to locations closer to your users, but for this exercise, we will use S3 since this is provided by Alexa hosted. 
 
 A. To upload the S3 Assets, you can access your S3 provision under the code tab at the very bottom on the left side. Go here now.
@@ -118,9 +118,9 @@ C. In here, upload all of the assets {link-S3-assets}. We will use these over th
 +
 image::S3Provision.png[]
 
-Now that your assets are uploaded, we can update our Launch Request with images
+Now that your assets are uploaded, we can update our Launch Request with images.
 
-== Updating our Launch Request Handler
+== Updating our launch request handler
 
 Now that we have our no context launch request working, it is time to add an image rather than using the default background. 
 
@@ -155,7 +155,7 @@ IMPORTANT: Make sure the AlexaBackground responsive component is above the other
 
 You may notice we are using a single 1920x1080 png for each of the devices and it scales pretty well. We want to use the highest possible resolution to consider FireTV devices. Scaling down produces a better quality image. The tradeoff is that smaller resolution devices which do not support this quality level will download unnecessary data. The best course of action would be to provide two or more different image resolutions for different devices classes. We will see how to do this in the next section. 
 
-== Applying Our Images
+== Applying our images
 
 A. Now that we have our document ready, replace the launchDocument.json contents in your Code tab with the JSON from the authoring tool. 
 B. Go back to the index.js. Since we are adding in links to our private S3 instance, we will need to import the util module. At the top of this file, add in another import:

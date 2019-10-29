@@ -2,7 +2,7 @@
 :sectnums:
 :toc:
 
-= Making More Documents
+= Create More Visuals Scalably
 
 {blank}
 
@@ -199,11 +199,13 @@ When we remove the redundant code and replace it with references to our layout, 
 +
 But wait... this isn't that much simpler to look at! It looks longer... Let's simplify our document further by breaking out the layout and styles into it's own APL package.
 
-== Hosting Your Own APL Package
+== Hosting your own APL package
 
 Once you have your components rendering and the launch screen looks the same, it is time to host our layout so it can be used in more than one document. Layouts, styles, and resources can all be hosted in an https://developer.amazon.com/docs/alexa-presentation-language/apl-package.html[APL package]. In fact, an APL package has the same format of an APL document except, there is no mainTemplate. This is a great way to share resources, styles, or your own custom responsive components or UI patterns across multiple APL documents. You can even create your own documents to share with the rest of the Alexa developer community!
 
 We want to host both our style and our layout. To do so we will use our S3 bucket on our backend. Unfortunately, since we are using the Alexa hosted environment, we cannot modify permissions on the S3 provision we are given. Alexa devices and simulators need the header, `Access-Control-Allow-Origin` to be set and allow *.amazon.com. To learn more about Cross-Origin Resource Sharing, https://developer.amazon.com/docs/alexa-presentation-language/apl-support-for-your-skill.html#support-cors[check out the tech docs]. Also, the link must be public which we cannot do with Alexa hosted. But for this exercise, we will use https://raw.githubusercontent.com/alexa/skill-sample-nodejs-first-apl-skill/master/modules/code/module4/documents/my-cakewalk-apl-package.json[this GitHub link] to host our JSON APL package. Note: Github supports CORS on all domains.
+
+NOTE: If you are using another service to host your assets that service must also send the appropriate headers.
 
 Our package will be just the reusable set of properties from our APL document. This includes the layouts and the styles. We also will need the import section because we rely on alexa-layouts in order to render our layout. Imports are transitive in APL. This is basically everything except for the `mainTemplate`. Our package will be:
 

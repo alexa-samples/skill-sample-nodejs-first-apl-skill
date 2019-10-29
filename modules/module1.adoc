@@ -7,45 +7,55 @@
 
 {blank}
 
-Welcome to the Alexa Presentation Language (APL) extension to the {link-cakewalk}. After taking this course, you will have the information needed to create rich multimodal experiences for Alexa. The course will teach you the following:
+Welcome to How to build a multimodal Alexa skill, a continuation of the {link-cakewalk}. After taking this course, you will have the information needed to create rich multimodal experiences for Alexa using Alexa Presentation Language (APL). The course will teach you the following:
 
-* link:module1.html[Module 1]: Why build multimodal skills and the basics of an APL skill
-* link:module2.html[Module 2]: How to use the authoring tool to create APL visuals
-* link:module3.html[Module 3]: Modify your backend code to add a LaunchRequest visual
-* link:module4.html[Module 4]: Make more visuals, scalably by sharing your custom APL code
-* link:module5.html[Module 5]: Adding animations and controlling video with commands
-* link:module6.html[Module 6]: Wrap-up and extra credit ideas
+* link:module1.html[Module 1]: Understand the Basics of APL
+* link:module2.html[Module 2]: Build Your First Visuals with the APL Authoring Tool
+* link:module3.html[Module 3]: Modify Your Backend to Add LaunchRequest Visuals
+* link:module4.html[Module 4]: Create More Visuals Scalably
+* link:module5.html[Module 5]: Add Animation and Video Control
+* link:module6.html[Module 6]: Wrapping Up & Resources
 
 == What is Cake Walk?
-Cake Walk is the introductory skill building course where new Alexa Developers build a simple Alexa skill which remembers their birthday. On repeated usage of the Cake Walk skill, you will either hear a Happy Birthday message from Alexa, or a countdown of days until it is your birthday. In this course, we are going to add visuals and animations to teach the fundamentals of building with APL. If you are new to skill building, we recommend you check out the {link-cakewalk}, but if you are already building Alexa skills or familiar with the concepts, then keep reading! Cake Walk starter code will be provided later if needed. 
+The Cake Walk course is an introductory skill building course where you can build a simple Alexa skill (Cake Walk skill) which remembers your birthday. On repeated usage of the Cake Walk skill, you will either hear a Happy Birthday message from Alexa, or a countdown of days until it is your birthday. In this course, we are going to add visuals and animations to teach the fundamentals of https://developer.amazon.com/docs/alexa-presentation-language/understand-apl.html[building with APL]. If you are new to skill building, we recommend you check out the {link-cakewalk}, but if you are already building Alexa skills or are already familiar with the concepts, then keep reading! Code for the Cake Walk skill and instructions to set it up will be provided later if you need it.
 
-== Why Multimodal Skills?
-Multimodal simply means many modes. While Alexa is always voice first, adding visuals as a secondary mode can greatly enrich your customer's experience for Alexa-enabled devices with screens. There are tens of millions of multimodal Alexa devices, including Echo devices such as the Echo Spot and Echo Show, FireTV, Fire tablets, and thousands of third party devices. Adding another mode to your Alexa Skill can enhance the experience for your customers on these devices. 
+== Why multimodal skills?
+Multimodal is the addition of other forms of communication, such as visual aids, to the voice experience that Alexa already provides. While Alexa is always voice first, adding visuals as a secondary mode can greatly enrich your customer's experience for Alexa-enabled devices with screens. There are tens of millions of multimodal Alexa devices, including Echo devices such as the Echo Spot and Echo Show, FireTV, Fire tablets, and thousands of devices from other manufacturers with Alexa built-in. Adding another mode to your Alexa Skill can enhance the experience for your customers on these devices in the following ways.
 
-=== Increase the Level of Detail of your Skill's Response
-Multimodal Skills can simplify the voice responses from your Alexa Skill and provide more information through visuals. Voice is a fantastic interface for ease of use, speed and efficiency, but it is not always the best at presenting complex or a large amounts of information. Reducing the length of output speech if a screen is present and presenting information on the screen can help with verbose wording. For example, a weather skill that provides the daily forecast could just tell you the temperature range and precipitation, while on screen, it displays a breakdown by hour of each of these datapoints, humidity, wind speed, etc. All of the information is potentially important, but it would take far too long to even read out all of these stats, let alone an hour by hour breakdown! If the requesting device does not have a screen, more information such as humidity and wind speed can be read out to the customer. In both cases, you would want to allow them to ask for more details. This is especially important for when the customer is not looking at the screen, but using a multimodal device, anyways. Later in this course, we will cover the specifics of how to determine if the requesting Alexa device has a screen.
+=== Increase the level of detail in your skill's response
+Multimodal Skills can provide more information through visual aids leading to a better customer experience. Voice is a fantastic way to interact with users because it's intuitive and efficient; however, it is not a great choice for presenting complex or large amounts of information at once. Having the ability to show visual aids can reduce verbosity in your voice response by displaying more in-depth information on the subject at hand. For example, a weather skill that provides the daily forecast could tell you the temperature and precipitation, while on a screen, it could display a breakdown richer weather data such as humidity, wind speed, and temperature hour by hour. All of the information is potentially important, but it would take far too long to even read out all of these stats, let alone an hour by hour breakdown! If the requesting device does not have a screen, more information such as humidity and wind speed can be read out to the customer. In both cases, you would want to allow them to ask for more details. Even if a user has a multimodal device, we can't assume they're always looking at the screen. Later in this course, we will cover the specifics of how to determine if the requesting Alexa device has a screen.
 
-=== Ambient Experiences
-Ambient experiences tangential to the main reason of opening the skill are an important way to train your customers in how to interact with your skill. Hints provide a place where you can nudge users to perform specific actions. This can be made specific to the interaction they are currently having. For instance, considering the weather skill above, you may want to provide a hint to the user to tell them that they can ask for a breakdown of the wind speed by hour if asking about the weather for the day. In addition to hints, you can display images related to the content you are talking about. This is particularly nice in longer running entertainment skills such as music skills where you can display the album art of a song playing, or even a photo gallery of the band at live shows. 
+=== Ambient experiences
+Ambient experiences that are tangential to the skill experience are an important way to train your customers in how to interact with your skill. Hints provide a place where you can nudge users to perform specific actions. Hint messages can be specific to the ongoing interaction that the user is currently having. For instance, in our weather skill above, you may want to provide a hint to the user to tell them that they can ask for a breakdown of the wind speed by hour if asking about the weather for the day. In addition to hints, you can display images related to the content you are talking about. This is particularly nice in longer running entertainment skills such as music skills where you can display the album art of a song playing, or even a photo gallery of the band at live shows. 
 
-=== Complementary Branded Visuals
-High quality visuals improves your brand image for your skill. Multimodal devices provide an opportunity to add visual branding to your experience. You can add your brand logo, as well as any information that might be relevant to the skill response. For instance, if you have a business skill, you might want to show a chart of sales when talking about a sales summary with your skill logo at the top. This complements the audio experience with a visual that is relevant to the voice response, in addition to your brand image. 
+=== Complementary branded visuals
+High quality visuals improves your brand image for your skill. Multimodal devices provide an opportunity to add visual branding to your experience. You can add your brand logo, as well as any information that might be relevant to the skill response. You can use your own color palette and styling to the visual experience your customers are having. For instance, if you have a business skill, you might want to show a chart of sales when talking about a sales summary with your skill logo at the top with colors to show gains and losses. Since branding is about having a constant reminder of the experience to the customer that is memorable without being obtrusive, this complements the audio experience with a visual that is relevant to the voice response, in addition to your brand image. 
 
-=== Rich Media Experiences
-While you always need a voice experience, some skills are used primarily as a media experience. Multimodal interfaces give you the ability to provide videos and images. Consider a skill which displays user photos, videos, and photo metadata from a user's hosted drive account. This would do very little on a headless device, only having the functionality to read out the data about the content, but it would function fully and play the video or display images if used from a device with a screen. Multimodal devices give the opportunity to do this which does not exist otherwise. 
+=== Rich media experiences
+While you always need a voice experience, some skills are used primarily as a way to showcase media. Multimodal interfaces give you the ability to provide videos, images, and animations. Consider a skill which displays user photos, videos, and photo metadata from a user's hosted account. This would do very little on a headless device, only having the functionality to read out the data about the content, but it would function fully and play the video or display images if used from a device with a screen. Multimodal devices give the opportunity to do this which does not exist otherwise. 
 
 == Alexa Presentation Language
 The https://developer.amazon.com/docs/alexa-presentation-language/understand-apl.html[Alexa Presentation Language], which we call APL for short, is designed for rendering visuals across the ever increasing category of Alexa-enabled devices with screens, allowing you to add graphics, images, slideshows, video, and animations to create the visual experience you want in a way that is consistent across your skill. 
 
-=== APL Skill Flow
+=== APL skill flow
 
 image:APLSkillFlowDiagram.png[]
 
-Alexa skills all follow a diagram similar to the one above. Customers talk to their Alexa-enabled device (1). This goes off to Alexa Voice Services (AVS) to translate that voice into text, then text into an intention (2). Following that, the intent (with slots) goes to the correct backend (3) which formulates an appropriate speakOutput with optional additional directives. Directives are simply messages which tell an Alexa device to perform an action. This goes through AVS (4) to perform text to speech from the skill's speakOutput and renders visuals if the appropriate directive (RenderDocument) is sent. There are also events which can trigger requests to the skill backend in response to user actions. These are similar to the handlers created for an intent or launch request. 
+Alexa skills all follow a diagram similar to the one above. 
 
-=== APL Documents
+1. Customers talk to their Alexa-enabled device. 
+2. This goes off to the Alexa service in the cloud to translate that voice into text, then text into an intention. 
+3. The intent (with slots) goes to the correct backend which formulates an appropriate speakOutput with optional additional directives*. 
+4. This response through Alexa services to perform text to speech from the skill's speakOutput and renders visuals on the device if the appropriate directive (RenderDocument) is sent. 
 
-An APL document is a holder for all of the data to define what happens in a RenderDocument directive. The visuals on screen are made up of APL components, and layouts. https://developer.amazon.com/docs/alexa-presentation-language/apl-component.html[Components] are the most basic building blocks of APL and represent small, self-contained UI elements which display on the https://en.wikipedia.org/wiki/Viewport[viewport]. https://developer.amazon.com/docs/alexa-presentation-language/apl-layout.html[Layouts] are used similarly to components, but are not primitive elements. Rather, they combine other layouts and primitive components to create a UI pattern. These can be self defined or pulled from other sources as an import. Every APL document has a "mainTemplate". This simply represents the start state of the APL screen to be rendered. Here is an example blank APL document with all of its properties: 
+Not pictured are events which can trigger requests to the skill backend in response to user actions. These are similar to the handlers created for an intent or launch request. 
+
+*Directives are simply messages which tell an Alexa device to perform an action
+
+=== APL documents
+
+An APL document is a holder for all of the definitions of UI elements and their visual hierarchy in a RenderDocument directive. APL documents also hold styles associated with those components, as well as points where you can bind data. The visual elements on the screen are made up of APL components, and layouts. https://developer.amazon.com/docs/alexa-presentation-language/apl-component.html[Components] are the most basic building blocks of APL and represent small, self-contained UI elements which display on the https://en.wikipedia.org/wiki/Viewport[viewport]. https://developer.amazon.com/docs/alexa-presentation-language/apl-layout.html[Layouts] are used like components, but are not primitive elements. Rather, they combine other layouts and primitive components to create a UI pattern. You can create your own layouts or import pre-defined layouts from other sources. 
+Every APL document has a "mainTemplate". This simply represents the start state of the APL screen to be rendered. Here is an example blank APL document with all of its top-level properties: 
 
  {
      "type": "APL",
@@ -67,6 +77,6 @@ An APL document is a holder for all of the data to define what happens in a Rend
      }
  }
 
-Instead of defining all of the terms now, as you go through the course, you will learn many of the above parts of the APL document in more detail. 
+Instead of defining all of the terms now, you will learn about the parts of an APL document in more detail as you progress through the course. Let's go to section 2 where we will use the APL authoring tool to create a simple APL document for our LaunchRequest for our Cake Walk skill.
 
 link:module2.html[Next Module (2)]

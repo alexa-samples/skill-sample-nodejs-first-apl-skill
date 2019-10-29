@@ -1,0 +1,12 @@
+{
+    "text": {
+        "start": "Happy Birthday!",
+        "middle": "From,",
+        "end": "Alexa <3"
+    },
+    "assets": {
+        "video": "https://github.com/alexa/skill-sample-nodejs-first-apl-skill/blob/master/modules/assets/Amazon_Cake.mp4?raw=true",
+        "cake":"https://github.com/alexa/skill-sample-nodejs-first-apl-skill/blob/master/modules/assets/alexaCake_960x960.png?raw=true",
+        "backgroundURL": "https://github.com/alexa/skill-sample-nodejs-first-apl-skill/blob/master/modules/assets/lights_1280x800.png?raw=true"
+    }
+}

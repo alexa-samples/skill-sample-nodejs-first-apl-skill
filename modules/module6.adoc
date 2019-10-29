@@ -5,7 +5,7 @@
 Thank you for joining our introductory APL course! We hope you have learned a lot. For more information about Alexa Multimodal, visit https://developer.amazon.com/en-US/alexa/alexa-skills-kit/multimodal
 
 
-== Food For Thought
+== Food for thought
 
 There are a few ways you can improve this skill and add a better visual experience. Think about:
 
@@ -14,7 +14,7 @@ There are a few ways you can improve this skill and add a better visual experien
 3. Vector art! You can use the https://developer.amazon.com/docs/alexa-presentation-language/apl-avg-format.html[AVG vector format]. There are https://svgtoavg.glitch.me/[some tools] to help convert SVGs.
 4. Make a better fix to the Spot device which includes the image. Instead of displaying the text only, add the image behind the text (and make it look good).
 
-== Advanced Conversational Design Resources:
+== Advanced conversational design resources:
 
 * Technical Documentation
 ** https://developer.amazon.com/docs/alexa-presentation-language/understand-apl.html[Understand APL]
@@ -37,11 +37,11 @@ There are a few ways you can improve this skill and add a better visual experien
 ** TODO
 
 
-== Continue the Conversation:
+== Continue the conversation:
 * Reach out to us on twitter https://twitter.com/alexadevs[@alexadevs]
 * Visit us on https://www.twitch.tv/amazonalexa[twitch] where we dive into advanced voice design concepts and new features of the ASK SDK on a regular basis!
 
-== Give Us Feedback
+== Give us feedback
 
 We're committed to developing online and in-person learning material to aid designers and developers in learning how to develop compelling voice experience
 
