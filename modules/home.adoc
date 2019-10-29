@@ -1,0 +1,17 @@
+:link-cakewalk: https://developer.amazon.com/en-US/alexa/alexa-skills-kit/courses/cake-walk[Cake Walk: Build an Engaging Alexa Skill]
+
+= Welcome
+
+{blank}
+
+Welcome to How to Build a Multimodal Alexa Skill, a continuation of the {link-cakewalk}. After taking this course, you will have the information needed to create rich multimodal experiences for Alexa using Alexa Presentation Language (APL). The course will teach you the following:
+
+* link:module1.html[Module 1]: Why Build Multimodal Alexa Skills?
+* link:module2.html[Module 2]: Build Your First Visuals with the APL Authoring Tool
+* link:module3.html[Module 3]: Modify Your Backend to Add LaunchRequest Visuals
+* link:module4.html[Module 4]: Create More Visuals Scalably
+* link:module5.html[Module 5]: Add Animation and Video Control
+* link:module6.html[Module 6]: Wrapping Up & Resources
+
+== What is Cake Walk?
+The Cake Walk course is an introductory skill building course where you can build a simple Alexa skill (Cake Walk skill) which remembers your birthday. On repeated usage of the Cake Walk skill, you will either hear a Happy Birthday message from Alexa, or a countdown of days until it is your birthday. In this course, we are going to add visuals and animations to teach the fundamentals of https://developer.amazon.com/docs/alexa-presentation-language/understand-apl.html[building with APL]. If you are new to skill building, we recommend you check out the {link-cakewalk}, but if you are already building Alexa skills or are already familiar with the concepts, then keep reading! Code for the Cake Walk skill and instructions to set the skill up will be provided later in the course if you need it.

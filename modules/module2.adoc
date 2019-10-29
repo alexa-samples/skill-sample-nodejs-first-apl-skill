@@ -87,7 +87,7 @@ Some of the component properties can be defined using https://developer.amazon.c
 
 NOTE: Not all properties can be styled on all components. https://developer.amazon.com/docs/alexa-presentation-language/apl-styled-properties.html[Here is the full list of style-able properties for each component type.]
 
-A. Click the styles sidebar. You will see an empty set of parenthesis. Now, add the following block to this.
+A. Click the styles sidebar. You will see an empty set of parenthesis. Now, replace the empty set with this:
 +
  {
      "bigText": {
@@ -133,7 +133,7 @@ Even though you have not changed the actual text component, since it is using th
 
 Did you notice the "Data" button? This is to simulate the data that can be a part of the `Alexa.Presentation.APL.RenderDocument` directive which is what you send from your skill backend to render the document. But, we'll come back to that later. First, let's look at how to build our document with data sources. 
 
-To reference data in a datasource, you simply refer to it in the payload using `payload.[YourDefinedJSObject]`. This is called "payload" by default when in the authoring tool since it is listed as a parameter to the "mainTemplate". If you want a different name, you will have to change this parameter, but for this, leave it as is. We'll add another Text component which will use a datasource and the style we defined. Now that we have some familiarity with text components, let's modify our block. 
+To reference data in a datasource, you simply refer to it in the payload using `payload.[YourDefinedObject]`. This is called "payload" by default when in the authoring tool since it is listed as a parameter to the "mainTemplate". If you want a different name, you will have to change this parameter, but for this, leave it as is. We'll add another Text component which will use a datasource and the style we defined. Now that we have some familiarity with text components, let's modify our block. 
 
 A. Add the following inside the container's items array, underneath the current text object:
 +
@@ -234,7 +234,7 @@ image::authoringToolWithBirthdayImage.png[]
 
 How does it look? Delicious!? This is starting to look more like a birthday-themed skill. Let's make this work for the other viewport profiles, too.
 
-== Making a Responsive Document
+== Making a responsive document
 
 Below the simulator screen, we have been viewing our changes in, you will see some Echo devices with screens. We have been using the "Medium Hub" device (which is the Echo Show screen parameters) for now, but there are many other supported devices. Now, let's try out our document on other screens. 
 
