@@ -179,27 +179,6 @@ C. Now test it out!
 D. Once that is working, enter your birthday and test the launchHandler with context when it is not your birthday. You should see the commands applied to this as well. 
 We are not quite done. What about animations when it is their birthday? Since, that experience is defined in the birthdayDocument.json file which we have not added commands to. Let's fix this.
 
-== Adding birthday interactions
-
-WARNING: Skip this section. Onmount inside of an APL package is not working at the moment :)
-
-For the birthday screen, we want to show a screen like this:
-
-image:birthdayVideo.gif[]
-
-Notice that the animations are the same for the text items which are also shared. We have a few options on how to apply these commands. But, to avoid copy and pasting, let's move the shared commands into the APL package. 
-
-A. Since you cannot do this with Alexa Hosted, instead, start to point your APL imports (for both birthdayDocument.json and launchDocument.json) at this new package: 
-+
- {
-    "name": "my-cakewalk-apl-package-v2",
-    "version": "1.0",
-    "source": "https://raw.githubusercontent.com/alexa/skill-sample-nodejs-first-apl-skill/master/modules/code/module5/documents/my-cakewalk-apl-package-v2.json"
- }
-+
-In here, you will see just the commands targeting the shared text components. So, you can now remove these from your launchDocument.json doc, keeping only the image command. 
-B. Deploy your new documents and test out the birthday scenario in the developer simulator to ensure your animations are now applied. If the animations are working, move onto the next section.
-
 == Adding video control
 
 Did you notice the other change in the above gif? There is a new component added to the birthdayDocument.json document, the https://developer.amazon.com/docs/alexa-presentation-language/apl-transport-controls-layout.html[AlexaTransportsControls responsive component]. You should always have an on screen control for your video or it may not pass certification. Let's add this. This component is also a part of the alexa-layouts package.
