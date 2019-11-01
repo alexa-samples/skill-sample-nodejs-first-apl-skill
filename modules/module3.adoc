@@ -28,11 +28,11 @@ Even though you can add a render directive to every response, not all devices ca
 		"System": {
 			...
 			"device": {
-				"deviceId": "amzn1.ask.device.AGXTGBOJAX3WK4YUKWCQ2CILA6S35XSANHUIPFZ6IEOYQG234XDJFP5WVLREJDWHV6PYBEHRNDUYCZMIM52ED3XO3VY7LBBEFT7JZQZW4SKD4Q3BUYQPLAEPGGF5VWAVLZXT4I4LXX5DGLRKEWGI5GLVCRZPUZK5I2IX5LMK5V2FXKJ4A2NLC",
+				"deviceId": "amzn1.ask.device.1...",
 				"supportedInterfaces": {
 					"Alexa.Presentation.APL": {
 						"runtime": {
-							"maxVersion": "1.0"
+							"maxVersion": "1.1"
 						}
 					}
 				}
@@ -54,7 +54,6 @@ B. Underneath the `// Create Render Directive` comment, add:
 +
  handlerInput.responseBuilder.addDirective({
      type: 'Alexa.Presentation.APL.RenderDocument',
-     version: '1.1',
      document: launchDocument,
      datasources: {
         text: {
@@ -66,6 +65,7 @@ B. Underneath the `// Create Render Directive` comment, add:
     }
  });
 +
+Notice, we left our information about the image. There are some additional steps we need in order to serve the image from our Alexa hosted environment, so we'll come back to this later.
 Now, let's import our launchDocument. We will be naming our document launchDocument.json since it represents the APL Document for the generic Launch Requests.
 +
 image:createLaunchScreenJSON.gif[]
@@ -74,14 +74,14 @@ C. On the left, select the "lambda" folder. Right-click and select "Create Folde
 D. Inside this new file, add the JSON from the authoring tool we created in module 2 (the full JSON document is at the end of module 2).
 E. Then, import this at the top of your `index.js` like so:
 +
- const launchDocument = require('./documents/launchDocument.json')
+ const launchDocument = require('./documents/launchDocument.json');
 +
 The launchDocument variable in your javascript code represents the contents of your json file. 
-F. Now, deploy the code. But wait, we cannot test it, yet.
+F. Now, deploy the code. Try testing it! 
 
 == Using the developer console simulator to test
 
-Before we can test our document changes, we have to enable APL in the Build tab. 
+Did you have issues testing your APL additions? Before we can test our document changes, we have to enable APL in the Build tab. 
 
 A. Click on the build Tab. You will need to click on Interfaces on the left side.
 +
@@ -89,7 +89,7 @@ image::interfacesClick.png[]
 +
 B. Scroll down and toggle the Alexa Presentation Language and you will see the block expand. Select all of the boxes. 
 +
-Hub Round, Hub Landscape, and TV Fullscreen are selected by default and must be supported. Each of these are screens you will be officially supporting. They will not scale your content, so whatever assets and APL layout you send in the response will be shown as is. This also means whatever viewport profiles are not supported will scale your content from the closest sized viewport you do support. Select them all because we will be verifying and testing each of these profiles. By selecting these, you are saying you tested your layout on each of these profiles.
+Hub Round, Hub Landscape, and TV Fullscreen are selected by default and must be supported. Each of these are screens you will be officially supporting. They will not scale your content, so whatever assets and APL layout you send in the response will be shown as is. This also means whatever viewport profiles are not supported will scale your content from the closest sized viewport you do support. Select them all because we will be verifying and testing each of these profiles. By selecting these, you are saying you tested your layout on each of these profiles. To learn more about selecting viewport profiles, https://developer.amazon.com/docs/alexa-presentation-language/apl-select-the-viewport-profiles-your-skill-supports.html[check out the tech docs.]
 +
 image::toggleAPL.png[]
 +
@@ -97,14 +97,15 @@ C. After you toggle APL on and select all of the viewport profiles, you must bui
 +
 D. After building, you are ready to test. Go to the test tab and make sure "Device Display" is checked. Now if you scroll down past the request/response json, you can select the device you want to try. 
 +
+TIP: Uncheck the skill I/O so you do not need to scroll down to see visuals!
++
 TIP: Selecting a device type will reset your skill session.
 +
 E. Test your screen on a medium hub by triggering the launch handler for instance by typing, `open cake walk`. 
 +
 TIP: Remember to delete your user data if you have any! Cake walk has two different LaunchRequest handlers - One which is invoked when there is no context while the other is invoked when your birthday is known. Since we modified the no context launch handler, you must delete your user data from S3 to make sure there is actually no context. You can do this by accessing the S3 provision ("Media storage: S3..."), clicking "amzn1-ask-skill-...", and then deleting the document that starts with "amzn1.ask.account...".  
 +
-F. Repeat this test on all the other screen types. 
-
+F. Repeat this test on all the other screen types. Remember, we did not include the birthday cake image, yet, so don't worry if you do not see it!
 
 == Uploading assets to S3
 Before we can make use of image assets, we will need to host these images. Ideally, you will use a https://en.wikipedia.org/wiki/Content_delivery_network[CDN] (such as https://aws.amazon.com/blogs/networking-and-content-delivery/amazon-s3-amazon-cloudfront-a-match-made-in-the-cloud/[Amazon Cloudfront in conjunction with S3]) to serve your assets to locations closer to your users, but for this exercise, we will use S3 since this is provided by Alexa hosted. 
@@ -113,19 +114,19 @@ A. To upload the S3 Assets, you can access your S3 provision under the code tab 
 + 
 image::S3Access.png[]
 +
-B. In your S3 provision, you will open up into the Media page. 
+B. In your S3 provision, open the media page. 
 C. In here, upload all of the assets {link-S3-assets}. We will use these over the course of the module. After you upload, you will see all of the assets on the page in S3 like so.
 +
 image::S3Provision.png[]
 
-Now that your assets are uploaded, we can update our Launch Request with images.
+Now that your assets are uploaded, we can update our Launch Request with more images.
 
 == Updating our launch request handler
 
-Now that we have our no context launch request working, it is time to add an image rather than using the default background. 
+Now that we have our no context launch request working, it is time to add a background image rather than using the default background. 
 
 A. To do so, first open up the {authoringToolLink}[authoring tool] and paste in the launchDocument.json information. 
-B. Then in the data section, use:
+B. In the data section of the authoring tool, use:
 +
  {
     "text": {
@@ -139,9 +140,9 @@ B. Then in the data section, use:
     }
  }
 +
-You will notice a new field in our data, backgroundURL, under the assets object. This represents where the device will fetch a background image from. We will use the Github repo for hosting it for now while we develop the screen, but our actual code will use the S3 presigned link util function. Now, we need to add our background component. 
-C. Go back to the APL tab in the tool.
-D. We are going to add the https://developer.amazon.com/docs/alexa-presentation-language/apl-alexa-background-layout.html[AlexaBackground responsive component]. To use this, you need the alexa-layouts package which we already have! Using the AlexaBackground is easy, just add the following to the top of your containers in the items array:
+You may notice a new field in our data, backgroundURL, under the assets object. This represents where the device will fetch a background image from. We will use the Github repo for hosting it for now while we develop the screen since this is a public link, but our actual code will use the S3 presigned link util function. The presigned link utility is needed to generate a short-lived public URL to the private bucket you uploaded the assets to. Now, we need to add our background component. 
+C. Go back to the APL tab in the authoring tool.
+D. We are going to add the https://developer.amazon.com/docs/alexa-presentation-language/apl-alexa-background-layout.html[AlexaBackground responsive component]. To use this, you need the alexa-layouts package which we already have! Using the AlexaBackground is easy, just add the following to the top of both of your containers in the items array of each:
 +
  {
     "type": "AlexaBackground",
@@ -149,7 +150,19 @@ D. We are going to add the https://developer.amazon.com/docs/alexa-presentation-
  },
 +
 You should see the background light up...er...see the lights in the background. 
-E. Apply the same changes to the `@hubRoundSmall` variation and ensure it works in the authoring tool. 
+E. Now that we are using a background Image, we want to modify the text color. Since we have a style for all of our text objects this is easy! Simply, add `"color": "black",` as a new property in our `bigText` style. This will give you:
++
+ "bigText": {
+    "values": [
+        {
+            "fontSize": "72dp",
+            "color": "black",
+            "textAlign": "center"
+        }
+    ]
+ }
++
+F. Apply the same changes to the `@hubRoundSmall` variation and ensure it works in the authoring tool. 
 
 IMPORTANT: Make sure the AlexaBackground responsive component is above the other components, otherwise it will occlude them!
 
@@ -178,7 +191,7 @@ C. We must add our new datasources to our code in the index.js. Since our images
  }
 +
 D. Deploy and test your new document on each of the screen sizes.
-E. But wait, we aren't fully done yet. We are going to add the optimization we mentioned in the last section. This requires another asset. We have already uploaded the lights_1280x800.png. We need to change out images to conditionally pull the right asset. Replace the value for our backgroundURL with:
+E. Working? Well, we aren't fully done yet! We are going to add the optimization we mentioned in the last section. This requires another asset. We have already uploaded the lights_1280x800.png. We need to change out images to conditionally pull the right asset. Replace the value for our backgroundURL with:
 +
  util.getS3PreSignedUrl(backgroundKey)
 +
@@ -186,12 +199,11 @@ F. To conditionally set the proper `backgroundKey`, we need to use the Ask-sdk-c
 +
  const viewportProfile = Alexa.getViewportProfile(handlerInput.requestEnvelope);
 +
-This will return a https://developer.amazon.com/docs/alexa-presentation-language/apl-viewport-characteristics.html#access-the-viewport-information-in-your-code[ViewportProfile] such as `HUB-LANDSCAPE-LARGE`. What we want to do is to check if the requesting device a TV or a Hub device. If it is a TV (XLARGE), we will use the large asset, but if it is a hub, we will deliver the smaller asset. Ideally, you would have an asset for each type of profile, but since we are using a responsive component, this is really only saving some bandwidth on lower resolution devices. 
 G. We can implement this logic with the statement added below the viewportProfile statement:
 +
  const backgroundKey = viewportProfile === 'TV-LANDSCAPE-XLARGE' ? "Media/lights_1920x1080.png" : "Media/lights_1280x800.png";
 +
-H. Test this out making sure to use the TV and the hub devices in the test console. 
+H. Test this out making sure to use the TV and the hub devices in the test console. You may not notice much different. If you want to verify this is working, check out the Skill I/O section in the test console and make sure you have the correct assets served when you use a TV vs a smaller resolution device.
 
 Since our frontend is scaling properly by using the responsive components, we are done! Let's head to the next module and learn some more advanced APL document concepts.
 

@@ -24,7 +24,7 @@ B. Add `"id": "birthdayVideo"` to your video component in the birthdayDocument.j
 
 == Adding commands to our document
 
-The command we will be using is the https://developer.amazon.com/docs/alexa-presentation-language/apl-standard-commands.html#animate_item_command[AnimateItem command]. This command was added in APL 1.1, so make sure that your APL document and your code level directives are declaring version 1.1. In both the APL document and your code, this will look like `version: '1.1'`. The animate item command will run a fixed-duration animation sequence on one or more properties of a single component. We are going to modify the `transform` property. 
+The command we will be using is the https://developer.amazon.com/docs/alexa-presentation-language/apl-standard-commands.html#animate_item_command[AnimateItem command]. This command was added in APL 1.1, so make sure that your APL document is declaring version 1.1 which will look like `version: '1.1'`. The animate item command will run a fixed-duration animation sequence on one or more properties of a single component. We are going to modify the `transform` property. 
 
 The basic structure of our animate item commands will be :
 
@@ -245,7 +245,6 @@ A. Add a new token field to the APL RenderDocument directive with the value of `
  // Create Render Directive
  handlerInput.responseBuilder.addDirective({
     type: 'Alexa.Presentation.APL.RenderDocument',
-    version: '1.1',
     token: 'birthdayToken',
     document: birthdayDocument,
     datasources: {
@@ -276,7 +275,6 @@ You will end up with APL directive code that looks like this:
  // Create Render Directive
  handlerInput.responseBuilder.addDirective({
     type: 'Alexa.Presentation.APL.RenderDocument',
-    version: '1.1',
     token: 'birthdayToken',
     document: birthdayDocument,
     datasources: {

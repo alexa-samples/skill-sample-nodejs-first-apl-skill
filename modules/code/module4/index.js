@@ -87,7 +87,6 @@ const HasBirthdayLaunchRequestHandler = {
                 // Create Render Directive
                 handlerInput.responseBuilder.addDirective({
                     type: 'Alexa.Presentation.APL.RenderDocument',
-                    version: '1.1',
                     document: launchDocument,
                     datasources: {
                         text: {
@@ -106,7 +105,6 @@ const HasBirthdayLaunchRequestHandler = {
                 // Create Render Directive
                 handlerInput.responseBuilder.addDirective({
                     type: 'Alexa.Presentation.APL.RenderDocument',
-                    version: '1.1',
                     document: birthdayDocument,
                     datasources: {
                         text: {
@@ -143,7 +141,6 @@ const LaunchRequestHandler = {
             // Create Render Directive
             handlerInput.responseBuilder.addDirective({
                 type: 'Alexa.Presentation.APL.RenderDocument',
-                version: '1.1',
                 document: launchDocument,
                 datasources: {
                     text: {

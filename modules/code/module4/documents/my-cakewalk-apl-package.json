@@ -48,6 +48,7 @@
                         {
                             "type": "Text",
                             "style": "bigText",
+                            "paddingTop":"${@viewportProfile == @hubRoundSmall ? 75dp : 0dp}",
                             "text": "${startText}",
                             "id":"textTop"
                         },

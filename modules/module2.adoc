@@ -133,7 +133,9 @@ Even though you have not changed the actual text component, since it is using th
 
 Did you notice the "Data" button? This is to simulate the data that can be a part of the `Alexa.Presentation.APL.RenderDocument` directive which is what you send from your skill backend to render the document. But, we'll come back to that later. First, let's look at how to build our document with data sources. 
 
-To reference data in a datasource, you simply refer to it in the payload using `payload.[YourDefinedObject]`. This is called "payload" by default when in the authoring tool since it is listed as a parameter to the "mainTemplate". If you want a different name, you will have to change this parameter, but for this, leave it as is. We'll add another Text component which will use a datasource and the style we defined. Now that we have some familiarity with text components, let's modify our block. 
+To reference data in a datasource, you simply refer to it in the payload using `payload.[YourDefinedObject]`. This is called "payload" by default when in the authoring tool since it is listed as a parameter to the "mainTemplate". If you want a different name for the payload, you will have to change this parameter, but for now, leave it as is. We'll add another Text component which will use a datasource and the style we defined. To reference the data, you will write an expression like, `${YourDefinedObject}`.
+
+Now, that we have some familiarity with text components, let's modify our block. 
 
 A. Add the following inside the container's items array, underneath the current text object:
 +
@@ -195,7 +197,7 @@ A. Add this import object to your import list in your APL document import sectio
  }
 +
 Alexa layouts is an important package for creating https://developer.amazon.com/docs/alexa-presentation-language/apl-build-responsive-apl-documents.html[responsive layouts]. The AlexaImage component has https://developer.amazon.com/docs/alexa-presentation-language/apl-alexa-image-layout.html#alexaimage-parameters[many parameters], most of which are optional. 
-B. Add the following image block underneath the last text component.
+B. Add the following image block inside of a new container underneath the last text component. This new block should be nested within the existing Container, so be sure to put it in the same "items" array as your text components.
 + 
  {
     "type": "Container",
@@ -205,16 +207,16 @@ B. Add the following image block underneath the last text component.
             "type": "AlexaImage",
             "imageSource": "${payload.assets.cake}",
             "imageRoundedCorner": false,
-            "imageScale": "best-fit",
-            "imageHeight": "50vh",
-            "imageAspectRatio": "standard_landscape",
+            "imageScale": "best-fill",
+            "imageHeight":"40vh",
+            "imageAspectRatio": "square",
             "imageBlurredBackground": false
         }
     ]
  }
 +
 Let's break this down. First, we are creating a new container which will align our child components to the center. Our only child component is the AlexaImage responsive component. 
-For the fields we are using in the AlexaImage, imageSource is important since it specifies the URL where the image is hosted. We want to give it the standard landscape aspect ratio since we will want to maintain our image resolution. When the image scales, it will use the best-fit strategy. To control the size, we are using the imageHeight property and setting it to 50% of the view height. To learn more about each of these, check out the parameters in https://developer.amazon.com/docs/alexa-presentation-language/apl-alexa-image-layout.html#alexaimage-parameters[[the tech doc].
+For the fields we are using in the AlexaImage, imageSource is important since it specifies the URL where the image is hosted. We want to give it the standard landscape aspect ratio since we will want to maintain our image resolution. When the image scales, it will use the best-fit strategy. To control the size, we are using the imageHeight property and setting it to 50% of the viewport height. To learn more about each of these, check out the parameters in https://developer.amazon.com/docs/alexa-presentation-language/apl-alexa-image-layout.html#alexaimage-parameters[the tech doc].
 This relies on a new "assets.cake" object to be added to the data section. The new data section will look like:
 +
  {
@@ -256,7 +258,7 @@ WARNING: spoiler below
 image::brokenHelloSpot.png[Broken Spot Image]
 +
 B. Our wording is cut off on the Small Hub (Round) device screen. Let's fix this using the https://developer.amazon.com/docs/alexa-presentation-language/apl-component.html#when[when] property. This property allows for boolean evaluation. If true, it will show a component and its children, but if false, it will not. 
-In addition to `when`, we will be using https://developer.amazon.com/docs/alexa-presentation-language/apl-resources.html[Resources] from the alexa-layouts import. This time, we will use the alexa-layouts package's definitions of constants representing the above device types and viewport profiles. It allows you to create statements such as:
+In addition to `when`, we will be using https://developer.amazon.com/docs/alexa-presentation-language/apl-resources.html[Resources] from the alexa-layouts import. Resources are simply named constants which are referenced with `@<Resource_name>`. This time, we will use the alexa-layouts package's definitions of constants representing the above device types and viewport profiles. It allows you to create statements with predefined viewport-specific constants such as:
 +
  ${@viewportProfile == @hubLandscapeLarge}
 +
@@ -267,7 +269,7 @@ rather than
 There is no difference between these statements for an Echo Show 2 device request. But, let's consider there is a new device with a 1300dp wide screen. Should we add another statement to this conditional? What about for a third device in a similar class? 
 By using the Amazon defined resources, we will have better scaling APL documents without even knowing all the possible screen size permutations. This is because `@hubLandscapeLarge` represents screens between 1280 and 1920 wide, so it encompasses more devices of that class. Even though it is in the same class of device, since the screen does not match exactly the width we are checking, it will not render anything.
 C. Since our document looks good on all devices except for the round small hub device, let's add in a new set of components for that one. Click on the Small Round Hub icon.
-D. Since a false evaluation will lead to no children components displaying, let's add the following statement at the top of our container. 
+D. Since a false evaluation will lead to no children components displaying, let's add the following statement at the top of our first container. 
 +
  "when":"${@viewportProfile != @hubRoundSmall}"
 +
@@ -285,7 +287,9 @@ I. Then, remove the cake image.
 Now your display should look properly on each of the device types. Check this now.
 J. Copy your APL document and save your JSON in your text editor of choice as `launchDocument.json`
 
-Final APL Document JSON for reference:
+As an aside, there are a number of different ways we could have fixed this document for the small round hub profile. We could just keep the image and drop the text, or move the image to the background of the small round hub. In terms of structure, we could keep everything in one container and conditionally add the padding and hide the image to provide the same experience. The benefit to this technical approach is that we will not get newly added components by default in the future. Which also means as we iterate and change the rectangular hubs, we will not be modifying the structure of our small round hub screens. Since the screen is fundamentally different from others especially in our design, we forked it. Feel free to take a different approach for other skills if it suits your designs better!
+
+The final APL Document JSON for reference:
 
  {
     "type": "APL",
