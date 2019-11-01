@@ -168,19 +168,14 @@ When we remove the redundant code and replace it with references to our layout, 
                         "endText":"${payload.text.end}"
                     },
                     {
-                        "type": "Container",
-                        "alignItems": "center",
-                        "items": [
-                            {
-                                "type": "AlexaImage",
-                                "imageSource": "${payload.assets.cake}",
-                                "imageRoundedCorner": false,
-                                "imageScale": "best-fit",
-                                "imageHeight": "50vh",
-                                "imageAspectRatio": "standard_landscape",
-                                "imageBlurredBackground": false
-                            }
-                        ]
+                        "type": "AlexaImage",
+                        "alignSelf": "center",
+                        "imageSource": "${payload.assets.cake}",
+                        "imageRoundedCorner": false,
+                        "imageScale": "best-fill",
+                        "imageHeight":"40vh",
+                        "imageAspectRatio": "square",
+                        "imageBlurredBackground": false
                     }
                 ],
                 "height": "100%",
@@ -343,19 +338,14 @@ With this import, we can now reference the values from our custom style (bigText
                         "endText":"${payload.text.end}"
                     },
                     {
-                        "type": "Container",
-                        "alignItems": "center",
-                        "items": [
-                            {
-                                "type": "AlexaImage",
-                                "imageSource": "${payload.assets.cake}",
-                                "imageRoundedCorner": false,
-                                "imageScale": "best-fit",
-                                "imageHeight": "50vh",
-                                "imageAspectRatio": "standard_landscape",
-                                "imageBlurredBackground": false
-                            }
-                        ]
+                        "type": "AlexaImage",
+                        "alignSelf": "center",
+                        "imageSource": "${payload.assets.cake}",
+                        "imageRoundedCorner": false,
+                        "imageScale": "best-fill",
+                        "imageHeight":"40vh",
+                        "imageAspectRatio": "square",
+                        "imageBlurredBackground": false
                     }
                 ],
                 "height": "100%",

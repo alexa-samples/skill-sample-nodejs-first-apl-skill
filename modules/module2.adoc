@@ -197,26 +197,21 @@ A. Add this import object to your import list in your APL document import sectio
  }
 +
 Alexa layouts is an important package for creating https://developer.amazon.com/docs/alexa-presentation-language/apl-build-responsive-apl-documents.html[responsive layouts]. The AlexaImage component has https://developer.amazon.com/docs/alexa-presentation-language/apl-alexa-image-layout.html#alexaimage-parameters[many parameters], most of which are optional. 
-B. Add the following image block inside of a new container underneath the last text component. This new block should be nested within the existing Container, so be sure to put it in the same "items" array as your text components.
+B. Add the following image block inside of a new container underneath the last text component. This new block should be put in the same "items" array as your text components, after the bottom text component.
 + 
  {
-    "type": "Container",
-    "alignItems": "center",
-    "items": [
-        {
-            "type": "AlexaImage",
-            "imageSource": "${payload.assets.cake}",
-            "imageRoundedCorner": false,
-            "imageScale": "best-fill",
-            "imageHeight":"40vh",
-            "imageAspectRatio": "square",
-            "imageBlurredBackground": false
-        }
-    ]
+    "type": "AlexaImage",
+    "alignSelf": "center",
+    "imageSource": "${payload.assets.cake}",
+    "imageRoundedCorner": false,
+    "imageScale": "best-fill",
+    "imageHeight":"40vh",
+    "imageAspectRatio": "square",
+    "imageBlurredBackground": false
  }
 +
-Let's break this down. First, we are creating a new container which will align our child components to the center. Our only child component is the AlexaImage responsive component. 
-For the fields we are using in the AlexaImage, imageSource is important since it specifies the URL where the image is hosted. We want to give it the standard landscape aspect ratio since we will want to maintain our image resolution. When the image scales, it will use the best-fit strategy. To control the size, we are using the imageHeight property and setting it to 50% of the viewport height. To learn more about each of these, check out the parameters in https://developer.amazon.com/docs/alexa-presentation-language/apl-alexa-image-layout.html#alexaimage-parameters[the tech doc].
+Let's break this down. For the fields we are using in the AlexaImage, imageSource is important since it specifies the URL where the image is hosted. We want to give it the standard landscape aspect ratio since we will want to maintain our image resolution. When the image scales, it will use the best-fit strategy. To control the size, we are using the imageHeight property and setting it to 40% of the viewport height. To learn more about each of these, check out the parameters in https://developer.amazon.com/docs/alexa-presentation-language/apl-alexa-image-layout.html#alexaimage-parameters[the tech doc].
+If you look at the tech docs, you will notice no reference to alignSelf. This property exists and works because the component is a child component of a container. AlignSelf will override the container alignment for that child, only. There are https://developer.amazon.com/docs/alexa-presentation-language/apl-container.html#container-children[some other properties] that are added since this is a child of a container.
 This relies on a new "assets.cake" object to be added to the data section. The new data section will look like:
 +
  {
@@ -348,19 +343,14 @@ The final APL Document JSON for reference:
                         "text": "${payload.text.end}"
                     },
                     {
-                        "type": "Container",
-                        "alignItems": "center",
-                        "items": [
-                            {
-                                "type": "AlexaImage",
-                                "imageSource": "${payload.assets.cake}",
-                                "imageRoundedCorner": false,
-                                "imageScale": "best-fit",
-                                "imageHeight": "40vh",
-                                "imageAspectRatio": "standard_landscape",
-                                "imageBlurredBackground": false
-                            }
-                        ]
+                        "type": "AlexaImage",
+                        "alignSelf": "center",
+                        "imageSource": "${payload.assets.cake}",
+                        "imageRoundedCorner": false,
+                        "imageScale": "best-fill",
+                        "imageHeight":"40vh",
+                        "imageAspectRatio": "square",
+                        "imageBlurredBackground": false
                     }
                 ],
                 "height": "100%",

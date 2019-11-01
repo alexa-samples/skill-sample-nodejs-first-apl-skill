@@ -53,19 +53,14 @@
                         "text": "${payload.text.end}"
                     },
                     {
-                        "type": "Container",
-                        "alignItems": "center",
-                        "items": [
-                            {
-                                "type": "AlexaImage",
-                                "imageSource": "${payload.assets.cake}",
-                                "imageRoundedCorner": false,
-                                "imageScale": "best-fit",
-                                "imageHeight": "50vh",
-                                "imageAspectRatio": "standard_landscape",
-                                "imageBlurredBackground": false
-                            }
-                        ]
+                        "type": "AlexaImage",
+                        "alignSelf": "center",
+                        "imageSource": "${payload.assets.cake}",
+                        "imageRoundedCorner": false,
+                        "imageScale": "best-fill",
+                        "imageHeight":"40vh",
+                        "imageAspectRatio": "square",
+                        "imageBlurredBackground": false
                     }
                 ],
                 "height": "100%",
