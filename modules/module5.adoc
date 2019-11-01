@@ -7,9 +7,9 @@
 
 In this section, you will learn about APL Commands and how to add them to your skill. We will animate the text components and images across all of our APL screens and add in a video component.
 
-== What and why
+== What are APL commands?
 
-https://developer.amazon.com/docs/alexa-presentation-language/apl-commands.html[APL Commands] are messages which change the visual or audio presentation of the content delivered to your customer. There are a few different ways you can use commands. The first is by using the directive, `Alexa.Presentation.APL.ExecuteCommands`. There are also different bindings in some components and even in the APL document. For an example, the https://developer.amazon.com/docs/alexa-presentation-language/apl-touchwrapper.html#onpress[TouchWrapper responsive component] has an onPress property which takes in a list of commands. Today, we will be using a similar mechanism within the APL document, the `onMount` property of our APL document which executes commands immediately upon inflating the document. This is useful for the animation commands we are using in our introduction.
+https://developer.amazon.com/docs/alexa-presentation-language/apl-commands.html[APL Commands] are messages which change the visual or audio presentation of the content delivered to your customer. There are a few different ways you can use commands. The first is by using the directive, `Alexa.Presentation.APL.ExecuteCommands`. There are also different handler properties in some components and even in the APL document. For an example, the https://developer.amazon.com/docs/alexa-presentation-language/apl-touchwrapper.html#onpress[TouchWrapper responsive component] has an onPress property which takes in a list of commands. Today, we will be using a similar mechanism within the APL document, the `onMount` property of our APL document which executes commands immediately upon inflating the document. This is useful for the animation commands we are using in our introduction.
 
 Now, let's animate some text objects. This is what we want to create:
 
@@ -17,10 +17,11 @@ image:FinalLaunchScreen.gif[]
 
 == Updating our APL documents
 
-First, we will need to update out APL Documents to be able to use commands by adding an https://developer.amazon.com/docs/alexa-presentation-language/apl-component.html#id[id] property to our components. Since we want the commands to execute immediately on the APL screen loading, we will be putting them inside the onMount property of our launch document. Add some logical ids for our text components... But, wait... these are in the APL package. If you checked the hosted version, you will see there are already component ids added! These are `textTop, textMiddle, textBottom` corresponding to the top, middle, and bottom text components, so there is no need to add any more ids there. 
+First, we will need to update out APL Documents to be able to use commands by adding an https://developer.amazon.com/docs/alexa-presentation-language/apl-component.html#id[id] property to our components. Since we want the commands to execute immediately on the APL screen loading, we will be putting the commands inside the onMount property of our launch document. 
+In order to target our components with the commands, we will need to add some logical ids for our text components... But, wait... these are in the APL package. If you check the hosted version, you will see there are already component ids added by default! These are `textTop, textMiddle, textBottom` corresponding to the top, middle, and bottom text components, so there is no need to add anything. However, if you would like to add different Ids, these are exposed as parameters in the APL package.
 
-A. In your launch document (launchDocument.json file), add `"id": "image"` to the AlexaImage component. The last id to add is in the video component in our birthday screen document. 
-B. Add `"id": "birthdayVideo"` to your video component in the birthdayDocument.json file. 
+A. In your launch document (launchDocument.json file), add `"id": "image"` to the AlexaImage component. 
+B. In your birthday visual, (birthdayDocument.json file), add `"id": "birthdayVideo"` to your video component.
 
 == Adding commands to our document
 
@@ -203,7 +204,7 @@ B. Deploy your new documents and test out the birthday scenario in the developer
 
 Did you notice the other change in the above gif? There is a new component added to the birthdayDocument.json document, the https://developer.amazon.com/docs/alexa-presentation-language/apl-transport-controls-layout.html[AlexaTransportsControls responsive component]. You should always have an on screen control for your video or it may not pass certification. Let's add this. This component is also a part of the alexa-layouts package.
 
-A. Add the AlexaTransportControls component to the container with the video component, since we want this aligned to the center, also.
+A. Add the AlexaTransportControls component to the container with the video component inside birthdayDocument.json, since we want this aligned to the center, too. This should go after the video component in the items list.
 +
  {
     "type": "Container",

@@ -26,7 +26,7 @@
     "commands": {},
     "layouts": {
         "cakeWalkText": {
-            "description": "A basic text layout with start, middle and end.",
+            "description": "A basic text layout with start, middle and end. Ids to target each individual layout (for commands) will be textTop, textMiddle, and textBottom, respectively.",
             "parameters":[
                 {
                     "name": "startText",
@@ -39,6 +39,21 @@
                 {
                     "name": "endText",
                     "type": "string"
+                },
+                {
+                    "name": "topId",
+                    "type": "string",
+                    "default": "textTop"
+                },
+                {
+                    "name": "middledId",
+                    "type": "string",
+                    "default": "textMiddle"
+                },
+                {
+                    "name": "bottomId",
+                    "type": "string",
+                    "default": "textBottom"
                 }
             ],
             "items": [
@@ -50,19 +65,19 @@
                             "style": "bigText",
                             "paddingTop":"${@viewportProfile == @hubRoundSmall ? 75dp : 0dp}",
                             "text": "${startText}",
-                            "id":"textTop"
+                            "id":"${topId}"
                         },
                         {
                             "type": "Text",
                             "style": "bigText",
                             "text": "${middleText}",
-                            "id": "textMiddle"
+                            "id": "${middleId}"
                         },
                         {
                             "type": "Text",
                             "style": "bigText",
                             "text": "${endText}",
-                            "id": "textBottom"
+                            "id": "${bottomId}"
                         }
                     ]
                 }
