@@ -18,7 +18,7 @@ image:FinalLaunchScreen.gif[]
 == Updating our APL documents
 
 First, we will need to update out APL Documents to be able to use commands by adding an https://developer.amazon.com/docs/alexa-presentation-language/apl-component.html#id[id] property to our components. Since we want the commands to execute immediately on the APL screen loading, we will be putting the commands inside the onMount property of our launch document. 
-In order to target our components with the commands, we will need to add some logical ids for our text components... But, wait... these are in the APL package. If you check the hosted version, you will see there are already component ids added by default! These are `textTop, textMiddle, textBottom` corresponding to the top, middle, and bottom text components, so there is no need to add anything. However, if you would like to add different Ids, these are exposed as parameters in the APL package.
+In order to target our components with the commands, we will need to add some logical ids for our text components... But, wait... these are in the APL package. If you check the hosted version, you will see there are already component ids added by default! These are `textTop, textMiddle, textBottom` corresponding to the top, middle, and bottom text components, so there is no need to add anything. However, if you would like to add different Ids, each text id is exposed as a parameter in the APL package.
 
 A. In your launch document (launchDocument.json file), add `"id": "image"` to the AlexaImage component. 
 B. In your birthday visual, (birthdayDocument.json file), add `"id": "birthdayVideo"` to your video component.

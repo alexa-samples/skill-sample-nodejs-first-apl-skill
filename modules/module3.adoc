@@ -103,7 +103,9 @@ TIP: Selecting a device type will reset your skill session.
 +
 E. Test your screen on a medium hub by triggering the launch handler for instance by typing, `open cake walk`. 
 +
-TIP: Remember to delete your user data if you have any! Cake walk has two different LaunchRequest handlers - One which is invoked when there is no context while the other is invoked when your birthday is known. Since we modified the no context launch handler, you must delete your user data from S3 to make sure there is actually no context. You can do this by accessing the S3 provision ("Media storage: S3..."), clicking "amzn1-ask-skill-...", and then deleting the document that starts with "amzn1.ask.account...".  
+TIP: #1 Remember to delete your user data if you have any! Cake walk has two different LaunchRequest handlers - One which is invoked when there is no context while the other is invoked when your birthday is known. Since we modified the no context launch handler, you must delete your user data from S3 to make sure there is actually no context. You can do this by accessing the S3 provision ("Media storage: S3..."), clicking "amzn1-ask-skill-...", and then deleting the document that starts with "amzn1.ask.account...".  
++
+TIP: #2 An alternative way to test without deleting user data is to fire a one shot intent to reset the day, month, and year values. For instance, "Alexa, tell cake walk that I was born on <month> <day>".
 +
 F. Repeat this test on all the other screen types. Remember, we did not include the birthday cake image, yet, so don't worry if you do not see it!
 
