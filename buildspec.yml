@@ -1,0 +1,61 @@
+version: 0.2
+
+#env:
+  #variables:
+   #  ruby: 2.6
+     # key: "value"
+  #parameter-store:
+     # key: "value"
+     # key: "value"
+  #git-credential-helper: yes
+
+phases:
+  install:
+    #If you use the Ubuntu standard image 2.0 or later, you must specify runtime-versions.
+    #If you specify runtime-versions and use an image other than Ubuntu standard image 2.0, the build fails.
+    runtime-versions:
+      ruby: 2.6
+      # name: version
+    commands:
+       - gem install asciidoctor
+       - gem install zip
+      # - command
+  #pre_build:
+    #commands:
+      # - command
+      # - command
+  build:
+    commands:
+       - mkdir $CODEBUILD_SRC_DIR/build/
+       - mkdir $CODEBUILD_SRC_DIR/build/optical-cupcake
+       - mkdir $CODEBUILD_SRC_DIR/build/optical-cupcake/modules
+       - mkdir $CODEBUILD_SRC_DIR/build/optical-cupcake/modules/images
+       - cp $CODEBUILD_SRC_DIR/modules/images/* $CODEBUILD_SRC_DIR/build/optical-cupcake/modules/images
+       - cd $CODEBUILD_SRC_DIR/
+       - find . -name '*.adoc' -exec asciidoctor --destination-dir ./build/optical-cupcake/modules {} \;
+       - cd $CODEBUILD_SRC_DIR/build
+       - ls
+
+      # - zip -r build.zip *
+      # - command
+  #post_build:
+    #commands:
+      # - command
+      # - command
+artifacts:
+  #files:
+  #  - $CODEBUILD_SRC_DIR/build/build.zip
+  #discard-paths: yes
+  #name: $(date +%Y-%m-%d)
+  
+  base-directory: $CODEBUILD_SRC_DIR/build
+  #discard-paths: yes
+  files:
+    - '**/*'
+  
+    # - location
+  #discard-paths: yes
+  #base-directory: location
+#cache:
+  #paths:
+    # - paths
