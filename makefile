@@ -58,4 +58,7 @@ restart-server: stop-server start-server
 open:
 	open http://$(IP_ADDRESS)/~muoioj/optical-cupcake/modules/$(page).html
 
-all: cleanbuild open
+zipall: 
+	zip -r ./build/assets.zip modules/assets/*
+
+all: cleanbuild zipall open
