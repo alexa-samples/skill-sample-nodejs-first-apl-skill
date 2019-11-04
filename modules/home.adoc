@@ -4,12 +4,12 @@
 
 {blank}
 
-Welcome to How to Build a Multimodal Alexa Skill, a continuation of the {link-cakewalk}. After taking this course, you'll have the information needed to create rich multimodal experiences for Alexa using Alexa Presentation Language (APL). The course will teach you the following:
+Welcome to How to Build a Multimodal Alexa Skill, a continuation of {link-cakewalk} . After taking this course, you'll have the information needed to create rich multimodal experiences for Alexa using Alexa Presentation Language (APL). The course will teach you the following:
 
 * link:module1.html[Module 1]: Why Build Multimodal Alexa Skills?
 * link:module2.html[Module 2]: Build Your First Visuals with the APL Authoring Tool
 * link:module3.html[Module 3]: Modify Your Backend to Add LaunchRequest Visuals
-* link:module4.html[Module 4]: Create More Visuals Scalably
+* link:module4.html[Module 4]: Create Visuals to Scale Across All Devices
 * link:module5.html[Module 5]: Add Animation and Video Control
 * link:module6.html[Module 6]: Wrapping Up & Resources
 
