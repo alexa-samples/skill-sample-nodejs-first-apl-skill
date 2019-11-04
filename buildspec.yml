@@ -19,25 +19,22 @@ phases:
     commands:
        - gem install asciidoctor
        - gem install zip
-      # - command
   #pre_build:
     #commands:
       # - command
       # - command
   build:
     commands:
-       - mkdir $CODEBUILD_SRC_DIR/build/
-       - mkdir $CODEBUILD_SRC_DIR/build/optical-cupcake
-       - mkdir $CODEBUILD_SRC_DIR/build/optical-cupcake/modules
-       - mkdir $CODEBUILD_SRC_DIR/build/optical-cupcake/modules/images
-       - cp $CODEBUILD_SRC_DIR/modules/images/* $CODEBUILD_SRC_DIR/build/optical-cupcake/modules/images
-       - cd $CODEBUILD_SRC_DIR/
-       - find . -name '*.adoc' -exec asciidoctor --destination-dir ./build/optical-cupcake/modules {} \;
-       - cd $CODEBUILD_SRC_DIR/build
-       - ls
-
-      # - zip -r build.zip *
-      # - command
+      - mkdir $CODEBUILD_SRC_DIR/build/
+      - mkdir $CODEBUILD_SRC_DIR/build/optical-cupcake
+      - mkdir $CODEBUILD_SRC_DIR/build/optical-cupcake/modules
+      - mkdir $CODEBUILD_SRC_DIR/build/optical-cupcake/modules/images
+      - cp $CODEBUILD_SRC_DIR/modules/images/* $CODEBUILD_SRC_DIR/build/optical-cupcake/modules/images
+      - cd $CODEBUILD_SRC_DIR/
+      - find . -name '*.adoc' -exec asciidoctor --destination-dir ./build/optical-cupcake/modules {} \;
+      - zip -r ./build/assets.zip modules/assets/*
+      - cd $CODEBUILD_SRC_DIR/build
+      - ls
   #post_build:
     #commands:
       # - command
@@ -49,10 +46,8 @@ artifacts:
   #name: $(date +%Y-%m-%d)
   
   base-directory: $CODEBUILD_SRC_DIR/build
-  #discard-paths: yes
   files:
-    - '**/*'
-  
+    - '**/*'  
     # - location
   #discard-paths: yes
   #base-directory: location
