@@ -2,12 +2,12 @@
 
 = Wrapping Up & Resources
 
-Thank you for joining our introductory APL course! We hope you have learned a lot. For more information about Alexa Multimodal, visit https://developer.amazon.com/en-US/alexa/alexa-skills-kit/multimodal
+Thank you for joining our introductory APL course! We hope you've learned a lot. For more information about Alexa Multimodal, visit https://developer.amazon.com/en-US/alexa/alexa-skills-kit/multimodal
 
 
 == Food for thought
 
-There are a few ways you can improve this skill and add a better visual experience. Think about:
+There are a few ways you can improve this skill and add a better visual experience. Think about the following:
 
 1. Design a custom GUI for FireTV. 
 2. Add a screen for the intents we did not cover. For instance, when we successfully get the birthday, you can add visuals of the year, month, and day to that screen (text and a calendar, perhaps?).
@@ -15,7 +15,7 @@ There are a few ways you can improve this skill and add a better visual experien
 4. Make a better fix to the Spot device which includes the image. Instead of displaying the text only, add the image behind the text (and make it look good).
 5. Build the commands in a more reusable way. Define a slideIn command with direction and apply it to each text element.
 
-== Advanced conversational design resources:
+== Advanced resources:
 
 * Technical Documentation
 ** https://developer.amazon.com/docs/alexa-presentation-language/understand-apl.html[Understand APL]

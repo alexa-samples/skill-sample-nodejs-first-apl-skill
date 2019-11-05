@@ -49,7 +49,7 @@ A. In your `LaunchRequestHandler.handle()` before the response is created, add:
      // Create Render Directive.
  }
 +
-This if statement is going to check if the APL interface is sent in the request envelope. Only then, do we want to add the response. Now, let's add the response. 
+This "if" statement is going to check if the APL interface is sent in the request envelope. Only then, do we want to add the response. Now, let's add the response. 
 B. Underneath the `// Create Render Directive` comment, add:
 +
  handlerInput.responseBuilder.addDirective({
@@ -65,19 +65,19 @@ B. Underneath the `// Create Render Directive` comment, add:
     }
  });
 +
-Notice, we left our information about the image. There are some additional steps we need in order to serve the image from our Alexa hosted environment, so we'll come back to this later.
+Notice, we left out information about the image. There are some additional steps we need in order to serve the image from our Alexa hosted environment, so we'll come back to this later.
 Now, let's import our launchDocument. We will be naming our document launchDocument.json since it represents the APL Document for the generic Launch Requests.
 +
 image:createLaunchScreenJSON.gif[]
 +
-C. On the left, select the "lambda" folder. Right-click and select "Create Folder". Call this folder "documents". Add a new file inside the new folder called `launchDocument.json`.
+C. On the left, select the *lambda* folder. Right-click and select *Create Folder*. Call this folder `documents`. Add a new file inside the new folder called `launchDocument.json`.
 D. Inside this new file, add the JSON from the authoring tool we created in module 2 (the full JSON document is at the end of module 2).
 E. Then, import this at the top of your `index.js` like so:
 +
  const launchDocument = require('./documents/launchDocument.json');
 +
 The launchDocument variable in your javascript code represents the contents of your json file. 
-F. Now, deploy the code. Try testing it! 
+F. Now, deploy the code. Remember to test it! 
 
 == Using the developer console simulator to test
 
@@ -93,11 +93,11 @@ Hub Round, Hub Landscape, and TV Fullscreen are selected by default and must be 
 +
 image::toggleAPL.png[]
 +
-C. After you toggle APL on and select all of the viewport profiles, you must build the interaction model. Note: this also means changes to the supported profiles need a new skill certification round in order to go live.
+C. After you toggle APL on and select all of the viewport profiles, you must build the interaction model. 
+Note: this also means changes to the supported profiles need a new skill certification round in order to go live.
 +
 D. After building, you are ready to test. Go to the test tab and make sure "Device Display" is checked. Now if you scroll down past the request/response json, you can select the device you want to try. 
-+
-TIP: Uncheck the skill I/O so you do not need to scroll down to see visuals!
+Uncheck the *Skill I/O* so you do not need to scroll down to see visuals!
 +
 TIP: Selecting a device type will reset your skill session.
 +
@@ -112,12 +112,12 @@ F. Repeat this test on all the other screen types. Remember, we did not include 
 == Uploading assets to S3
 Before we can make use of image assets, we will need to host these images. Ideally, you will use a https://en.wikipedia.org/wiki/Content_delivery_network[CDN] (such as https://aws.amazon.com/blogs/networking-and-content-delivery/amazon-s3-amazon-cloudfront-a-match-made-in-the-cloud/[Amazon Cloudfront in conjunction with S3]) to serve your assets to locations closer to your users, but for this exercise, we will use S3 since this is provided by Alexa hosted. 
 
-A. To upload the S3 Assets, you can access your S3 provision under the code tab at the very bottom on the left side. Go here now.
+A. To upload the S3 Assets, access your S3 provision under the *Code* tab at the very bottom on the left side.
 + 
 image::S3Access.png[]
 +
-B. In your S3 provision, open the media page. 
-C. In here, upload all of the assets {link-S3-assets}. For your convenience, we have the https://alexa.design/apl-cake-walk-assets[assets zipped here]. We will use these over the course of the module. After you upload, you will see all of the assets on the page in S3 like so.
+B. In your S3 provision, open the *media* page. 
+C. In here, upload all of the assets {link-S3-assets}. For your convenience, we have the https://alexa.design/apl-cake-walk-assets[assets zipped here]. We will use all of these over the course of the module. After you upload, you will see all of the assets on the page in S3.
 +
 image::S3Provision.png[]
 
@@ -143,15 +143,15 @@ B. In the data section of the authoring tool, use:
  }
 +
 You may notice a new field in our data, backgroundURL, under the assets object. This represents where the device will fetch a background image from. We will use the Github repo for hosting it for now while we develop the screen since this is a public link, but our actual code will use the S3 presigned link util function. The presigned link utility is needed to generate a short-lived public URL to the private bucket you uploaded the assets to. Now, we need to add our background component. 
-C. Go back to the APL tab in the authoring tool.
-D. We are going to add the https://developer.amazon.com/docs/alexa-presentation-language/apl-alexa-background-layout.html[AlexaBackground responsive component]. To use this, you need the alexa-layouts package which we already have! Using the AlexaBackground is easy, just add the following to the top of both of your containers in the items array of each:
+C. Go back to the *APL* tab in the authoring tool.
+D. We are going to add the https://developer.amazon.com/docs/alexa-presentation-language/apl-alexa-background-layout.html[AlexaBackground responsive component]. To use this, you need the alexa-layouts package which we already have! Using the AlexaBackground is easy; just add the following to the top of both of your containers in the items array of each:
 +
  {
     "type": "AlexaBackground",
     "backgroundImageSource": "${payload.assets.backgroundURL}"
  },
 +
-You should see the background light up...er...see the lights in the background. 
+You should see the background light up... Er... See the lights in the background. 
 E. Now that we are using a background Image, we want to modify the text color. Since we have a style for all of our text objects this is easy! Simply, add `"color": "black",` as a new property in our `bigText` style. This will give you:
 +
  "bigText": {
@@ -172,12 +172,12 @@ You may notice we are using a single 1920x1080 png for each of the devices and i
 
 == Applying our images
 
-A. Now that we have our document ready, replace the launchDocument.json contents in your Code tab with the JSON from the authoring tool. 
+A. Now that we have our document ready, replace the launchDocument.json contents in your *Code* tab with the JSON from the authoring tool. 
 B. Go back to the index.js. Since we are adding in links to our private S3 instance, we will need to import the util module. At the top of this file, add in another import:
 +
  const util = require('./util');
 +
-C. We must add our new datasources to our code in the index.js. Since our images are in the non-public S3 bucket, we are going to be using the util function to get a short lived public URL to the asset. The S3 object keys in this case are going to be of the form, `'Media/imageName.png'`. Lets add our images inside the APL render block's data. Our datasources block will now look like:
+C. Add the new datasources to our code in the index.js. Since our images are in the non-public S3 bucket, we are going to be using the util function to get a short lived public URL to the asset. The S3 object keys in this case are going to be of the form, `'Media/imageName.png'`. Lets add our images inside the APL render block's data. Our datasources block will now look like:
 +
  datasources: {
     text: {
@@ -205,9 +205,9 @@ G. We can implement this logic with the statement added below the viewportProfil
 +
  const backgroundKey = viewportProfile === 'TV-LANDSCAPE-XLARGE' ? "Media/lights_1920x1080.png" : "Media/lights_1280x800.png";
 +
-H. Test this out making sure to use the TV and the hub devices in the test console. You may not notice much different. If you want to verify this is working, check out the Skill I/O section in the test console and make sure you have the correct assets served when you use a TV vs a smaller resolution device.
+H. Test this out making sure to use the TV and the hub devices in the test console. You may not notice much of a difference. If you want to verify this is working, check out the *Skill I/O* section in the test console and make sure you have the correct assets served when you use a TV vs a smaller resolution device.
 
-Since our frontend is scaling properly by using the responsive components, we are done! Let's head to the next module and learn some more advanced APL document concepts.
+Since our frontend is scaling properly by using the responsive components, we are done! Let's head to the next module and learn some about more advanced APL document concepts.
 
 https://github.com/alexa/skill-sample-nodejs-first-apl-skill/tree/master/modules/code/module3[Complete code in Github]
 
