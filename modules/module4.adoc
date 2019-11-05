@@ -2,7 +2,7 @@
 :sectnums:
 :toc:
 
-= Create More Visuals Scalably
+= Create More Visuals With Less
 
 {blank}
 

@@ -117,7 +117,7 @@ A. To upload the S3 Assets, you can access your S3 provision under the code tab 
 image::S3Access.png[]
 +
 B. In your S3 provision, open the media page. 
-C. In here, upload all of the assets {link-S3-assets}. We will use these over the course of the module. After you upload, you will see all of the assets on the page in S3 like so.
+C. In here, upload all of the assets {link-S3-assets}. For your convenience, we have the https://alexa.design/apl-cake-walk-assets[assets zipped here]. We will use these over the course of the module. After you upload, you will see all of the assets on the page in S3 like so.
 +
 image::S3Provision.png[]
 
