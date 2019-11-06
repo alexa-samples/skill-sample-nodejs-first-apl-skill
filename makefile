@@ -38,7 +38,7 @@ build:
 	mkdir -p ~/Sites/optical-cupcake/modules/images
 	cp ./modules/images/* ~/Sites/optical-cupcake/modules/images/
 	find . -name '*.adoc' -exec asciidoctor -a icons=font --destination-dir ~/Sites/optical-cupcake/modules {} \;
-	find . -name '*.adoc' -exec asciidoctor-pdf  -a icons=font --destination-dir ./build {} \;
+	# find . -name '*.adoc' -exec asciidoctor-pdf  -a icons=font --destination-dir ./build {} \;
 
 clean: 
 	rm -rf build/

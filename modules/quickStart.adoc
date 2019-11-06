@@ -6,21 +6,19 @@
 
 These are the instructions for skill builders who have never worked with the Cake Walk skill.
 
-== Understand Cake Walk
+== Setup Cake Walk
 
-Cake Walk is a simple skill which changes between usages. The initial experience is Alexa welcoming you and requesting for your birthday. It uses auto-delegation to get each of these slots. These are stored in persistent memory (S3) and the skill session ends.
+Cake walk is a skill that celebrates your birthday! Tell it your birthday to have it count down the days. Interact with the skill on your special day to hear a happy birthday message. 
 
-On opening Cake Walk after you entered your birthday, you are either greeted with a countdown to your birthday, or if it is your birthday, you get a birthday message.
+On opening Cake Walk after you told Alexa your birthday, you are either greeted with a countdown to your birthday, or if it is your birthday, you get a birthday message. To set up your own Cake Walk skill, follow the steps:
 
-To build your own cake walk skill, go to the https://github.com/alexa/skill-sample-nodejs-first-skill[Cake Walk code repo on github]. Once you are here, you can will need the https://github.com/alexa/skill-sample-nodejs-first-skill/tree/master/final[final module code uploaded to developer console]. Clone the repository if you are familiar with git, but it is not necessary, because you want to set the files up in your Alexa Developer account. 
-
-A. Open the https://developer.amazon.com/alexa/console/ask[developer console to the ASK page]. Sign in if needed.
+A. Open the https://developer.amazon.com/alexa/console/ask[developer console to the ASK page]. Sign in or create an Alexa developer account if you do not yet have one.
 B. Click *Create skill*.
-C. Enter the skill name as "Cake Walk".
+C. Enter the skill name as "Cake Walk". Make sure to scroll down and click *Alexa-Hosted (Node.JS)* below. Using the Alexa hosted environment means we do not need an AWS account.
 +
 image:MakeCakeWalk.gif[]
 +
-D. Upload the interaction model https://raw.githubusercontent.com/alexa/skill-sample-nodejs-first-skill/master/final/en-US.json[from here] to your skill. This is easy to do from the *build* tab. Copy paste the raw github link JSON into the "JSON Editor" which you can find on the left side.
+D. Upload the interaction model https://raw.githubusercontent.com/alexa/skill-sample-nodejs-first-skill/master/final/en-US.json[from here] to your skill. This is easy to do from the *build* tab. Copy paste the raw GitHub JSON into the "JSON Editor" which you can find on the left side.
 E. Build your interaction model with the *Build Model* button.
 F. For the code, switch to the *Code* tab in the developer console.
 G. Replace the contents of index.js with the https://raw.githubusercontent.com/alexa/skill-sample-nodejs-first-skill/master/final/index.js[contents in Github from here]. 
@@ -28,4 +26,22 @@ H. Replace the contents of the package.json file with the https://raw.githubuser
 I. Save and deploy the code.
 J. Go to the test tab and enable the skill in "Development" stage.
 K. Test the skill by typing `open cake walk` into the Alexa Simulator text box.
-L. When this is all working (you will see JSON in the request and response), go back to link:module3.html[module 3].
+L. When this is all working (you will see JSON in the request and response), you have finished setting up Cake Walk!
+
+== Testing Cake Walk
+
+Cake walk has two different LaunchRequest handlers: One which is invoked when there is no context while the other is invoked when your birthday is known. Our skill knows the birthday when it is saved into S3. 
+
+To delete what is in S3:
+
+A. Access the S3 provision for your Alexa hosted skill by going to the Code tab.
+B. On the left you will see: *Media storage: S3...*. Click this.
++
+image::S3Access.png[]
++
+C. On the S3 page, click the skill ID: *amzn1-ask-skill-...*. 
+D. Delete the document that starts with "amzn1.ask.account...".
+
+Perform these steps now if you have already told Alexa your birthday since we will be building a visual for the launchRequest with no context first.
+
+TIP: An alternative way to test without deleting user data is to fire a one shot intent to reset the day, month, and year values. For instance, "Alexa, tell cake walk that I was born on <month> <day> <year>". This will let you easily set the birthday to today to test when it is your birthday or to a different day to test the non-birthday scenario. We will be building different visuals for each.

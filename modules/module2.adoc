@@ -9,10 +9,10 @@
 
 In this section, we are going to learn about the authoring tool and use this to create an APL LaunchRequest response document for our Cake Walk skill. By the end of this section, you'll simply have a screen that says, "Welcome to Cake Walk!," with a small image of a cake. To make this screen, you'll learn about the following:
 
-* APL image and text components
-* Styles
-* Data binding basics
-* Responsive documents
+- APL image and text components
+- Styles
+- Data binding basics
+- Responsive documents
 
 Let's get started.
 
@@ -25,14 +25,14 @@ A. Click {authoringToolLink}[here to go to the authoring tool]. Save this link a
 image:AuthoringToolLandingPage.png[]
 +
 B. We are going to *Start from scratch*. This will give us a basic APL document without any components added to the mainTemplate. 
-C. In the authoring tool, make sure GUI is selected on the left side. This will give us the graphical representation of the structure of the document (under *Layouts*) as well as some text boxes where properties can be filled in. On the right side you will see the components you can drag and drop into place. Now drag in a text component. You'll see something like this.
+C. In the authoring tool, make sure *GUI* is selected on the left side. This will give us the graphical representation of the structure of the document (under *Layouts*) as well as some text boxes where properties can be filled in. On the right side you will see the components you can drag and drop into place. Now drag in a text component. You'll see something like this.
 +
 image::firstHelloWorld.gif[]
 +
 D. Let's add some text, "Hello Cake Walk!". Click on the text component under the layouts section.
 E. Scroll down the middle section until you find the *text* property of the text component. Change this message to `Hello Cake Walk!`.
 F. Above this, find the fontSize property and change this to 72dp. We want to increase the text size to account for our customers which are looking at the device from far away. 
-Now you should no longer see the text...Uh oh! Because the text is bound to such a small rendering box, it no longer can display text with such a large font. Let's fix this.
+Now the text is outside of the blue bounding box...Uh oh! Because the text is bound to such a small rendering box, it no longer displays the text properly with such a large font. Let's fix this.
 G. Scroll down to the *Width* section and find the *width* property of our Text component. Delete the value in the width text box, so it will default to auto. 
 H. Do the same with *height* under the *Height* section. Auto is a better setting to use since it will automatically scale the size of the bounding box for the text to match the content. This will help us later if we choose to modify the font size in the future as we did above.
 
@@ -79,7 +79,7 @@ For reference here is the JSON that you should have.
      }
  }
 
-We created a text component and then modified some properties on it using the GUI. To see the full set of text component properties, https://developer.amazon.com/docs/alexa-presentation-language/apl-text.html[check out the tech docs]. If you looked at that page, you will see that paddingTop and paddingBottom are missing. That is because all components also inherit properties from their parents. The top level component tech doc can be https://developer.amazon.com/docs/alexa-presentation-language/apl-component.html[found here].
+We created a text component and then modified some properties on it using the GUI. To see the full set of text component properties, https://developer.amazon.com/docs/alexa-presentation-language/apl-text.html[check out the text component docs]. If you looked at that page, you will see that paddingTop and paddingBottom are missing. That is because all components also inherit properties from their parents. Here is the https://developer.amazon.com/docs/alexa-presentation-language/apl-component.html[full list of style properties] that all components share.
 
 The authoring tool also created a container for us. https://developer.amazon.com/docs/alexa-presentation-language/apl-container.html[Containers] are components that house other components in an alignment of "column" or "row". Since containers are also components, they have the basic component properties. Containers are essential for building responsive APL documents. Complex documents will use a mix of row and column containers to properly lay out components in a way which scales nicely across devices. 
 
@@ -137,9 +137,9 @@ Did you notice the *Data* button? This simulates the data that can be a part of 
 
 To reference data in a datasource, you'll need to refer to it in the payload using `payload.[YourDefinedObject]`. This is called "payload" by default when in the authoring tool since it is listed as a parameter to the "mainTemplate". If you want a different name for the payload, you will have to change this parameter, but for now, leave it as is. We'll add another Text component which will use a datasource and the style we defined. To reference the data, you will write an expression like, `${YourDefinedObject}`.
 
-Now that we have some familiarity with text components, let's modify our block. 
+Now that we have some familiarity with text components, let's modify our *APL* JSON. 
 
-A. Add the following inside the container's items array, underneath the current text object:
+A. Add the following inside the container's items array, underneath the existing text object:
 +
  {
     "type": "Text",
@@ -153,7 +153,7 @@ A. Add the following inside the container's items array, underneath the current 
  }
 +
 B. While we're at it, let's change the text data in our very first text component to `${payload.text.start}`. 
-Where'd it go? This happened because we have no data in the data source we are referencing. Let's fix this using that *Data* tab. 
+Wait a minute... Where did that go? The text disappeared because we have no data in the data source we are referencing. Let's fix this using that *Data* tab. 
 C. After clicking the *Data* button, you'll see an empty dataset `{}`. We'll need to add data which follows the structure we set. So we have a "text" object with "start", "middle", and "end" fields. 
 D. Add the following to the *Data* section of the authoring tool:
 +
@@ -191,8 +191,8 @@ A. Add this import object to your import list in your APL document import sectio
     "theme": "dark",
     "import": [
         {
-        "name": "alexa-layouts",
-        "version": "1.1.0"
+            "name": "alexa-layouts",
+            "version": "1.1.0"
         }
     ],
 	 ...<Omitted_rest_of_doc>
@@ -214,10 +214,10 @@ B. Add the following image block inside of a new container underneath the last t
 +
 Let's break this down:
 +
-*For the fields we are using in the AlexaImage, imageSource is important since it specifies the URL where the image is hosted. 
-* We want to give it the standard landscape aspect ratio since we'll want to maintain our image resolution. 
-* When the image scales, it will use the best-fit strategy. 
-* To control the size, we are using the imageHeight property and set it to 40% of the viewport height. 
+- For the fields we are using in the AlexaImage, imageSource is important since it specifies the URL where the image is hosted. 
+- We want to give it the standard landscape aspect ratio since we'll want to maintain our image resolution. 
+- When the image scales, it will use the best-fit strategy. 
+- To control the size, we are using the imageHeight property and set it to 40% of the viewport height. 
 +
 To learn more about each of these, check out the parameters in https://developer.amazon.com/docs/alexa-presentation-language/apl-alexa-image-layout.html#alexaimage-parameters[the tech doc].
 If you look at the tech docs, you'll notice no reference to alignSelf. This property exists and works because the component is a child component of a container. AlignSelf will override the container alignment for that child, only. There are https://developer.amazon.com/docs/alexa-presentation-language/apl-container.html#container-children[some other properties] that are added since this is a child of a container, too.

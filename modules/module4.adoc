@@ -385,6 +385,7 @@ Now, let's make our final document.
 == Adding a Special Birthday Video
 
 Our birthdayDocument will use a full screen video instead of the image component with the text removed, making sure to provide the same layout on a spot. The https://developer.amazon.com/docs/alexa-presentation-language/apl-video.html[video component] has a simple structure for our use case.
+
 A. In the code tab, create a new document called `birthdayDocument.json` and make it a copy of our old document.
 B. Replace the image component in your birthdayDocument.json with the following video component inside a container.
 +

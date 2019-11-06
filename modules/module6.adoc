@@ -17,16 +17,17 @@ There are a few ways you can improve this skill and add a better visual experien
 
 == Advanced resources:
 
-* Technical Documentation
-** https://developer.amazon.com/docs/alexa-presentation-language/understand-apl.html[Understand APL]
+* Technical documentation
 ** https://developer.amazon.com/docs/alexa-presentation-language/apl-alexa-packages-overview.html[Alexa Design System for APL]
 ** https://developer.amazon.com/docs/alexa-design/apl.html[APL Alexa Design Guide]
-** https://forums.developer.amazon.com/topics/apl.html[APL developer forums topic]
-** https://forums.developer.amazon.com/articles/193931/apl-known-issues-and-bugs-2.html[Known issues in APL]
+** https://developer.amazon.com/docs/alexa-presentation-language/aplt-interface.html[APL for text only devices]
+** https://developer.amazon.com/docs/alexa-presentation-language/apl-avg-format.html[Using vector graphics with APL]
+* Code samples
 ** https://github.com/alexa/skill-sample-nodejs-first-apl-skill[APL Cake Walk Repo]
-** https://github.com/alexa/skill-sample-nodejs-first-skill[Cake Walk]
 ** https://github.com/alexa/skill-sample-nodejs-premium-hello-world[Premium Hello World]
 ** https://github.com/alexa/skill-sample-nodejs-fact-in-skill-purchases[Fact In-skill Purchases]
+** https://github.com/alexa-labs/skill-sample-nodejs-sauce-boss[Sauce Boss]
+** Pager karaoke: https://github.com/alexa-labs/skill-sample-python-pager-karaoke[Python], https://github.com/alexa-labs/skill-sample-java-pager-karaoke[Java], https://github.com/alexa-labs/skill-sample-nodejs-firetv-vlogs[NodeJS]
 * Training
 ** https://alexa.design/cake-walk[Build your first engaging skill with Cake Walk]
 ** https://developer.amazon.com/en-US/alexa/alexa-skills-kit/resources/training-resources/design-for-in-skill-purchasing[How to Design for In-Skill Purchasing]
@@ -34,9 +35,10 @@ There are a few ways you can improve this skill and add a better visual experien
 ** https://developer.amazon.com/alexa/console/ask/displays[APL Authoring tool]
 ** https://developer.amazon.com/alexa/voice-design[Alexa Voice Design Guide]
 ** https://developer.amazon.com/en-US/alexa/alexa-skills-kit/situational-design[Learn to Design Complex Interactions with Situational Design]
-* Blog Posts
-** TODO
-
+** https://developer.amazon.com/blogs/alexa/author/Jaime+Radwan[Design blog posts on APL]
+* Support
+** https://forums.developer.amazon.com/topics/apl.html[APL developer forums topic]
+** https://forums.developer.amazon.com/articles/193931/apl-known-issues-and-bugs-2.html[Known issues in APL]
 
 == Continue the conversation:
 * Reach out to us on twitter https://twitter.com/alexadevs[@alexadevs]
