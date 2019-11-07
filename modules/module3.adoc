@@ -1,6 +1,6 @@
 
 :link-cakewalk: https://developer.amazon.com/en-US/alexa/alexa-skills-kit/courses/cake-walk[Cake Walk Course]
-:link-quick-setup: link:quickStart.html[quick setup instructions, window=_blank]
+:link-quick-setup: link:quick-start.html[quick setup instructions, window=_blank]
 :link-S3-assets: https://github.com/alexa/skill-sample-nodejs-first-apl-skill/tree/master/modules/assets[from this page.]
 :authoringToolLink: https://developer.amazon.com/alexa/console/ask/displays
 :sectnums:
