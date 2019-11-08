@@ -9,7 +9,7 @@ In this section, you will learn about APL Commands and how to add them to your s
 
 == What are APL commands?
 
-https://developer.amazon.com/docs/alexa-presentation-language/apl-commands.html[APL Commands] are messages which change the visual or audio presentation of the content delivered to your customer. There are a few different ways you can use commands. The first is by using the directive, `Alexa.Presentation.APL.ExecuteCommands`. There are also different handler properties in some components and even in the APL document. For an example, the https://developer.amazon.com/docs/alexa-presentation-language/apl-touchwrapper.html#onpress[TouchWrapper responsive component] has an onPress property which takes in a list of commands. Today, we will be using a similar mechanism within the APL document, the `onMount` property of our APL document which executes commands immediately upon inflating the document. This is useful for the animation commands we are using in our introduction.
+https://developer.amazon.com/docs/alexa-presentation-language/apl-commands.html[APL Commands, window=_blank] are messages which change the visual or audio presentation of the content delivered to your customer. There are a few different ways you can use commands. The first is by using the directive, `Alexa.Presentation.APL.ExecuteCommands`. There are also different handler properties in some components and even in the APL document. For an example, the https://developer.amazon.com/docs/alexa-presentation-language/apl-touchwrapper.html#onpress[TouchWrapper responsive component, window=_blank] has an onPress property which takes in a list of commands. Today, we will be using a similar mechanism within the APL document, the `onMount` property of our APL document which executes commands immediately upon inflating the document. This is useful for the animation commands we are using in our introduction.
 
 Now, let's animate some text objects. This is what we want to create:
 
@@ -17,7 +17,7 @@ image:FinalLaunchScreen.gif[]
 
 == Updating our APL documents
 
-First, we will need to update out APL Documents to be able to use commands by adding an https://developer.amazon.com/docs/alexa-presentation-language/apl-component.html#id[id property] to our components. Since we want the commands to execute immediately on the APL screen loading, we will be putting the commands inside the onMount property of our launch document. 
+First, we will need to update out APL Documents to be able to use commands by adding an https://developer.amazon.com/docs/alexa-presentation-language/apl-component.html#id[id property, window=_blank] to our components. Since we want the commands to execute immediately on the APL screen loading, we will be putting the commands inside the onMount property of our launch document. 
 In order to target our components with the commands, we'll need to add some logical ids for our text components. Hold up though! These are defined in the APL package. If you check the hosted version, you will see there are already component ids added by default! These are `textTop, textMiddle, textBottom` corresponding to the top, middle, and bottom text components, so there is no need to add anything. However, if you would like to add different ids, each text component id is exposed as a parameter in the APL package.
 
 A. In your launch document (launchDocument.json file), add `"id": "image",` to the AlexaImage component. 
@@ -25,7 +25,7 @@ B. In your birthday visual, (birthdayDocument.json file), add `"id": "birthdayVi
 
 == Adding commands to our document
 
-The command we will be using is the https://developer.amazon.com/docs/alexa-presentation-language/apl-standard-commands.html#animate_item_command[AnimateItem command]. This command was added in APL 1.1, so make sure that your APL document is declaring version 1.1 which will look like `version: '1.1'`. The animate item command will run a fixed-duration animation sequence on one or more properties of a single component. We are going to modify the `transform` property. 
+The command we will be using is the https://developer.amazon.com/docs/alexa-presentation-language/apl-standard-commands.html#animate_item_command[AnimateItem command, window=_blank]. This command was added in APL 1.1, so make sure that your APL document is declaring version 1.1 which will look like `version: '1.1'`. The animate item command will run a fixed-duration animation sequence on one or more properties of a single component. We are going to modify the `transform` property. 
 
 The basic structure of our animate item commands will be :
 
@@ -281,7 +281,7 @@ D. Save and deploy and test this out now.
 
 That's a cool animation isn't it? Great work on expanding your Cake Walk with images, text, video, and animations!
 
-https://github.com/alexa/skill-sample-nodejs-first-apl-skill/tree/master/modules/code/module5[Complete code in Github]
+https://github.com/alexa/skill-sample-nodejs-first-apl-skill/tree/master/modules/code/module5[Complete code in Github, window=_blank]
 
 link:module4.html[Previous Module (4)] 
 link:module6.html[Wrap Up & Extra Credit]

@@ -19,13 +19,13 @@ And we want to make these screens:
 image::finalCountdownScreen.png[] 
 image::finalBirthdayScreen.png[]
 
-See the similarities? We can already make the countdown screen with our current document! And, we can almost make the Birthday screen. There are only two differences between the birthday screen and our current launch screen. The birthdayt screen has a video instead of an image, and the background asset is different. Let's start by optimizing our current document using https://developer.amazon.com/docs/alexa-presentation-language/apl-layout.html[layouts]. 
+See the similarities? We can already make the countdown screen with our current document! And, we can almost make the Birthday screen. There are only two differences between the birthday screen and our current launch screen. The birthdayt screen has a video instead of an image, and the background asset is different. Let's start by optimizing our current document using https://developer.amazon.com/docs/alexa-presentation-language/apl-layout.html[layouts, window=_blank]. 
 
 Layouts are composite components; they are components made out of other components and layouts. We have already been using layouts (responsive components are layouts defined by Amazon in the APL Package, "alexa-Layouts"), but now it is time to define our own layout based on the patterns we see in our screens for our experience.
 
-Layouts are also defined in JSON. They have a description, parameters accepted, and an items section which is composed of other components. The https://developer.amazon.com/docs/alexa-presentation-language/apl-layout.html#parameters[parameters] can have default values in case there is no parameter value provided, as well as a specific type (or "any"). We can extract the text parts of our document and create a layout out of it. Let's do so now.
+Layouts are also defined in JSON. They have a description, parameters accepted, and an items section which is composed of other components. The https://developer.amazon.com/docs/alexa-presentation-language/apl-layout.html#parameters[parameters, window=_blank] can have default values in case there is no parameter value provided, as well as a specific type (or "any"). We can extract the text parts of our document and create a layout out of it. Let's do so now.
 
-A. Open the https://developer.amazon.com/alexa/console/ask/displays[APL authoring tool.]
+A. Open the https://developer.amazon.com/alexa/console/ask/displays[APL authoring tool., window=_blank]
 B. Add the layout of the repeated patterns to the `layouts` section of the document. The reusable text layout looks like:
 +
  "cakeWalkText": {
@@ -208,9 +208,9 @@ But wait... This isn't that much simpler- it looks longer now! Let's simplify ou
 
 == Hosting your own APL package
 
-Once you have your components rendering and the launch screen looks the same, it is time to host our layout so it can be used in more than one document. Layouts, styles, and resources can all be hosted in an https://developer.amazon.com/docs/alexa-presentation-language/apl-package.html[APL package]. In fact, an APL package has the same format of an APL document except, there is no mainTemplate. This is a great way to share resources, styles, or your own custom responsive components or UI patterns across multiple APL documents. You can even create your own documents to share with the rest of the Alexa developer community!
+Once you have your components rendering and the launch screen looks the same, it is time to host our layout so it can be used in more than one document. Layouts, styles, and resources can all be hosted in an https://developer.amazon.com/docs/alexa-presentation-language/apl-package.html[APL package, window=_blank]. In fact, an APL package has the same format of an APL document except, there is no mainTemplate. This is a great way to share resources, styles, or your own custom responsive components or UI patterns across multiple APL documents. You can even create your own documents to share with the rest of the Alexa developer community!
 
-We want to host both our style and our layout. To do so we will use our S3 bucket on our backend. Unfortunately, since we are using the Alexa hosted environment, we cannot modify permissions on the S3 provision we are given. Alexa devices and simulators need the header, `Access-Control-Allow-Origin` to be set and allow *.amazon.com. To learn more about Cross-Origin Resource Sharing, https://developer.amazon.com/docs/alexa-presentation-language/apl-support-for-your-skill.html#support-cors[check out the tech docs]. Also, the link must be public which we cannot do with Alexa hosted. But for this exercise, we will use https://raw.githubusercontent.com/alexa/skill-sample-nodejs-first-apl-skill/master/modules/code/module4/documents/my-cakewalk-apl-package.json[this GitHub link] to host our JSON APL package. Note: Github supports CORS on all domains.
+We want to host both our style and our layout. To do so we will use our S3 bucket on our backend. Unfortunately, since we are using the Alexa hosted environment, we cannot modify permissions on the S3 provision we are given. Alexa devices and simulators need the header, `Access-Control-Allow-Origin` to be set and allow *.amazon.com. To learn more about Cross-Origin Resource Sharing, https://developer.amazon.com/docs/alexa-presentation-language/apl-support-for-your-skill.html#support-cors[check out the tech docs, window=_blank]. Also, the link must be public which we cannot do with Alexa hosted. But for this exercise, we will use https://raw.githubusercontent.com/alexa/skill-sample-nodejs-first-apl-skill/master/modules/code/module4/documents/my-cakewalk-apl-package.json[this GitHub link, window=_blank] to host our JSON APL package. Note: Github supports CORS on all domains.
 
 NOTE: If you are using another service to host your assets that service must also send the appropriate headers.
 
@@ -285,7 +285,7 @@ Our package will be just the reusable set of properties from our APL document. T
     }
  }
 
-Now in our main document, we can remove everything except for the mainTemplate blob, and add in a new import for our package. In the authoring tool, we can use https://raw.githubusercontent.com/alexa/skill-sample-nodejs-first-apl-skill/master/modules/code/module4/documents/my-cakewalk-apl-package.json[this public link] to test. 
+Now in our main document, we can remove everything except for the mainTemplate blob, and add in a new import for our package. In the authoring tool, we can use https://raw.githubusercontent.com/alexa/skill-sample-nodejs-first-apl-skill/master/modules/code/module4/documents/my-cakewalk-apl-package.json[this public link, window=_blank] to test. 
 
 A. Add this import to your document:
 +
@@ -384,7 +384,7 @@ Now, let's make our final document.
 
 == Adding a Special Birthday Video
 
-Our birthdayDocument will use a full screen video instead of the image component with the text removed, making sure to provide the same layout on a spot. The https://developer.amazon.com/docs/alexa-presentation-language/apl-video.html[video component] has a simple structure for our use case.
+Our birthdayDocument will use a full screen video instead of the image component with the text removed, making sure to provide the same layout on a spot. The https://developer.amazon.com/docs/alexa-presentation-language/apl-video.html[video component, window=_blank] has a simple structure for our use case.
 
 A. In the code tab, create a new document called `birthdayDocument.json` and make it a copy of our old document.
 B. Replace the image component in your birthdayDocument.json with the following video component inside a container.
@@ -511,7 +511,7 @@ E. Now, Test your skill. Clear your user data in S3 and lie so today is your bir
 
 When this is working, you can go to the final module to learn about commands.
 
-https://github.com/alexa/skill-sample-nodejs-first-apl-skill/tree/master/modules/code/module4[Complete code in Github]
+https://github.com/alexa/skill-sample-nodejs-first-apl-skill/tree/master/modules/code/module4[Complete code in Github, window=_blank]
 
 link:module3.html[Previous Module (3)]
 link:module5.html[Next Module (5)]

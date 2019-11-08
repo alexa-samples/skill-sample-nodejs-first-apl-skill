@@ -79,15 +79,15 @@ For reference here is the JSON that you should have.
      }
  }
 
-We created a text component and then modified some properties on it using the GUI. To see the full set of text component properties, https://developer.amazon.com/docs/alexa-presentation-language/apl-text.html[check out the text component docs]. If you looked at that page, you will see that paddingTop and paddingBottom are missing. That is because all components also inherit properties from their parents. Here is the https://developer.amazon.com/docs/alexa-presentation-language/apl-component.html[full list of style properties] that all components share.
+We created a text component and then modified some properties on it using the GUI. To see the full set of text component properties, https://developer.amazon.com/docs/alexa-presentation-language/apl-text.html[check out the text component docs, window=_blank]. If you looked at that page, you will see that paddingTop and paddingBottom are missing. That is because all components also inherit properties from their parents. Here is the https://developer.amazon.com/docs/alexa-presentation-language/apl-component.html[full list of style properties, window=_blank] that all components share.
 
-The authoring tool also created a container for us. https://developer.amazon.com/docs/alexa-presentation-language/apl-container.html[Containers] are components that house other components in an alignment of "column" or "row". Since containers are also components, they have the basic component properties. Containers are essential for building responsive APL documents. Complex documents will use a mix of row and column containers to properly lay out components in a way which scales nicely across devices. 
+The authoring tool also created a container for us. https://developer.amazon.com/docs/alexa-presentation-language/apl-container.html[Containers, window=_blank] are components that house other components in an alignment of "column" or "row". Since containers are also components, they have the basic component properties. Containers are essential for building responsive APL documents. Complex documents will use a mix of row and column containers to properly lay out components in a way which scales nicely across devices. 
 
 == Hello Cake Walk with style
 
-Some of the component properties can be defined using https://developer.amazon.com/docs/alexa-presentation-language/apl-style-definition-and-evaluation.html[styles]. Styles are a named set of properties that can be reused across components.
+Some of the component properties can be defined using https://developer.amazon.com/docs/alexa-presentation-language/apl-style-definition-and-evaluation.html[styles, window=_blank]. Styles are a named set of properties that can be reused across components.
 
-NOTE: Not all properties can be styled on all components. https://developer.amazon.com/docs/alexa-presentation-language/apl-styled-properties.html[Here is the full list of style-able properties for each component type.]
+NOTE: Not all properties can be styled on all components. https://developer.amazon.com/docs/alexa-presentation-language/apl-styled-properties.html[Here is the full list of style-able properties for each component type., window=_blank]
 
 A. Click the *styles* sidebar. You'll see an empty set of parenthesis. Now, replace the empty set with this:
 +
@@ -112,7 +112,7 @@ Your APL code will now look like this:
 image::finalHelloAPL.png[]
 +
 Let's take this a step further and center our text using styles.
-D. In the styles section, let's add the https://developer.amazon.com/docs/alexa-presentation-language/apl-text.html#textalign[textAlign] property and set this to centered.
+D. In the styles section, let's add the https://developer.amazon.com/docs/alexa-presentation-language/apl-text.html#textalign[textAlign, window=_blank] property and set this to centered.
 +
  "textAlign": "center"
 +
@@ -173,9 +173,9 @@ Now, we have a set of reusable styles across this APL document, and we learned a
 
 == Adding a birthday cake
 
-We'll need to add an image component and use databinding. Image components use a URL to the resource that is storing the image. However, image is a primitive component. To scale the image across all of the viewport sizes would take a lot of effort and multiple image resolutions since it does not auto scale. Instead, use the https://developer.amazon.com/docs/alexa-presentation-language/apl-alexa-image-layout.html[AlexaImage] responsive component so we can use a single image that will scale across all device resolutions.
+We'll need to add an image component and use databinding. Image components use a URL to the resource that is storing the image. However, image is a primitive component. To scale the image across all of the viewport sizes would take a lot of effort and multiple image resolutions since it does not auto scale. Instead, use the https://developer.amazon.com/docs/alexa-presentation-language/apl-alexa-image-layout.html[AlexaImage, window=_blank] responsive component so we can use a single image that will scale across all device resolutions.
 
-To use the AlexaImage component, we'll need to add an import. Imports allow you to reference layouts, styles, and resources defined in other https://developer.amazon.com/docs/alexa-presentation-language/apl-package.html[packages]. We are going to use a standard package called https://developer.amazon.com/docs/alexa-presentation-language/apl-layouts-overview.html#import-the-alexa-layouts-package[`alexa-layouts`]. The import looks like this:
+To use the AlexaImage component, we'll need to add an import. Imports allow you to reference layouts, styles, and resources defined in other https://developer.amazon.com/docs/alexa-presentation-language/apl-package.html[packages, window=_blank]. We are going to use a standard package called https://developer.amazon.com/docs/alexa-presentation-language/apl-layouts-overview.html#import-the-alexa-layouts-package[`alexa-layouts`, window=_blank]. The import looks like this:
 
  {
      "name": "alexa-layouts",
@@ -198,7 +198,7 @@ A. Add this import object to your import list in your APL document import sectio
 	 ...<Omitted_rest_of_doc>
  }
 +
-Alexa layouts is an important package for creating https://developer.amazon.com/docs/alexa-presentation-language/apl-build-responsive-apl-documents.html[responsive layouts]. The AlexaImage component has https://developer.amazon.com/docs/alexa-presentation-language/apl-alexa-image-layout.html#alexaimage-parameters[many parameters], most of which are optional. 
+Alexa layouts is an important package for creating https://developer.amazon.com/docs/alexa-presentation-language/apl-build-responsive-apl-documents.html[responsive layouts, window=_blank]. The AlexaImage component has https://developer.amazon.com/docs/alexa-presentation-language/apl-alexa-image-layout.html#alexaimage-parameters[many parameters, window=_blank], most of which are optional. 
 B. Add the following image block inside of a new container underneath the last text component. This new block should be nested within the existing Container, so be sure to put it in the same "items" array as your text components.
 + 
  {
@@ -219,8 +219,8 @@ Let's break this down:
 - When the image scales, it will use the best-fit strategy. 
 - To control the size, we are using the imageHeight property and set it to 40% of the viewport height. 
 +
-To learn more about each of these, check out the parameters in https://developer.amazon.com/docs/alexa-presentation-language/apl-alexa-image-layout.html#alexaimage-parameters[the tech doc].
-If you look at the tech docs, you'll notice no reference to alignSelf. This property exists and works because the component is a child component of a container. AlignSelf will override the container alignment for that child, only. There are https://developer.amazon.com/docs/alexa-presentation-language/apl-container.html#container-children[some other properties] that are added since this is a child of a container, too.
+To learn more about each of these, check out the parameters in https://developer.amazon.com/docs/alexa-presentation-language/apl-alexa-image-layout.html#alexaimage-parameters[the AlexaImage tech doc, window=_blank].
+If you look at the tech docs, you'll notice no reference to alignSelf. This property exists and works because the component is a child component of a container. AlignSelf will override the container alignment for that child, only. There are https://developer.amazon.com/docs/alexa-presentation-language/apl-container.html#container-children[some other properties, window=_blank] that are added since this is a child of a container, too.
 This relies on a new "assets.cake" object to be added to the data section. The new data section will look like:
 +
  {
@@ -261,8 +261,8 @@ WARNING: spoiler below
 .Well, that doesn't look quite right...
 image::brokenHelloSpot.png[Broken Spot Image]
 +
-B. Our wording is cut off on the Small Hub (Round) device screen. Let's fix this using the https://developer.amazon.com/docs/alexa-presentation-language/apl-component.html#when[when] property. This property allows for boolean evaluation. If true, it will show a component and its children, but if false, it will not. 
-In addition to `when`, we will be using https://developer.amazon.com/docs/alexa-presentation-language/apl-resources.html[Resources] from the alexa-layouts import. Resources are simply named constants which are referenced with `@<Resource_name>`. This time, we will use the alexa-layouts package's definitions of constants representing the above device types and viewport profiles. It allows you to create statements with predefined viewport-specific constants such as:
+B. Our wording is cut off on the Small Hub (Round) device screen. Let's fix this using the https://developer.amazon.com/docs/alexa-presentation-language/apl-component.html#when[when, window=_blank] property. This property allows for boolean evaluation. If true, it will show a component and its children, but if false, it will not. 
+In addition to `when`, we will be using https://developer.amazon.com/docs/alexa-presentation-language/apl-resources.html[Resources, window=_blank] from the alexa-layouts import. Resources are simply named constants which are referenced with `@<Resource_name>`. This time, we will use the alexa-layouts package's definitions of constants representing the above device types and viewport profiles. It allows you to create statements with predefined viewport-specific constants such as:
 +
  ${@viewportProfile == @hubLandscapeLarge}
 +
@@ -395,7 +395,7 @@ The final APL Document JSON for reference:
 
 Let's put this document to use in the next section. 
 
-https://github.com/alexa/skill-sample-nodejs-first-apl-skill/tree/master/modules/code/module2[Complete code in Github]
+https://github.com/alexa/skill-sample-nodejs-first-apl-skill/tree/master/modules/code/module2[Complete code in Github, window=_blank]
 
 link:module1.html[Previous Module (1)]
 link:module3.html[Next Module (3)]

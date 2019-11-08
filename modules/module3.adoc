@@ -1,7 +1,7 @@
 
-:link-cakewalk: https://developer.amazon.com/en-US/alexa/alexa-skills-kit/courses/cake-walk[Cake Walk Course]
+:link-cakewalk: https://developer.amazon.com/en-US/alexa/alexa-skills-kit/courses/cake-walk[Cake Walk Course, window=_blank]
 :link-quick-setup: link:quick-start.html[quick setup instructions, window=_blank]
-:link-S3-assets: https://github.com/alexa/skill-sample-nodejs-first-apl-skill/tree/master/modules/assets[from this page.]
+:link-S3-assets: https://github.com/alexa/skill-sample-nodejs-first-apl-skill/tree/master/modules/assets[from this page., window=_blank]
 :authoringToolLink: https://developer.amazon.com/alexa/console/ask/displays
 :sectnums:
 :toc:
@@ -90,7 +90,7 @@ image::interfacesClick.png[]
 +
 B. Scroll down and toggle the Alexa Presentation Language and you will see the block expand. Select all of the boxes. 
 +
-Hub Round, Hub Landscape, and TV Fullscreen are selected by default and must be supported. Each of these are screens you will be officially supporting. They will not scale your content, so whatever assets and APL layout you send in the response will be shown as is. This also means whatever viewport profiles are not supported will scale your content from the closest sized viewport you do support. Select them all because we will be verifying and testing each of these profiles. By selecting these, you are saying you tested your layout on each of these profiles. To learn more about selecting viewport profiles, https://developer.amazon.com/docs/alexa-presentation-language/apl-select-the-viewport-profiles-your-skill-supports.html[check out the tech docs.]
+Hub Round, Hub Landscape, and TV Fullscreen are selected by default and must be supported. Each of these are screens you will be officially supporting. They will not scale your content, so whatever assets and APL layout you send in the response will be shown as is. This also means whatever viewport profiles are not supported will scale your content from the closest sized viewport you do support. Select them all because we will be verifying and testing each of these profiles. By selecting these, you are saying you tested your layout on each of these profiles. To learn more about selecting viewport profiles, https://developer.amazon.com/docs/alexa-presentation-language/apl-select-the-viewport-profiles-your-skill-supports.html[check out the tech docs., window=_blank]
 +
 image::toggleAPL.png[]
 +
@@ -107,14 +107,14 @@ E. Test your screen on a medium hub by triggering the launch handler for instanc
 F. Repeat this test on all the other screen types. Remember, we did not include the birthday cake image, yet, so don't worry if you do not see it!
 
 == Uploading assets to S3
-Before we can make use of image assets, we will need to host these images. Ideally, you will use a https://en.wikipedia.org/wiki/Content_delivery_network[CDN] (such as https://aws.amazon.com/blogs/networking-and-content-delivery/amazon-s3-amazon-cloudfront-a-match-made-in-the-cloud/[Amazon Cloudfront in conjunction with S3]) to serve your assets to locations closer to your users, but for this exercise, we will use S3 since this is provided by Alexa hosted. 
+Before we can make use of image assets, we will need to host these images. Ideally, you will use a https://en.wikipedia.org/wiki/Content_delivery_network[CDN, window=_blank] (such as https://aws.amazon.com/blogs/networking-and-content-delivery/amazon-s3-amazon-cloudfront-a-match-made-in-the-cloud/[Amazon Cloudfront in conjunction with S3, window=_blank]) to serve your assets to locations closer to your users, but for this exercise, we will use S3 since this is provided by Alexa hosted. 
 
 A. To upload the S3 Assets, access your S3 provision under the *Code* tab at the very bottom on the left side.
 + 
 image::S3Access.png[]
 +
 B. In your S3 provision, open the *media* page. 
-C. In here, upload all of the assets {link-S3-assets}. For your convenience, we have the https://alexa.design/apl-cake-walk-assets[assets zipped here]. We will use all of these over the course of the module. After you upload, you will see all of the assets on the page in S3.
+C. In here, upload all of the assets {link-S3-assets}. For your convenience, we have the https://alexa.design/apl-cake-walk-assets[assets zipped here, window=_blank]. We will use all of these over the course of the module. After you upload, you will see all of the assets on the page in S3.
 +
 image::S3Provision.png[]
 
@@ -141,7 +141,7 @@ B. In the data section of the authoring tool, use:
 +
 You may notice a new field in our data, backgroundURL, under the assets object. This represents where the device will fetch a background image from. We will use the Github repo for hosting it for now while we develop the screen since this is a public link, but our actual code will use the S3 presigned link util function. The presigned link utility is needed to generate a short-lived public URL to the private bucket you uploaded the assets to. Now, we need to add our background component. 
 C. Go back to the *APL* tab in the authoring tool.
-D. We are going to add the https://developer.amazon.com/docs/alexa-presentation-language/apl-alexa-background-layout.html[AlexaBackground responsive component]. To use this, you need the alexa-layouts package which we already have! Using the AlexaBackground is easy; just add the following to the top of both of your containers in the items array of each:
+D. We are going to add the https://developer.amazon.com/docs/alexa-presentation-language/apl-alexa-background-layout.html[AlexaBackground responsive component, window=_blank]. To use this, you need the alexa-layouts package which we already have! Using the AlexaBackground is easy; just add the following to the top of both of your containers in the items array of each:
 +
  {
     "type": "AlexaBackground",
@@ -206,7 +206,7 @@ H. Test this out making sure to use the TV and the hub devices in the test conso
 
 Since our frontend is scaling properly by using the responsive components, we are done! Let's head to the next module and learn some about more advanced APL document concepts.
 
-https://github.com/alexa/skill-sample-nodejs-first-apl-skill/tree/master/modules/code/module3[Complete code in Github]
+https://github.com/alexa/skill-sample-nodejs-first-apl-skill/tree/master/modules/code/module3[Complete code in Github, window=_blank]
 
 link:module2.html[Previous Module (2)]
 link:module4.html[Next Module (4)]
