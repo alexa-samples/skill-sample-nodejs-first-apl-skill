@@ -419,7 +419,7 @@ The only difference in our current launch document and our known birthday docume
 
 image::finalCountdownScreen.png[]
 
-A. We want to avoid duplicating code, so let's make a helper function to get the background image based upon our key. This will also be used to fetch a new background image for the alternate document. In addition, we will use it to contain our device screen size to asset size logic. Add this helper function to your index.js above the comment that starts with `// This handler acts`:
+A. We want to avoid duplicating code, so let's make a helper function to get the background image based upon our key. This will also be used to fetch a new background image for the alternate document. In addition, we will use it to contain our device screen size to asset size logic. Add this helper function to your index.js anywhere outside of another function or object:
 +
  function getBackgroundURL(handlerInput, fileNamePrefix) {
     const viewportProfile = Alexa.getViewportProfile(handlerInput.requestEnvelope);

@@ -2,7 +2,7 @@
 
 :imagesdir: ../modules/images
 
-= Quick Start Instructions
+= Cake Walk Quick Start Instructions
 
 These are the instructions for skill builders who have never worked with the Cake Walk skill.
 
