@@ -46,7 +46,7 @@
                     "default": "textTop"
                 },
                 {
-                    "name": "middledId",
+                    "name": "middleId",
                     "type": "string",
                     "default": "textMiddle"
                 },
