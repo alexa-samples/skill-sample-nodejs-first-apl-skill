@@ -206,7 +206,7 @@ Did you notice the clipping on the audio response from Alexa? You may not notice
 
 Alexa is cut off from speaking when the video starts to play. We want Alexa to finish speaking, then start the video automatically. We need to turn off autoplay in order to fix this, but it does not make sense for our customers to have to tell the video to start. We'll use commands to solve this.
 
-To fix the audio, we are going to have to add the https://developer.amazon.com/docs/alexa-presentation-language/apl-execute-command-directive.html[ExecuteCommands directive] to our backend as well as a payload for it. The execute commands directive will execute the list of provided commands after Alexa is done speaking. It looks like this:
+To fix the audio, we are going to have to add the https://developer.amazon.com/docs/alexa-presentation-language/apl-execute-command-directive.html[ExecuteCommands directive] to our backend as well as a data source payload for it. The execute commands directive will execute the list of provided commands after Alexa is done speaking. It looks like this:
 
  {
     "type" : "Alexa.Presentation.APL.ExecuteCommands",

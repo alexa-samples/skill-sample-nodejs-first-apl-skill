@@ -145,7 +145,7 @@ D. We are going to add the https://developer.amazon.com/docs/alexa-presentation-
 +
  {
     "type": "AlexaBackground",
-    "backgroundImageSource": "${payload.assets.backgroundURL}"
+    "backgroundImageSource": "${assets.backgroundURL}"
  },
 +
 You should see the background light up... Er... See the lights in the background. 
@@ -174,7 +174,7 @@ B. Go back to the index.js. Since we are adding in links to our private S3 insta
 +
  const util = require('./util');
 +
-C. Add the new datasources to our code in the index.js. Since our images are in the non-public S3 bucket, we are going to be using the util function to get a short lived public URL to the asset. The S3 object keys in this case are going to be of the form, `'Media/imageName.png'`. Lets add our images inside the APL render block's data. Our datasources block will now look like:
+C. Add the new data sources to our code in the index.js. Since our images are in the non-public S3 bucket, we are going to be using the util function to get a short lived public URL to the asset. The S3 object keys in this case are going to be of the form, `'Media/imageName.png'`. Lets add our images inside the APL render block's data. Our `datasources` block will now look like:
 +
  datasources: {
     text: {
