@@ -54,7 +54,8 @@
     "layouts": {},
     "mainTemplate": {
         "parameters": [
-            "payload"
+            "text",
+            "assets"
         ],
         "items": [
             {
@@ -62,18 +63,18 @@
                 "items": [
                     {
                         "type": "AlexaBackground",
-                        "backgroundImageSource": "${payload.assets.backgroundURL}"
+                        "backgroundImageSource": "${assets.backgroundURL}"
                     },
                     {
                         "type": "cakeWalkText",
-                        "startText":"${payload.text.start}",
-                        "middleText":"${payload.text.middle}",
-                        "endText":"${payload.text.end}"
+                        "startText":"${text.start}",
+                        "middleText":"${text.middle}",
+                        "endText":"${text.end}"
                     },
                     {
                         "type": "AlexaImage",
                         "alignSelf": "center",
-                        "imageSource": "${payload.assets.cake}",
+                        "imageSource": "${assets.cake}",
                         "imageRoundedCorner": false,
                         "imageScale": "best-fill",
                         "imageHeight":"40vh",
@@ -91,13 +92,13 @@
                 "items": [
                     {
                         "type": "AlexaBackground",
-                        "backgroundImageSource": "${payload.assets.backgroundURL}"
+                        "backgroundImageSource": "${assets.backgroundURL}"
                     }, 
                     {
                         "type": "cakeWalkText",
-                        "startText":"${payload.text.start}",
-                        "middleText":"${payload.text.middle}",
-                        "endText":"${payload.text.end}"
+                        "startText":"${text.start}",
+                        "middleText":"${text.middle}",
+                        "endText":"${text.end}"
                     }
                 ],
                 "height": "100%",

@@ -111,7 +111,8 @@
     "layouts": {},
     "mainTemplate": {
         "parameters": [
-            "payload"
+            "text",
+            "assets"
         ],
         "items": [
             {
@@ -119,7 +120,7 @@
                 "items": [
                     {
                         "type": "AlexaBackground",
-                        "backgroundImageSource": "${payload.assets.backgroundURL}"
+                        "backgroundImageSource": "${assets.backgroundURL}"
                     },
                     {
                         "type": "Container",
@@ -130,7 +131,7 @@
                                 "height": "85vh",
                                 "width":"90vw",
                                 "id":"birthdayVideo",
-                                "source": "${payload.assets.video}",
+                                "source": "${assets.video}",
                                 "autoplay": false,
                                 "onPause": [{
                                     "type": "SetState",
@@ -165,13 +166,13 @@
                 "items": [
                     {
                         "type": "AlexaBackground",
-                        "backgroundImageSource": "${payload.assets.backgroundURL}"
+                        "backgroundImageSource": "${assets.backgroundURL}"
                     },
                     {
                         "type": "cakeWalkText",
-                        "startText":"${payload.text.start}",
-                        "middleText":"${payload.text.middle}",
-                        "endText":"${payload.text.end}"
+                        "startText":"${text.start}",
+                        "middleText":"${text.middle}",
+                        "endText":"${text.end}"
                     }
                 ],
                 "height": "100%",
