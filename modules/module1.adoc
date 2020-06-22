@@ -62,6 +62,6 @@ Every APL document has a "mainTemplate". This simply represents the start state 
      }
  }
 
-As you progress through the course, we'll cover the parts of an APL document in more detail. Continue to section 2 where you'll use the APL authoring tool to create a simple APL document for the Cake Walk skill's LaunchRequest.
+As you progress through the course, we'll cover the parts of an APL document in more detail. Continue to section 2 where you'll use the APL authoring tool to create a simple APL document for the Cake Time skill's LaunchRequest.
 
 link:module2.html[Next Module (2)]

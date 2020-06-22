@@ -143,7 +143,7 @@ const LaunchRequestHandler = {
         return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const speakOutput = 'Hello! Welcome to Cake walk. What is your birthday?';
+        const speakOutput = 'Hello! Welcome to Cake Time. What is your birthday?';
         const repromptOutput = 'I was born Nov. 6th, 2015. When were you born?';
 
         // Add APL directive to response
@@ -157,7 +157,7 @@ const LaunchRequestHandler = {
                         type: 'object',
                         start: "Welcome",
                         middle: "to",
-                        end: "Cake Walk!"
+                        end: "Cake Time!"
                     },
                     assets: {
                         cake: util.getS3PreSignedUrl('Media/alexaCake_960x960.png'),
@@ -167,7 +167,7 @@ const LaunchRequestHandler = {
             });
         }
 
-        const headerMessage = "Welcome to Cake Walk!";
+        const headerMessage = "Welcome to Cake Time!";
 
         return handlerInput.responseBuilder
             .speak(speakOutput)

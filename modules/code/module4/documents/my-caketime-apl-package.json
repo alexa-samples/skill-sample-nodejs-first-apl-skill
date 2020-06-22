@@ -1,0 +1,87 @@
+{
+    "type": "APL",
+    "version": "1.1",
+    "settings": {},
+    "theme": "dark",
+    "import": [
+        {
+            "name": "alexa-layouts",
+            "version": "1.1.0"
+        }
+    ],
+    "resources": [],
+    "styles": {
+        "bigText": {
+            "values": [
+                {
+                    "fontSize": "72dp",
+                    "color": "black",
+                    "textAlign": "center"
+                }
+            ]
+        }
+    },
+    "onMount": [],
+    "graphics": {},
+    "commands": {},
+    "layouts": {
+        "cakeTimeText": {
+            "description": "A basic text layout with start, middle and end. Ids to target each individual layout (for commands) will be textTop, textMiddle, and textBottom, respectively.",
+            "parameters":[
+                {
+                    "name": "startText",
+                    "type": "string"
+                },
+                {
+                    "name": "middleText",
+                    "type": "string"
+                },
+                {
+                    "name": "endText",
+                    "type": "string"
+                },
+                {
+                    "name": "topId",
+                    "type": "string",
+                    "default": "textTop"
+                },
+                {
+                    "name": "middleId",
+                    "type": "string",
+                    "default": "textMiddle"
+                },
+                {
+                    "name": "bottomId",
+                    "type": "string",
+                    "default": "textBottom"
+                }
+            ],
+            "items": [
+                {
+                    "type": "Container",
+                    "items": [
+                        {
+                            "type": "Text",
+                            "style": "bigText",
+                            "paddingTop":"${@viewportProfile == @hubRoundSmall ? 75dp : 0dp}",
+                            "text": "${startText}",
+                            "id":"${topId}"
+                        },
+                        {
+                            "type": "Text",
+                            "style": "bigText",
+                            "text": "${middleText}",
+                            "id": "${middleId}"
+                        },
+                        {
+                            "type": "Text",
+                            "style": "bigText",
+                            "text": "${endText}",
+                            "id": "${bottomId}"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

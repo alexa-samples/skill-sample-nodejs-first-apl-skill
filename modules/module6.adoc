@@ -23,13 +23,13 @@ There are a few ways you can improve this skill and add a better visual experien
 ** https://developer.amazon.com/docs/alexa-presentation-language/aplt-interface.html[APL for text only devices]
 ** https://developer.amazon.com/docs/alexa-presentation-language/apl-avg-format.html[Using vector graphics with APL]
 * Code samples
-** https://github.com/alexa/skill-sample-nodejs-first-apl-skill[APL Cake Walk Repo]
+** https://github.com/alexa/skill-sample-nodejs-first-apl-skill[APL Cake Time Repo]
 ** https://github.com/alexa/skill-sample-nodejs-premium-hello-world[Premium Hello World]
 ** https://github.com/alexa/skill-sample-nodejs-fact-in-skill-purchases[Fact In-skill Purchases]
 ** https://github.com/alexa-labs/skill-sample-nodejs-sauce-boss[Sauce Boss]
 ** Pager karaoke: https://github.com/alexa-labs/skill-sample-python-pager-karaoke[Python], https://github.com/alexa-labs/skill-sample-java-pager-karaoke[Java], https://github.com/alexa-labs/skill-sample-nodejs-firetv-vlogs[NodeJS]
 * Training
-** https://alexa.design/cake-walk[Build your first engaging skill with Cake Walk]
+** https://developer.amazon.com/alexa/alexa-skills-kit/get-deeper/tutorials-code-samples/build-an-engaging-alexa-skill[Tutorial: Build an Engaging Alexa Skill]
 ** https://developer.amazon.com/en-US/alexa/alexa-skills-kit/resources/training-resources/design-for-in-skill-purchasing[How to Design for In-Skill Purchasing]
 * Design
 ** https://developer.amazon.com/alexa/console/ask/displays[APL Authoring tool]
@@ -50,6 +50,6 @@ We're committed to developing online and in-person learning material to aid desi
 We'd love to hear from you in regard to:
 
 * This course. Let us know what you liked, didn't like, and what we can do to improve!
-** Tweet at us about what you liked and what can be improved. Use https://twitter.com/search?q=APLCakeWalk[#APLCakeWalk].
+** Tweet at us about what you liked and what can be improved. Use https://twitter.com/search?q=APLCakeTime[#APLCakeTime].
 ** We take https://github.com/alexa/skill-sample-nodejs-first-apl-skill/pulls[pull requests], too :)
 * Have a feature request for APL or general Alexa Skill Development? You have a voice: http://alexa.uservoice.com[uservoice].
