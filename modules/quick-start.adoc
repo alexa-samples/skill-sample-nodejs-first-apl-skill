@@ -2,21 +2,21 @@
 
 :imagesdir: ../modules/images
 
-= Cake Walk Quick Start Instructions
+= Cake Time Quick Start Instructions
 
-These are the instructions for skill builders who have never worked with the Cake Walk skill.
+These are the instructions for skill builders who have never worked with the Cake Time skill.
 
-== Setup Cake Walk
+== Setup Cake Time
 
-Cake walk is a skill that celebrates your birthday! Tell it your birthday to have it count down the days. Interact with the skill on your special day to hear a happy birthday message. 
+Cake Time is a skill that celebrates your birthday! Tell it your birthday to have it count down the days. Interact with the skill on your special day to hear a happy birthday message. 
 
-On opening Cake Walk after you told Alexa your birthday, you are either greeted with a countdown to your birthday, or if it is your birthday, you get a birthday message. To set up your own Cake Walk skill, follow the steps:
+On opening Cake Time after you told Alexa your birthday, you are either greeted with a countdown to your birthday, or if it is your birthday, you get a birthday message. To set up your own Cake Time skill, follow the steps:
 
 A. Open the https://developer.amazon.com/alexa/console/ask[developer console to the ASK page, window=_blank]. Sign in or create an Alexa developer account if you do not yet have one.
 B. Click *Create skill*.
-C. Enter the skill name as "Cake Walk". Make sure to scroll down and click *Alexa-Hosted (Node.JS)* below. Using the Alexa hosted environment means we do not need an AWS account.
+C. Enter the skill name as "Cake Time". Make sure to scroll down and click *Alexa-Hosted (Node.JS)* below. Using the Alexa hosted environment means we do not need an AWS account.
 +
-image:MakeCakeWalk.gif[]
+image:MakeCakeTime.gif[]
 +
 D. Upload the interaction model https://raw.githubusercontent.com/alexa/skill-sample-nodejs-first-skill/master/final/en-US.json[from here, window=_blank] to your skill. This is easy to do from the *build* tab. Copy paste the raw GitHub JSON into the "JSON Editor" which you can find on the left side.
 E. Build your interaction model with the *Build Model* button.
@@ -25,12 +25,12 @@ G. Replace the contents of index.js with the https://raw.githubusercontent.com/a
 H. Replace the contents of the package.json file with the https://raw.githubusercontent.com/alexa/skill-sample-nodejs-first-skill/master/final/package.json[contents in Github from here, window=_blank].
 I. Save and deploy the code.
 J. Go to the test tab and enable the skill in "Development" stage.
-K. Test the skill by typing `open cake walk` into the Alexa Simulator text box.
-L. When this is all working (you will see JSON in the request and response), you have finished setting up Cake Walk!
+K. Test the skill by typing `open cake time` into the Alexa Simulator text box.
+L. When this is all working (you will see JSON in the request and response), you have finished setting up Cake Time!
 
-== Testing Cake Walk
+== Testing Cake Time
 
-Cake walk has two different LaunchRequest handlers: One which is invoked when there is no context while the other is invoked when your birthday is known. Our skill knows the birthday when it is saved into S3. 
+Cake Time has two different LaunchRequest handlers: One which is invoked when there is no context while the other is invoked when your birthday is known. Our skill knows the birthday when it is saved into S3. 
 
 To delete what is in S3:
 
@@ -44,4 +44,4 @@ D. Delete the document that starts with "amzn1.ask.account...".
 
 Perform these steps now if you have already told Alexa your birthday since we will be building a visual for the launchRequest with no context first.
 
-TIP: An alternative way to test without deleting user data is to fire a one shot intent to reset the day, month, and year values. For instance, "Alexa, tell cake walk that I was born on <month> <day> <year>". This will let you easily set the birthday to today to test when it is your birthday or to a different day to test the non-birthday scenario. We will be building different visuals for each.
+TIP: An alternative way to test without deleting user data is to fire a one shot intent to reset the day, month, and year values. For instance, "Alexa, tell cake time that I was born on <month> <day> <year>". This will let you easily set the birthday to today to test when it is your birthday or to a different day to test the non-birthday scenario. We will be building different visuals for each.

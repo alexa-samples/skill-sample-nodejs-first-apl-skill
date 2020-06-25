@@ -5,9 +5,9 @@
     "theme": "dark",
     "import": [
         {
-            "name": "my-cakewalk-apl-package-v2",
+            "name": "my-caketime-apl-package-v2",
             "version": "1.0",
-            "source": "https://raw.githubusercontent.com/alexa/skill-sample-nodejs-first-apl-skill/master/modules/code/module5/documents/my-cakewalk-apl-package-v2.json"
+            "source": "https://raw.githubusercontent.com/alexa/skill-sample-nodejs-first-apl-skill/master/modules/code/module5/documents/my-caketime-apl-package-v2.json"
         },
         {
             "name": "alexa-layouts",
@@ -168,7 +168,7 @@
                         "backgroundImageSource": "${payload.assets.backgroundURL}"
                     },
                     {
-                        "type": "cakeWalkText",
+                        "type": "cakeTimeText",
                         "startText":"${payload.text.start}",
                         "middleText":"${payload.text.middle}",
                         "endText":"${payload.text.end}"
