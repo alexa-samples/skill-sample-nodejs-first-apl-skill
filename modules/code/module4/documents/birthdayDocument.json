@@ -32,7 +32,8 @@
     "layouts": {},
     "mainTemplate": {
         "parameters": [
-            "payload"
+            "text",
+            "assets"
         ],
         "items": [
             {
@@ -40,7 +41,7 @@
                 "items": [
                     {
                         "type": "AlexaBackground",
-                        "backgroundImageSource": "${payload.assets.backgroundURL}"
+                        "backgroundImageSource": "${assets.backgroundURL}"
                     },
                     {
                         "type": "Container",
@@ -50,7 +51,7 @@
                             "type": "Video",
                             "height": "85vh",
                             "width":"90vw",
-                            "source": "${payload.assets.video}",
+                            "source": "${assets.video}",
                             "autoplay": true
                         }]
                     }
@@ -65,13 +66,13 @@
                 "items": [
                     {
                         "type": "AlexaBackground",
-                        "backgroundImageSource": "${payload.assets.backgroundURL}"
+                        "backgroundImageSource": "${assets.backgroundURL}"
                     },
                     {
                         "type": "cakeTimeText",
-                        "startText":"${payload.text.start}",
-                        "middleText":"${payload.text.middle}",
-                        "endText":"${payload.text.end}"
+                        "startText":"${text.start}",
+                        "middleText":"${text.middle}",
+                        "endText":"${text.end}"
                     }
                 ],
                 "height": "100%",

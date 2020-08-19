@@ -74,9 +74,9 @@ C. Remove the redundant code (all of the duplicate code moved to the layout on e
 +
  {
     "type": "cakeTimeText",
-    "startText":"${payload.text.start}",
-    "middleText":"${payload.text.middle}",
-    "endText":"${payload.text.end}"
+    "startText":"${text.start}",
+    "middleText":"${text.middle}",
+    "endText":"${text.end}"
  }
 +
 When we remove the redundant code and replace it with references to our layout, we get:
@@ -151,7 +151,8 @@ When we remove the redundant code and replace it with references to our layout, 
     },
     "mainTemplate": {
         "parameters": [
-            "payload"
+            "text",
+            "assets"
         ],
         "items": [
             {
@@ -159,18 +160,18 @@ When we remove the redundant code and replace it with references to our layout, 
                 "items": [
                     {
                         "type": "AlexaBackground",
-                        "backgroundImageSource": "${payload.assets.backgroundURL}"
+                        "backgroundImageSource": "${assets.backgroundURL}"
                     },
                     {
                         "type": "cakeTimeText",
-                        "startText":"${payload.text.start}",
-                        "middleText":"${payload.text.middle}",
-                        "endText":"${payload.text.end}"
+                        "startText":"${text.start}",
+                        "middleText":"${text.middle}",
+                        "endText":"${text.end}"
                     },
                     {
                         "type": "AlexaImage",
                         "alignSelf": "center",
-                        "imageSource": "${payload.assets.cake}",
+                        "imageSource": "${assets.cake}",
                         "imageRoundedCorner": false,
                         "imageScale": "best-fill",
                         "imageHeight":"40vh",
@@ -187,13 +188,13 @@ When we remove the redundant code and replace it with references to our layout, 
                 "items": [
                     {
                         "type": "AlexaBackground",
-                        "backgroundImageSource": "${payload.assets.backgroundURL}"
+                        "backgroundImageSource": "${assets.backgroundURL}"
                     }, 
                     {
                         "type": "cakeTimeText",
-                        "startText":"${payload.text.start}",
-                        "middleText":"${payload.text.middle}",
-                        "endText":"${payload.text.end}"
+                        "startText":"${text.start}",
+                        "middleText":"${text.middle}",
+                        "endText":"${text.end}"
                     }
                 ],
                 "height": "100%",
@@ -321,7 +322,8 @@ With this import, we can now reference the values from our custom style (bigText
     "layouts": {},
     "mainTemplate": {
         "parameters": [
-            "payload"
+            "text",
+            "assets"
         ],
         "items": [
             {
@@ -329,18 +331,18 @@ With this import, we can now reference the values from our custom style (bigText
                 "items": [
                     {
                         "type": "AlexaBackground",
-                        "backgroundImageSource": "${payload.assets.backgroundURL}"
+                        "backgroundImageSource": "${assets.backgroundURL}"
                     },
                     {
                         "type": "cakeTimeText",
-                        "startText":"${payload.text.start}",
-                        "middleText":"${payload.text.middle}",
-                        "endText":"${payload.text.end}"
+                        "startText":"${text.start}",
+                        "middleText":"${text.middle}",
+                        "endText":"${text.end}"
                     },
                     {
                         "type": "AlexaImage",
                         "alignSelf": "center",
-                        "imageSource": "${payload.assets.cake}",
+                        "imageSource": "${assets.cake}",
                         "imageRoundedCorner": false,
                         "imageScale": "best-fill",
                         "imageHeight":"40vh",
@@ -358,13 +360,13 @@ With this import, we can now reference the values from our custom style (bigText
                 "items": [
                     {
                         "type": "AlexaBackground",
-                        "backgroundImageSource": "${payload.assets.backgroundURL}"
+                        "backgroundImageSource": "${assets.backgroundURL}"
                     }, 
                     {
                         "type": "cakeTimeText",
-                        "startText":"${payload.text.start}",
-                        "middleText":"${payload.text.middle}",
-                        "endText":"${payload.text.end}"
+                        "startText":"${text.start}",
+                        "middleText":"${text.middle}",
+                        "endText":"${text.end}"
                     }
                 ],
                 "height": "100%",
@@ -397,7 +399,7 @@ B. Replace the image component in your birthdayDocument.json with the following 
         "type": "Video",
         "height": "85vh",
         "width":"90vw",
-        "source": "${payload.assets.video}",
+        "source": "${assets.video}",
         "autoplay": true
     }]
  }
@@ -428,7 +430,7 @@ A. We want to avoid duplicating code, so let's make a helper function to get the
  }
 +
 This is beneficial since it provides a single place where our assumptions of filenames live. If we want to add more viewport profile detection or we decide to change hosting from our S3 bucket, we have a single place to do so.
-B. We now need to refactor our LaunchRequestHandler.handle() code to use the new function. Our new data payload will now have a new value for the backgroundURL key:
+B. We now need to refactor our LaunchRequestHandler.handle() code to use the new function. Our new data source will now have a new value for the backgroundURL key:
 +
  backgroundURL: getBackgroundURL(handlerInput, "lights")
 +
@@ -444,7 +446,7 @@ C. Since we will be using the same launch doc, we already have the import to the
      // Create Render Directive
  }
 +
-D. We are going to define a variable to use in our data payload, `numberDaysString`. This is a variable string which will be something like "1 day" or "234 days". You can represent this by the expression:
+D. We are going to define a variable to use in our data source, `numberDaysString`. This is a variable string which will be something like "1 day" or "234 days". You can represent this by the expression:
 +
  const numberDaysString = diffDays === 1 ? "1 day": diffDays + " days";
 +
@@ -468,7 +470,7 @@ E. Now, underneath `// Create Render Directive`, add our directive:
     }
  });
 +
-Notice we are now using the numberDaysString in our data payload, so this will change based on our input and the day of the year. In addition, we are making use of our helper function to construct the lights url to fetch the proper signed URL.
+Notice we are now using the numberDaysString in our data source, so this will change based on our input and the day of the year. In addition, we are making use of our helper function to construct the lights url to fetch the proper signed URL.
 F. Test it out! You will have to go through the whole flow to enter your month, day, and year of birth before you can see this screen.
 
 == Wiring up the birthday video

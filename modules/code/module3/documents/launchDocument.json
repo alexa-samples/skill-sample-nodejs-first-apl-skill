@@ -27,7 +27,8 @@
     "layouts": {},
     "mainTemplate": {
         "parameters": [
-            "payload"
+            "text",
+            "assets"
         ],
         "items": [
             {
@@ -35,27 +36,27 @@
                 "items": [
                     {
                         "type": "AlexaBackground",
-                        "backgroundImageSource": "${payload.assets.backgroundURL}"
+                        "backgroundImageSource": "${assets.backgroundURL}"
                     },
                     {
                         "type": "Text",
                         "style": "bigText",
-                        "text": "${payload.text.start}"
+                        "text": "${text.start}"
                     },
                     {
                         "type": "Text",
                         "style": "bigText",
-                        "text": "${payload.text.middle}"
+                        "text": "${text.middle}"
                     },
                     {
                         "type": "Text",
                         "style": "bigText",
-                        "text": "${payload.text.end}"
+                        "text": "${text.end}"
                     },
                     {
                         "type": "AlexaImage",
                         "alignSelf": "center",
-                        "imageSource": "${payload.assets.cake}",
+                        "imageSource": "${assets.cake}",
                         "imageRoundedCorner": false,
                         "imageScale": "best-fill",
                         "imageHeight":"40vh",
@@ -72,23 +73,23 @@
                 "items": [
                     {
                         "type": "AlexaBackground",
-                        "backgroundImageSource": "${payload.assets.backgroundURL}"
+                        "backgroundImageSource": "${assets.backgroundURL}"
                     },
                     {
                         "type": "Text",
                         "style": "bigText",
                         "paddingTop": "75dp",
-                        "text": "${payload.text.start}"
+                        "text": "${text.start}"
                     },
                     {
                         "type": "Text",
                         "style": "bigText",
-                        "text": "${payload.text.middle}"
+                        "text": "${text.middle}"
                     },
                     {
                         "type": "Text",
                         "style": "bigText",
-                        "text": "${payload.text.end}"
+                        "text": "${text.end}"
                     }
                 ],
                 "height": "100%",

@@ -143,29 +143,38 @@ Even though you have not changed the actual text component, since it is using th
 
 == Data binding
 
-Did you notice the *Data* button? This simulates the data that can be a part of the `Alexa.Presentation.APL.RenderDocument` directive which is what you send from your skill backend to render the document. We'll come back to that later, but first, let's look at how to build our document with data sources. 
+Did you notice the *Data* button? This simulates the data source that can be a part of the `Alexa.Presentation.APL.RenderDocument` directive which is what you send from your skill backend to render the document. We'll come back to that later, but first, let's look at how to build our document with data sources. 
 
-To reference data in a datasource, you'll need to refer to it in the payload using `payload.[YourDefinedObject]`. This is called "payload" by default when in the authoring tool since it is listed as a parameter to the "mainTemplate". If you want a different name for the payload, you will have to change this parameter, but for now, leave it as is. We'll add another Text component which will use a datasource and the style we defined. To reference the data, you will write an expression like, `${YourDefinedObject}`.
+To reference data in a data source, you will first need to pass a parameter into your APL document. In earlier versions of APL, the entire data source was bound to a single parameter which defaulted to the name, "payload". Now, however, you can pass in multiple parameters which are defined in your data source as long as none of the parameters are called "payload". Using a parameter named "payload" reverts to this old behavior for backwards-compatibility reasons, but it is not recommended to use the legacy naming. If you look at your current APL document, you will see the default authoring tool parameter name of "payload". We will need to change this to match our data parameters. Let's add and use a simple data source.
 
-Now that we have some familiarity with text components, let's modify our *APL* JSON. 
-
-A. Add the following inside the container's items array, underneath the existing text object:
+A. Inside the `mainTemplate.parameters` array, replace the word "payload" with "text". This will leave you with:
++
+ "mainTemplate": {
+     "parameters": [
+        "text"
+     ]
+    ...
+ }
++
+Now that we have our parameter passed to the document, we can reference it. The data source is a JSON representation of key value pairs. We can nest this object however makes sense for our application. Now, let's add another Text component which will use a data source and the style we defined. To reference the data, you will write an expression like, `${parameterName.YourDefinedObject}`. Let's modify our *APL* JSON. 
++
+B. Add the following inside the container's items array, underneath the existing text object:
 +
  {
     "type": "Text",
     "style": "bigText",
-    "text": "${payload.text.middle}"
+    "text": "${text.middle}"
  },
  {
     "type": "Text",
     "style": "bigText",
-    "text": "${payload.text.end}"
+    "text": "${text.end}"
  }
 +
-B. While we're at it, let's change the text data in our very first text component to `${payload.text.start}`. 
+C. While we're at it, let's change the text data in our very first text component to `${text.start}`. 
 Wait a minute... Where did that go? The text disappeared because we have no data in the data source we are referencing. Let's fix this using that *Data* tab. 
-C. After clicking the *Data* button, you'll see an empty dataset `{}`. We'll need to add data which follows the structure we set. So we have a "text" object with "start", "middle", and "end" fields. 
-D. Add the following to the *Data* section of the authoring tool:
+D. After clicking the *Data* button, you'll see an empty dataset `{}`. We'll need to add data which follows the structure we set with our parameter we named, "text". So we have a "text" object with "start", "middle", and "end" fields. 
+E. Add the following to the *Data* section of the authoring tool:
 +
  {
      "text": {
@@ -175,7 +184,7 @@ D. Add the following to the *Data* section of the authoring tool:
      }
  }
 
-The data payload represents variable data in the document. We are going to reuse this layout later to render similarly structured text with new data. This technique will allow you to more easily localize this skill since all of the localization logic can live in the backend. In addition, we are going to leverage this functionality to reuse our APL document. You'll see the following:
+The data JSON objet represents variable data in the document. We are going to reuse this layout later to render similarly structured text with new data. This technique will allow you to more easily localize the skill since all of the localization logic can live in the backend. In addition, we are going to leverage this functionality to reuse our APL document. You'll see the following:
 
 image::WelcomeToCakeTime.png[]
 
@@ -192,7 +201,7 @@ To use the AlexaImage component, we'll need to add an import. Imports allow you 
      "version": "1.1.0"
  }
 
-A. Add this import object to your import list in your APL document import section. Afterwards, this will look like:
+A. Add this above import object to your import list in your APL document import section. Afterwards, this will look like:
 +
  {
     "type": "APL",
@@ -214,7 +223,7 @@ B. Add the following image block inside of a new container underneath the last t
  {
     "type": "AlexaImage",
     "alignSelf": "center",
-    "imageSource": "${payload.assets.cake}",
+    "imageSource": "${assets.cake}",
     "imageRoundedCorner": false,
     "imageScale": "best-fill",
     "imageHeight":"40vh",
@@ -244,7 +253,18 @@ This relies on a new "assets.cake" object to be added to the data section. The n
     }
  }
 +
-C. Update your data blob with this new data. Then you'll see:
+C. Go to the *Data* tab and update your data with the new "assets" object.
+D. The last step is to add our new mainTemplate parameter, "assets". Go back to the *APL* tab and add this to the mainTemplate.parameters list, leaving you with:
++
+ "mainTemplate": {
+     "parameters": [
+        "text",
+        "assets"
+     ]
+    ...
+ }
++
+Then, you'll see:
 +
 image::authoringToolWithBirthdayImage.png[]
 
@@ -335,7 +355,8 @@ The final APL Document JSON for reference:
     "layouts": {},
     "mainTemplate": {
         "parameters": [
-            "payload"
+            "text",
+            "assets"
         ],
         "items": [
             {
@@ -347,26 +368,26 @@ The final APL Document JSON for reference:
                         "style": "bigText",
                         "paddingTop": "12dp",
                         "paddingBottom": "12dp",
-                        "text": "${payload.text.start}"
+                        "text": "${text.start}"
                     },
                     {
                         "type": "Text",
                         "style": "bigText",
                         "paddingTop": "12dp",
                         "paddingBottom": "12dp",
-                        "text": "${payload.text.middle}"
+                        "text": "${text.middle}"
                     },
                     {
                         "type": "Text",
                         "style": "bigText",
                         "paddingTop": "12dp",
                         "paddingBottom": "12dp",
-                        "text": "${payload.text.end}"
+                        "text": "${text.end}"
                     },
                     {
                         "type": "AlexaImage",
                         "alignSelf": "center",
-                        "imageSource": "${payload.assets.cake}",
+                        "imageSource": "${assets.cake}",
                         "imageRoundedCorner": false,
                         "imageScale": "best-fill",
                         "imageHeight":"40vh",
@@ -385,17 +406,17 @@ The final APL Document JSON for reference:
                         "type": "Text",
                         "style": "bigText",
                         "paddingTop": "75dp",
-                        "text": "${payload.text.start}"
+                        "text": "${text.start}"
                     },
                     {
                         "type": "Text",
                         "style": "bigText",
-                        "text": "${payload.text.middle}"
+                        "text": "${text.middle}"
                     },
                     {
                         "type": "Text",
                         "style": "bigText",
-                        "text": "${payload.text.end}"
+                        "text": "${text.end}"
                     }
                 ],
                 "height": "100%",
