@@ -279,7 +279,7 @@ You'll end up with APL directive code that looks like this:
 +
 D. Save and deploy and test this out now.
 
-That's a cool animation isn't it? Great work on expanding your Cake Walk with images, text, video, and animations!
+That's a cool animation isn't it? Great work on expanding your Cake Time with images, text, video, and animations!
 
 https://github.com/alexa/skill-sample-nodejs-first-apl-skill/tree/master/modules/code/module5[Complete code in Github, window=_blank]
 

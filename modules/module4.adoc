@@ -28,7 +28,7 @@ Layouts are also defined in JSON. They have a description, parameters accepted, 
 A. Open the https://developer.amazon.com/alexa/console/ask/displays[APL authoring tool., window=_blank]
 B. Add the layout of the repeated patterns to the `layouts` section of the document. The reusable text layout looks like:
 +
- "cakeWalkText": {
+ "cakeTimeText": {
     "description": "A basic text layout with start, middle and end.",
     "parameters":[
         {
@@ -70,10 +70,10 @@ B. Add the layout of the repeated patterns to the `layouts` section of the docum
 +
 This can simplify our already existing document and will allow us to get rid of duplicate JSON. Note, there is one difference here between the text components for Echo spot and the rest of the devices. We will resolve this with a conditional statement inside of the paddingTop property instead of on the container. This greatly simplifies our whole JSON document!
 +
-C. Remove the redundant code (all of the duplicate code moved to the layout on each section) and replace it with the new "cakeWalkText" layout. We would use this layout like so:
+C. Remove the redundant code (all of the duplicate code moved to the layout on each section) and replace it with the new "cakeTimeText" layout. We would use this layout like so:
 +
  {
-    "type": "cakeWalkText",
+    "type": "cakeTimeText",
     "startText":"${text.start}",
     "middleText":"${text.middle}",
     "endText":"${text.end}"
@@ -108,7 +108,7 @@ When we remove the redundant code and replace it with references to our layout, 
     "graphics": {},
     "commands": {},
     "layouts": {
-        "cakeWalkText": {
+        "cakeTimeText": {
             "description": "A basic text layout with start, middle and end.",
             "parameters":[
                 {
@@ -163,7 +163,7 @@ When we remove the redundant code and replace it with references to our layout, 
                         "backgroundImageSource": "${assets.backgroundURL}"
                     },
                     {
-                        "type": "cakeWalkText",
+                        "type": "cakeTimeText",
                         "startText":"${text.start}",
                         "middleText":"${text.middle}",
                         "endText":"${text.end}"
@@ -191,7 +191,7 @@ When we remove the redundant code and replace it with references to our layout, 
                         "backgroundImageSource": "${assets.backgroundURL}"
                     }, 
                     {
-                        "type": "cakeWalkText",
+                        "type": "cakeTimeText",
                         "startText":"${text.start}",
                         "middleText":"${text.middle}",
                         "endText":"${text.end}"
@@ -211,7 +211,7 @@ But wait... This isn't that much simpler- it looks longer now! Let's simplify ou
 
 Once you have your components rendering and the launch screen looks the same, it is time to host our layout so it can be used in more than one document. Layouts, styles, and resources can all be hosted in an https://developer.amazon.com/docs/alexa-presentation-language/apl-package.html[APL package, window=_blank]. In fact, an APL package has the same format of an APL document except, there is no mainTemplate. This is a great way to share resources, styles, or your own custom responsive components or UI patterns across multiple APL documents. You can even create your own documents to share with the rest of the Alexa developer community!
 
-We want to host both our style and our layout. To do so we will use our S3 bucket on our backend. Unfortunately, since we are using the Alexa hosted environment, we cannot modify permissions on the S3 provision we are given. Alexa devices and simulators need the header, `Access-Control-Allow-Origin` to be set and allow *.amazon.com. To learn more about Cross-Origin Resource Sharing, https://developer.amazon.com/docs/alexa-presentation-language/apl-support-for-your-skill.html#support-cors[check out the tech docs, window=_blank]. Also, the link must be public which we cannot do with Alexa hosted. But for this exercise, we will use https://raw.githubusercontent.com/alexa/skill-sample-nodejs-first-apl-skill/master/modules/code/module4/documents/my-cakewalk-apl-package.json[this GitHub link, window=_blank] to host our JSON APL package. Note: Github supports CORS on all domains.
+We want to host both our style and our layout. To do so we will use our S3 bucket on our backend. Unfortunately, since we are using the Alexa hosted environment, we cannot modify permissions on the S3 provision we are given. Alexa devices and simulators need the header, `Access-Control-Allow-Origin` to be set and allow *.amazon.com. To learn more about Cross-Origin Resource Sharing, https://developer.amazon.com/docs/alexa-presentation-language/apl-support-for-your-skill.html#support-cors[check out the tech docs, window=_blank]. Also, the link must be public which we cannot do with Alexa hosted. But for this exercise, we will use https://raw.githubusercontent.com/alexa/skill-sample-nodejs-first-apl-skill/master/modules/code/module4/documents/my-caketime-apl-package.json[this GitHub link, window=_blank] to host our JSON APL package. Note: Github supports CORS on all domains.
 
 NOTE: If you are using another service to host your assets that service must also send the appropriate headers.
 
@@ -244,7 +244,7 @@ Our package will be just the reusable set of properties from our APL document. T
     "graphics": {},
     "commands": {},
     "layouts": {
-        "cakeWalkText": {
+        "cakeTimeText": {
             "description": "A basic text layout with start, middle and end.",
             "parameters":[
                 {
@@ -286,17 +286,17 @@ Our package will be just the reusable set of properties from our APL document. T
     }
  }
 
-Now in our main document, we can remove everything except for the mainTemplate blob, and add in a new import for our package. In the authoring tool, we can use https://raw.githubusercontent.com/alexa/skill-sample-nodejs-first-apl-skill/master/modules/code/module4/documents/my-cakewalk-apl-package.json[this public link, window=_blank] to test. 
+Now in our main document, we can remove everything except for the mainTemplate blob, and add in a new import for our package. In the authoring tool, we can use https://raw.githubusercontent.com/alexa/skill-sample-nodejs-first-apl-skill/master/modules/code/module4/documents/my-caketime-apl-package.json[this public link, window=_blank] to test. 
 
 A. Add this import to your document:
 +
  {
-    "name": "my-cakewalk-apl-package",
+    "name": "my-caketime-apl-package",
     "version": "1.0",
-    "source": "https://raw.githubusercontent.com/alexa/skill-sample-nodejs-first-apl-skill/master/modules/code/module4/documents/my-cakewalk-apl-package.json"
+    "source": "https://raw.githubusercontent.com/alexa/skill-sample-nodejs-first-apl-skill/master/modules/code/module4/documents/my-caketime-apl-package.json"
  }
 +
-With this import, we can now reference the values from our custom style (bigText) and layout (cakeWalkText). Our document is now significantly smaller and easier to read since we can remove our layout and style:
+With this import, we can now reference the values from our custom style (bigText) and layout (cakeTimeText). Our document is now significantly smaller and easier to read since we can remove our layout and style:
 +
  {
     "type": "APL",
@@ -305,9 +305,9 @@ With this import, we can now reference the values from our custom style (bigText
     "theme": "dark",
     "import": [
         {
-            "name": "my-cakewalk-apl-package",
+            "name": "my-caketime-apl-package",
             "version": "1.0",
-            "source": "https://raw.githubusercontent.com/alexa/skill-sample-nodejs-first-apl-skill/master/modules/code/module4/documents/my-cakewalk-apl-package.json"
+            "source": "https://raw.githubusercontent.com/alexa/skill-sample-nodejs-first-apl-skill/master/modules/code/module4/documents/my-caketime-apl-package.json"
         },
         {
             "name": "alexa-layouts",
@@ -334,7 +334,7 @@ With this import, we can now reference the values from our custom style (bigText
                         "backgroundImageSource": "${assets.backgroundURL}"
                     },
                     {
-                        "type": "cakeWalkText",
+                        "type": "cakeTimeText",
                         "startText":"${text.start}",
                         "middleText":"${text.middle}",
                         "endText":"${text.end}"
@@ -363,7 +363,7 @@ With this import, we can now reference the values from our custom style (bigText
                         "backgroundImageSource": "${assets.backgroundURL}"
                     }, 
                     {
-                        "type": "cakeWalkText",
+                        "type": "cakeTimeText",
                         "startText":"${text.start}",
                         "middleText":"${text.middle}",
                         "endText":"${text.end}"
@@ -377,9 +377,9 @@ With this import, we can now reference the values from our custom style (bigText
     }
  }
 +
-NOTE: Why are we still importing alexa-layouts if imports are transitive? In general, it's best to explicitly declare the dependencies you are directly using. If the cakewalk apl package decides to no longer use alexa-layouts, your document will break! Therefore, your document also has a dependency on alexa-layouts
+NOTE: Why are we still importing alexa-layouts if imports are transitive? In general, it's best to explicitly declare the dependencies you are directly using. If the caketime apl package decides to no longer use alexa-layouts, your document will break! Therefore, your document also has a dependency on alexa-layouts
 +
-B. Open the developer portal to your Cake walk skill.
+B. Open the developer portal to your Cake Time skill.
 C. Save over your current launchDocument.json with this new document in the code tab of your skill.
 
 Now, let's make our final document. 
@@ -410,7 +410,7 @@ The video we will be using is of an animated birthday cake with Alexa Singing in
 video::https://public-pics-muoio.s3.amazonaws.com/video/Amazon_Cake.mp4[width=640]
 +
 This video really wants to be played fullscreen which is why we made our height 85% of the viewport height and width 90% of the viewport. However, now our text is no longer wanted when we display the video.
-C. Remove the CakeWalkText component in the first container (when `${@viewportProfile != @hubRoundSmall}`).
+C. Remove the CakeTimeText component in the first container (when `${@viewportProfile != @hubRoundSmall}`).
 D. Save this in your skill code as a new file, birthdayDocument.json.
 
 == Wiring up the Backend

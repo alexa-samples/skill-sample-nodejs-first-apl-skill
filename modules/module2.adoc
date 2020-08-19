@@ -7,7 +7,7 @@
 
 {blank}
 
-In this section, we are going to learn about the authoring tool and use this to create an APL LaunchRequest response document for our Cake Walk skill. By the end of this section, you'll simply have a screen that says, "Welcome to Cake Walk!," with a small image of a cake. To make this screen, you'll learn about the following:
+In this section, we are going to learn about the authoring tool and use this to create an APL LaunchRequest response document for our Cake Time skill. By the end of this section, you'll simply have a screen that says, "Welcome to Cake Time!," with a small image of a cake. To make this screen, you'll learn about the following:
 
 - APL image and text components
 - Styles
@@ -18,7 +18,7 @@ Let's get started.
 
 NOTE: We suggest using Firefox or Chrome for this course. Safari is not supported in the authoring tool.
 
-== Hello Cake Walk
+== Hello Cake Time
 
 A. Click {authoringToolLink}[here to go to the authoring tool]. Save this link as a bookmark, since we will be referencing it throughout the course. 
 B. You will be greeted with a request to see the new experience. Click *Yes*.
@@ -39,8 +39,8 @@ F. In the authoring tool, make sure *GUI* is selected on the left side. This wil
 +
 image::firstHelloWorld.gif[]
 +
-G. Let's add some text, "Hello Cake Walk!". Click on the text component under the layouts section.
-H. Scroll down the middle section until you find the *text* property of the text component. Change this message to `Hello Cake Walk!`.
+G. Let's add some text, "Hello Cake Time!". Click on the text component under the layouts section.
+H. Scroll down the middle section until you find the *text* property of the text component. Change this message to `Hello Cake Time!`.
 I. Above this, find the fontSize property and change this to 72dp. We want to increase the text size to account for our customers which are looking at the device from far away. 
 Now the text is outside of the blue bounding box...Uh oh! Because the text is bound to such a small rendering box, it no longer displays the text properly with such a large font. Let's fix this.
 J. Scroll down to the *Width* section and find the *width* property of our Text component. Delete the value in the width text box, so it will default to auto. 
@@ -48,9 +48,9 @@ K. Do the same with *height* under the *Height* section. Auto is a better settin
 
 You should now see something like this. 
 
-image::helloCakeWalkGUI.png[]
+image::helloCakeTimeGUI.png[]
 
-Congratulations! You have a functioning hello cakewalk document. You can see the document output under the *APL* tab in the sidebar.
+Congratulations! You have a functioning hello cake time document. You can see the document output under the *APL* tab in the sidebar.
 
 For reference here is the JSON that you should have.
 
@@ -79,7 +79,7 @@ For reference here is the JSON that you should have.
                          "paddingTop": "12dp",
                          "paddingBottom": "12dp",
                          "fontSize": "72dp",
-                         "text": "Hello Cake Walk!"
+                         "text": "Hello Cake Time!"
                      }
                  ],
                  "height": "100%",
@@ -93,7 +93,7 @@ We created a text component and then modified some properties on it using the GU
 
 The authoring tool also created a container for us. https://developer.amazon.com/docs/alexa-presentation-language/apl-container.html[Containers, window=_blank] are components that house other components in an alignment of "column" or "row". Since containers are also components, they have the basic component properties. Containers are essential for building responsive APL documents. Complex documents will use a mix of row and column containers to properly lay out components in a way which scales nicely across devices. 
 
-== Hello Cake Walk with style
+== Hello Cake Time with style
 
 Some of the component properties can be defined using https://developer.amazon.com/docs/alexa-presentation-language/apl-style-definition-and-evaluation.html[styles, window=_blank]. Styles are a named set of properties that can be reused across components.
 
@@ -180,13 +180,13 @@ E. Add the following to the *Data* section of the authoring tool:
      "text": {
          "start": "Welcome",
          "middle": "to",
-         "end": "Cake Walk!"
+         "end": "Cake Time!"
      }
  }
 
 The data JSON objet represents variable data in the document. We are going to reuse this layout later to render similarly structured text with new data. This technique will allow you to more easily localize the skill since all of the localization logic can live in the backend. In addition, we are going to leverage this functionality to reuse our APL document. You'll see the following:
 
-image::WelcomeToCakeWalk.png[]
+image::WelcomeToCakeTime.png[]
 
 Now, we have a set of reusable styles across this APL document, and we learned about making a screen using data binding. Let's add an image of a birthday cake.
 
@@ -246,7 +246,7 @@ This relies on a new "assets.cake" object to be added to the data section. The n
     "text": {
         "start": "Welcome",
         "middle": "to",
-        "end": "Cake Walk!"
+        "end": "Cake Time!"
     },
     "assets": {
         "cake":"https://github.com/alexa/skill-sample-nodejs-first-apl-skill/blob/master/modules/assets/alexaCake_960x960.png?raw=true"

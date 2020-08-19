@@ -1,5 +1,5 @@
 
-:link-cakewalk: https://developer.amazon.com/en-US/alexa/alexa-skills-kit/courses/cake-walk[Cake Walk Course, window=_blank]
+:link-caketime: https://developer.amazon.com/alexa/alexa-skills-kit/get-deeper/tutorials-code-samples/build-an-engaging-alexa-skill[Tutoria: Build an Engaging Alexa Skill, window=_blank]
 :link-quick-setup: link:quick-start.html[quick setup instructions, window=_blank]
 :link-S3-assets: https://github.com/alexa/skill-sample-nodejs-first-apl-skill/tree/master/modules/assets[from this page., window=_blank]
 :authoringToolLink: https://developer.amazon.com/alexa/console/ask/displays
@@ -12,9 +12,9 @@
 
 {blank}
 
-In this section, you will learn how to modify your backend to safely add APL visuals to your response. At the end, you will have enhanced your Cake Walk Launch request with the APL visuals you built in the last section. In addition, you will learn how to use S3 in the Alexa Hosted environment to host your own assets and use this to add a background image to your skill. 
+In this section, you will learn how to modify your backend to safely add APL visuals to your response. At the end, you will have enhanced your Cake Time Launch request with the APL visuals you built in the last section. In addition, you will learn how to use S3 in the Alexa Hosted environment to host your own assets and use this to add a background image to your skill. 
 
-Cake Walk code will be used in this section. If you have not done the {link-cakewalk}, and you are a new Alexa developer, check out the intro course, now, then come back to this module. If you are already a skill builder and experienced with the basics of a nodeJS skill, then feel free to skip the course and see the {link-quick-setup} to get the code and overview of the Cake Walk Skill. 
+Cake Time code will be used in this section. If you have not done the {link-caketime}, and you are a new Alexa developer, check out the intro course, now, then come back to this module. If you are already a skill builder and experienced with the basics of a nodeJS skill, then feel free to skip the course and see the {link-quick-setup} to get the code and overview of the Cake Time Skill. 
 
 == Adding visuals to your skill
 
@@ -61,7 +61,7 @@ B. Underneath the `// Create Render Directive` comment, add:
             type: 'object',
             start: "Welcome",
             middle: "to",
-            end: "Cake Walk!"
+            end: "Cake Time!"
         }
     }
  });
@@ -102,7 +102,7 @@ Uncheck the *Skill I/O* so you do not need to scroll down to see visuals!
 +
 TIP: Remember to delete your user data if you have any! Since we modified the no context launch handler, you must delete your user data from S3 to make sure there is actually no context in order to test this new screen.
 +
-E. Test your screen on a medium hub by triggering the launch handler for instance by typing, `open cake walk`. 
+E. Test your screen on a medium hub by triggering the launch handler for instance by typing, `open cake time`. 
 +
 F. Repeat this test on all the other screen types. Remember, we did not include the birthday cake image, yet, so don't worry if you do not see it!
 
@@ -114,7 +114,7 @@ A. To upload the S3 Assets, access your S3 provision under the *Code* tab at the
 image::S3Access.png[]
 +
 B. In your S3 provision, open the *media* page. 
-C. In here, upload all of the assets {link-S3-assets}. For your convenience, we have the https://alexa.design/apl-cake-walk-assets[assets zipped here, window=_blank]. We will use all of these over the course of the module. After you upload, you will see all of the assets on the page in S3.
+C. In here, upload all of the assets {link-S3-assets}. For your convenience, we have the https://optical-cupcake-build.s3.amazonaws.com/OpticalCupcake/assets.zip[assets zipped here, window=_blank]. We will use all of these over the course of the module. After you upload, you will see all of the assets on the page in S3.
 +
 image::S3Provision.png[]
 
@@ -131,7 +131,7 @@ B. In the data section of the authoring tool, use:
     "text": {
         "start": "Welcome",
         "middle": "to",
-        "end": "Cake Walk!"
+        "end": "Cake Time!"
     },
     "assets": {
         "cake":"https://github.com/alexa/skill-sample-nodejs-first-apl-skill/blob/master/modules/assets/alexaCake_960x960.png?raw=true",
@@ -181,7 +181,7 @@ C. Add the new data sources to our code in the index.js. Since our images are in
         type: 'object',
         start: "Welcome",
         middle: "to",
-        end: "Cake Walk!"
+        end: "Cake Time!"
     },
     assets: {
         cake: util.getS3PreSignedUrl('Media/alexaCake_960x960.png'),
