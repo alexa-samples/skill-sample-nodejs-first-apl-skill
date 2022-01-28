@@ -17,15 +17,15 @@ image:FinalLaunchScreen.gif[]
 
 == Updating our APL documents
 
-First, we will need to update out APL Documents to be able to use commands by adding an https://developer.amazon.com/docs/alexa-presentation-language/apl-component.html#id[id property, window=_blank] to our components. Since we want the commands to execute immediately on the APL screen loading, we will be putting the commands inside the onMount property of our launch document. 
+First, we will need to update out APL Documents to be able to use commands by adding an https://developer.amazon.com/docs/alexa-presentation-language/apl-component.html#id[id property, window=_blank] to our components. Since we want the commands to execute immediately on the APL screen loading, we will be putting the commands inside the onMount property of our launch document.
 In order to target our components with the commands, we'll need to add some logical ids for our text components. Hold up though! These are defined in the APL package. If you check the hosted version, you will see there are already component ids added by default! These are `textTop, textMiddle, textBottom` corresponding to the top, middle, and bottom text components, so there is no need to add anything. However, if you would like to add different ids, each text component id is exposed as a parameter in the APL package.
 
-A. In your launch document (launchDocument.json file), add `"id": "image",` to the AlexaImage component. 
+A. In your launch document (launchDocument.json file), add `"id": "image",` to the AlexaImage component.
 B. In your birthday visual, (birthdayDocument.json file), add `"id": "birthdayVideo",` to your video component.
 
 == Adding commands to our document
 
-The command we will be using is the https://developer.amazon.com/docs/alexa-presentation-language/apl-standard-commands.html#animate_item_command[AnimateItem command, window=_blank]. This command was added in APL 1.1, so make sure that your APL document is declaring version 1.1 which will look like `version: '1.1'`. The animate item command will run a fixed-duration animation sequence on one or more properties of a single component. We are going to modify the `transform` property. 
+The command we will be using is the https://developer.amazon.com/docs/alexa-presentation-language/apl-standard-commands.html#animate_item_command[AnimateItem command, window=_blank]. This command was added in APL 1.1, so make sure that your APL document is declaring version 1.1 which will look like `version: '1.1'`. The animate item command will run a fixed-duration animation sequence on one or more properties of a single component. We are going to modify the `transform` property.
 
 The basic structure of our animate item commands will be :
 
@@ -61,11 +61,11 @@ The transform property requires you to specify where the component is moving to 
    ]
  }
 
-Now that we understand the structure of our commands, we will need to create the JSON representing the commands inside the onMount property of our launchDocument.json file. Let's add some commands. To start, we will animate the text components to all slide in from different directions like in the gif and we want the commands to execute all at the same time, so the 3 text AnimateItem commands will be contained within the parallel command. To arrive at the values for each of these translations, we'll have to understand the viewport coordinate system. 
+Now that we understand the structure of our commands, we will need to create the JSON representing the commands inside the onMount property of our launchDocument.json file. Let's add some commands. To start, we will animate the text components to all slide in from different directions like in the gif and we want the commands to execute all at the same time, so the 3 text AnimateItem commands will be contained within the parallel command. To arrive at the values for each of these translations, we'll have to understand the viewport coordinate system.
 
-The viewport is drawn is with coordinate (0,0) contained at the upper left corner. In addition, all of the 'to' properties will be relative to the object's position in the APL document we built, not relative to the viewport coordinates. For the first object, we'll translate from 1600, to 0 on the X axis. The middle text will come from the left, so we will translate from -400 (so we can ensure the Text cannot be seen before animation) to 0 on the X axis, and the last item will come from below, which will use 'translateY' from 1200 to 0, since Y is positive going down. 
+The viewport is drawn is with coordinate (0,0) contained at the upper left corner. In addition, all of the 'to' properties will be relative to the object's position in the APL document we built, not relative to the viewport coordinates. For the first object, we'll translate from 1600, to 0 on the X axis. The middle text will come from the left, so we will translate from -400 (so we can ensure the Text cannot be seen before animation) to 0 on the X axis, and the last item will come from below, which will use 'translateY' from 1200 to 0, since Y is positive going down.
 
-A. Add the set of commands to your `onMount` property in your launchDocument.json document. Putting the above inside of the parallel command will leave us with: 
+A. Add the set of commands to your `onMount` property in your launchDocument.json document. Putting the above inside of the parallel command will leave us with:
 +
  [
     {
@@ -142,7 +142,7 @@ Once that is working, let's make the more complex animation for the image compon
 +
 image:definedEasingCurves.png[]
 +
-B. Put this all together for the image command gives us: 
+B. Put this all together for the image command gives us:
 +
  {
     "type": "AnimateItem",
@@ -172,9 +172,9 @@ B. Put this all together for the image command gives us:
     ]
  }
 +
-Add this in your `launchDocument.json` file inside the onMount command list. 
-C. Now test it out! 
-D. Once that is working, enter your birthday and test the launchHandler with context when it is not your birthday. You should see the commands applied to this as well. 
+Add this in your `launchDocument.json` file inside the onMount command list.
+C. Now test it out!
+D. Once that is working, enter your birthday and test the launchHandler with context when it is not your birthday. You should see the commands applied to this as well.
 We are not quite done. What about animations when it is their birthday? Since, that experience is defined in the birthdayDocument.json file which we have not added commands to. Let's fix this.
 
 == Adding video control
@@ -197,8 +197,8 @@ A. Add the AlexaTransportControls component to the container with the video comp
     ]
  }
 +
-Our component has a secondary control of 0 because we do not want to show the secondary control buttons. These are the skip and rewind buttons if you were playing a series of videos. The primary control size is the size of the play button. The mediaComponentId must reference the VideoComponent earlier in the document. 
-B. Save and deploy these changes and test for your birthday scenario. Make sure the button is functioning and stops and replays the video when toggled. 
+Our component has a secondary control of 0 because we do not want to show the secondary control buttons. These are the skip and rewind buttons if you were playing a series of videos. The primary control size is the size of the play button. The mediaComponentId must reference the VideoComponent earlier in the document.
+B. Save and deploy these changes and test for your birthday scenario. Make sure the button is functioning and stops and replays the video when toggled.
 
 Did you notice the clipping on the audio response from Alexa? You may not notice this if your birthday is close enough, but Alexa's voice response is getting cut off when the video starts to play. To fix this we will need to use the ExecuteCommands Directive.
 
@@ -283,5 +283,5 @@ That's a cool animation isn't it? Great work on expanding your Cake Time with im
 
 https://github.com/alexa/skill-sample-nodejs-first-apl-skill/tree/master/modules/code/module5[Complete code in Github, window=_blank]
 
-link:module4.html[Previous Module (4)] 
-link:module6.html[Wrap Up & Extra Credit]
+link:module4.adoc[Previous Module (4)]
+link:module6.adoc[Wrap Up & Extra Credit]

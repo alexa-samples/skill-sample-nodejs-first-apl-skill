@@ -1,5 +1,5 @@
 
-:link-caketime: https://developer.amazon.com/alexa/alexa-skills-kit/get-deeper/tutorials-code-samples/build-an-engaging-alexa-skill[Tutoria: Build an Engaging Alexa Skill, window=_blank]
+:link-caketime: https://github.com/alexa-samples/skill-sample-nodejs-first-skill[Tutoria: Build an Engaging Alexa Skill, window=_blank]
 :link-quick-setup: link:quick-start.html[quick setup instructions, window=_blank]
 :link-S3-assets: https://github.com/alexa/skill-sample-nodejs-first-apl-skill/tree/master/modules/assets[from this page., window=_blank]
 :authoringToolLink: https://developer.amazon.com/alexa/console/ask/displays
@@ -12,9 +12,9 @@
 
 {blank}
 
-In this section, you will learn how to modify your backend to safely add APL visuals to your response. At the end, you will have enhanced your Cake Time Launch request with the APL visuals you built in the last section. In addition, you will learn how to use S3 in the Alexa Hosted environment to host your own assets and use this to add a background image to your skill. 
+In this section, you will learn how to modify your backend to safely add APL visuals to your response. At the end, you will have enhanced your Cake Time Launch request with the APL visuals you built in the last section. In addition, you will learn how to use S3 in the Alexa Hosted environment to host your own assets and use this to add a background image to your skill.
 
-Cake Time code will be used in this section. If you have not done the {link-caketime}, and you are a new Alexa developer, check out the intro course, now, then come back to this module. If you are already a skill builder and experienced with the basics of a nodeJS skill, then feel free to skip the course and see the {link-quick-setup} to get the code and overview of the Cake Time Skill. 
+Cake Time code will be used in this section. If you have not done the {link-caketime}, and you are a new Alexa developer, check out the intro repository, now, then come back to this module. If you are already a skill builder and experienced with the basics of a nodeJS skill, then feel free to skip the course and see the {link-quick-setup} to get the code and overview of the Cake Time Skill.
 
 == Adding visuals to your skill
 
@@ -50,7 +50,7 @@ A. In your `LaunchRequestHandler.handle()` before the response is created, add:
      // Create Render Directive.
  }
 +
-This "if" statement is going to check if the APL interface is sent in the request envelope. Only then, do we want to add the response. Now, let's add the response. 
+This "if" statement is going to check if the APL interface is sent in the request envelope. Only then, do we want to add the response. Now, let's add the response.
 B. Underneath the `// Create Render Directive` comment, add:
 +
  handlerInput.responseBuilder.addDirective({
@@ -77,43 +77,43 @@ E. Then, import this at the top of your `index.js` like so:
 +
  const launchDocument = require('./documents/launchDocument.json');
 +
-The launchDocument variable in your javascript code represents the contents of your json file. 
-F. Now, deploy the code. Remember to test it! 
+The launchDocument variable in your javascript code represents the contents of your json file.
+F. Now, deploy the code. Remember to test it!
 
 == Using the developer console simulator to test
 
-Did you have issues testing your APL additions? Before we can test our document changes, we have to enable APL in the Build tab. 
+Did you have issues testing your APL additions? Before we can test our document changes, we have to enable APL in the Build tab.
 
 A. Click on the build Tab. You will need to click on Interfaces on the left side.
 +
 image::interfacesClick.png[]
 +
-B. Scroll down and toggle the Alexa Presentation Language and you will see the block expand. Select all of the boxes. 
+B. Scroll down and toggle the Alexa Presentation Language and you will see the block expand. Select all of the boxes.
 +
 Hub Round, Hub Landscape, and TV Fullscreen are selected by default and must be supported. Each of these are screens you will be officially supporting. They will not scale your content, so whatever assets and APL layout you send in the response will be shown as is. This also means whatever viewport profiles are not supported will scale your content from the closest sized viewport you do support. Select them all because we will be verifying and testing each of these profiles. By selecting these, you are saying you tested your layout on each of these profiles. To learn more about selecting viewport profiles, https://developer.amazon.com/docs/alexa-presentation-language/apl-select-the-viewport-profiles-your-skill-supports.html[check out the tech docs., window=_blank]
 +
 image::toggleAPL.png[]
 +
-C. After you toggle APL on and select all of the viewport profiles, you must build the interaction model. 
+C. After you toggle APL on and select all of the viewport profiles, you must build the interaction model.
 Note: this also means changes to the supported profiles need a new skill certification round in order to go live.
 +
-D. After building, you are ready to test. Go to the test tab and make sure "Device Display" is checked. Now if you scroll down past the request/response json, you can select the device you want to try. 
+D. After building, you are ready to test. Go to the test tab and make sure "Device Display" is checked. Now if you scroll down past the request/response json, you can select the device you want to try.
 Uncheck the *Skill I/O* so you do not need to scroll down to see visuals!
 +
 TIP: Remember to delete your user data if you have any! Since we modified the no context launch handler, you must delete your user data from S3 to make sure there is actually no context in order to test this new screen.
 +
-E. Test your screen on a medium hub by triggering the launch handler for instance by typing, `open cake time`. 
+E. Test your screen on a medium hub by triggering the launch handler for instance by typing, `open cake time`.
 +
 F. Repeat this test on all the other screen types. Remember, we did not include the birthday cake image, yet, so don't worry if you do not see it!
 
 == Uploading assets to S3
-Before we can make use of image assets, we will need to host these images. Ideally, you will use a https://en.wikipedia.org/wiki/Content_delivery_network[CDN, window=_blank] (such as https://aws.amazon.com/blogs/networking-and-content-delivery/amazon-s3-amazon-cloudfront-a-match-made-in-the-cloud/[Amazon Cloudfront in conjunction with S3, window=_blank]) to serve your assets to locations closer to your users, but for this exercise, we will use S3 since this is provided by Alexa hosted. 
+Before we can make use of image assets, we will need to host these images. Ideally, you will use a https://en.wikipedia.org/wiki/Content_delivery_network[CDN, window=_blank] (such as https://aws.amazon.com/blogs/networking-and-content-delivery/amazon-s3-amazon-cloudfront-a-match-made-in-the-cloud/[Amazon Cloudfront in conjunction with S3, window=_blank]) to serve your assets to locations closer to your users, but for this exercise, we will use S3 since this is provided by Alexa hosted.
 
 A. To upload the S3 Assets, access your S3 provision under the *Code* tab at the very bottom on the left side.
-+ 
++
 image::S3Access.png[]
 +
-B. In your S3 provision, open the *media* page. 
+B. In your S3 provision, open the *media* page.
 C. In here, upload all of the assets {link-S3-assets}. For your convenience, we have the https://optical-cupcake-build.s3.amazonaws.com/OpticalCupcake/assets.zip[assets zipped here, window=_blank]. We will use all of these over the course of the module. After you upload, you will see all of the assets on the page in S3.
 +
 image::S3Provision.png[]
@@ -122,9 +122,9 @@ Now that your assets are uploaded, we can update our Launch Request with more im
 
 == Updating our launch request handler
 
-Now that we have our no context launch request working, it is time to add a background image rather than using the default background. 
+Now that we have our no context launch request working, it is time to add a background image rather than using the default background.
 
-A. To do so, first open up the {authoringToolLink}[authoring tool] and paste in the launchDocument.json information. 
+A. To do so, first open up the {authoringToolLink}[authoring tool] and paste in the launchDocument.json information.
 B. In the data section of the authoring tool, use:
 +
  {
@@ -139,7 +139,7 @@ B. In the data section of the authoring tool, use:
     }
  }
 +
-You may notice a new field in our data, backgroundURL, under the assets object. This represents where the device will fetch a background image from. We will use the Github repo for hosting it for now while we develop the screen since this is a public link, but our actual code will use the S3 presigned link util function. The presigned link utility is needed to generate a short-lived public URL to the private bucket you uploaded the assets to. Now, we need to add our background component. 
+You may notice a new field in our data, backgroundURL, under the assets object. This represents where the device will fetch a background image from. We will use the Github repo for hosting it for now while we develop the screen since this is a public link, but our actual code will use the S3 presigned link util function. The presigned link utility is needed to generate a short-lived public URL to the private bucket you uploaded the assets to. Now, we need to add our background component.
 C. Go back to the *APL* tab in the authoring tool.
 D. We are going to add the https://developer.amazon.com/docs/alexa-presentation-language/apl-alexa-background-layout.html[AlexaBackground responsive component, window=_blank]. To use this, you need the alexa-layouts package which we already have! Using the AlexaBackground is easy; just add the following to the top of both of your containers in the items array of each:
 +
@@ -148,7 +148,7 @@ D. We are going to add the https://developer.amazon.com/docs/alexa-presentation-
     "backgroundImageSource": "${assets.backgroundURL}"
  },
 +
-You should see the background light up... Er... See the lights in the background. 
+You should see the background light up... Er... See the lights in the background.
 E. Now that we are using a background Image, we want to modify the text color. Since we have a style for all of our text objects this is easy! Simply, add `"color": "black",` as a new property in our `bigText` style. This will give you:
 +
  "bigText": {
@@ -161,15 +161,15 @@ E. Now that we are using a background Image, we want to modify the text color. S
     ]
  }
 +
-F. Apply the same changes to the `@hubRoundSmall` variation and ensure it works in the authoring tool. 
+F. Apply the same changes to the `@hubRoundSmall` variation and ensure it works in the authoring tool.
 
 NOTE: Make sure the AlexaBackground responsive component is above the other components, otherwise it will occlude them!
 
-You may notice we are using a single 1920x1080 png for each of the devices and it scales pretty well. We want to use the highest possible resolution to consider FireTV devices. Scaling down produces a better quality image. The tradeoff is that smaller resolution devices which do not support this quality level will download unnecessary data. The best course of action would be to provide two or more different image resolutions for different devices classes. We will see how to do this in the next section. 
+You may notice we are using a single 1920x1080 png for each of the devices and it scales pretty well. We want to use the highest possible resolution to consider FireTV devices. Scaling down produces a better quality image. The tradeoff is that smaller resolution devices which do not support this quality level will download unnecessary data. The best course of action would be to provide two or more different image resolutions for different devices classes. We will see how to do this in the next section.
 
 == Applying our images
 
-A. Now that we have our document ready, replace the launchDocument.json contents in your *Code* tab with the JSON from the authoring tool. 
+A. Now that we have our document ready, replace the launchDocument.json contents in your *Code* tab with the JSON from the authoring tool.
 B. Go back to the index.js. Since we are adding in links to our private S3 instance, we will need to import the util module. At the top of this file, add in another import:
 +
  const util = require('./util');
@@ -208,5 +208,5 @@ Since our frontend is scaling properly by using the responsive components, we ar
 
 https://github.com/alexa/skill-sample-nodejs-first-apl-skill/tree/master/modules/code/module3[Complete code in Github, window=_blank]
 
-link:module2.html[Previous Module (2)]
-link:module4.html[Next Module (4)]
+link:module2.adoc[Previous Module (2)]
+link:module4.adoc[Next Module (4)]
