@@ -1,6 +1,6 @@
 
-:link-caketime: https://github.com/alexa-samples/skill-sample-nodejs-first-skill[Tutoria: Build an Engaging Alexa Skill, window=_blank]
-:link-quick-setup: link:quick-start.html[quick setup instructions, window=_blank]
+:link-caketime: https://developer.amazon.com/en-US/docs/alexa/workshops/build-an-engaging-skill/get-started/index.html[Workshop: Build an Engaging Alexa Skill, window=_blank]
+:link-quick-setup: link:quick-start.adoc[quick setup instructions, window=_blank]
 :link-S3-assets: https://github.com/alexa/skill-sample-nodejs-first-apl-skill/tree/master/modules/assets[from this page., window=_blank]
 :authoringToolLink: https://developer.amazon.com/alexa/console/ask/displays
 :sectnums:
@@ -14,7 +14,9 @@
 
 In this section, you will learn how to modify your backend to safely add APL visuals to your response. At the end, you will have enhanced your Cake Time Launch request with the APL visuals you built in the last section. In addition, you will learn how to use S3 in the Alexa Hosted environment to host your own assets and use this to add a background image to your skill.
 
-Cake Time code will be used in this section. If you have not done the {link-caketime}, and you are a new Alexa developer, check out the intro repository, now, then come back to this module. If you are already a skill builder and experienced with the basics of a nodeJS skill, then feel free to skip the course and see the {link-quick-setup} to get the code and overview of the Cake Time Skill.
+If you are a new Alexa developer, check out the intro {link-caketime}, now, then come back to this module.
+
+The deprecated version of the Cake Time code (not the link above) will be used in this section. Follow the {link-quick-setup} to get the deprecated code and overview of the Skill for this guide.
 
 == Adding visuals to your skill
 

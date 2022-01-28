@@ -1,10 +1,11 @@
-:link-caketime: https://github.com/alexa-samples/skill-sample-nodejs-first-skill[Tutorial: Build an Engaging Alexa Skill, window=_blank]
+:link-caketime: https://developer.amazon.com/en-US/docs/alexa/workshops/build-an-engaging-skill/get-started/index.html[Workshop: Build an Engaging Alexa Skill, window=_blank]
+:link-quick-setup: link:quick-start.adoc[quick setup instructions, window=_blank]
 
 = Welcome
 
 {blank}
 
-Welcome to How to Build a Multimodal Alexa Skill, a continuation of the {link-caketime}. After taking this course, you will have the information needed to create rich multimodal experiences for Alexa using Alexa Presentation Language (APL). The course will teach you the following:
+Welcome to How to Build a Multimodal Alexa Skill, a continuation of the deprecated Cake Time tutorial.  To use this tutorial, see the {link-quick-setup} to get the code and overview of the Cake Time Skill for use in this tutorial.  If you need to learn the basics of building a skill, refer to the new {link-caketime}.  After taking this course, you will have the information needed to create rich multimodal experiences for Alexa using Alexa Presentation Language (APL). The course will teach you the following:
 
 * link:module1.adoc[Module 1]: Why Build Multimodal Alexa Skills?
 * link:module2.adoc[Module 2]: Build Your First Visuals with the APL Authoring Tool
